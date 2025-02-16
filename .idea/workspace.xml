@@ -4,89 +4,79 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/ansi.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/shortcut" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../bitcamp-hui/src/main/java/bitcamp/hui/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/Answer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer_like/AnswerLike.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/common/DataNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/Member.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberCreateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/Question.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionCreateDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question_category/QuestionCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/security/UserSecurityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/form_errors.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/layout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/login_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/navbar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/question_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/question_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/signup_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Recommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../blackstone-springboot/src/main/java/com/blackstone/Blackstone_springboot/domain/member/Recommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#ib_16384_0.dblwr" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#ib_16384_0.dblwr" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_redo/#ib_redo10_tmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_redo/#ib_redo9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_1.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_1.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_10.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_10.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_2.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_2.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_3.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_3.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_4.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_4.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_5.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_5.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_6.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_6.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_7.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_7.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_8.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_8.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_9.ibt" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/#innodb_temp/temp_9.ibt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/binlog.000001" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/binlog.000002" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/binlog.index" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/binlog.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/ib_buffer_pool" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/ib_buffer_pool" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/ibdata1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/ibtmp1" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/ibtmp1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/mysql.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/mysql.ibd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/undo_001" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/undo_001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/undo_002" beforeDir="false" afterPath="$PROJECT_DIR$/../../mannazo-jeonghuijun/mysql/demo/var/lib/mysql/undo_002" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sesac_msa/javadev/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../../sesac_msa/javadev/.project" afterDir="false" />
+    <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/../.idea/sesac-3rd.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/ItallApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer/Answer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer/AnswerRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer_like/AnswerLike.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/common/DataNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberCreateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionCreateDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/security/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/security/UserSecurityService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/static/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/static/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/static/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/form_errors.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/layout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/login_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/navbar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/question_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/question_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/question_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/signup_form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/itall/src/test/java/com/sesac/itall/ItallApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -120,24 +110,30 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2svWsb30tN60pOzK7iaZ2QPFUid" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Gradle.itall [:ItallApplication.main()].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jeonghuijun/git/sesac-3rd/itall/src/main/resources/static&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeonghuijun/git/sesac-3rd/itall&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
   }
 }</component>
@@ -179,7 +175,29 @@
       <option name="presentableId" value="Default" />
       <updated>1739336735471</updated>
     </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1739702658765</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739702658765</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first commit">
+      <option name="closed" value="true" />
+      <created>1739702842557</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739702842557</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="first commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
