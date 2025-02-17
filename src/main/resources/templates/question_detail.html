@@ -1,6 +1,19 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
-    <h1 th:text="${question.title}"></h1>
-    <div th:text="${question.content}"></div>
+    <!-- 질문 -->
+    <h2 class="border-bottom py-2" th:text="${questionResponseDTO.title}"></h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;" th:text="${questionResponseDTO.content}"></div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">
+                        <span th:if="${questionResponseDTO.nickname != null}" th:text="${questionResponseDTO.nickname}"></span>
+                    </div>
+                    <div th:text="${questionResponseDTO.formattedRegdate}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </html>

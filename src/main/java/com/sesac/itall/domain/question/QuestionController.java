@@ -4,6 +4,7 @@ import com.sesac.itall.domain.question_category.QuestionCategoryRepository;
 import com.sesac.itall.domain.question_category.QuestionCategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,12 +23,13 @@ public class QuestionController {
 
     @GetMapping("/list")
     public String list(Model model) {
-        List<Question> questionList = this.questionService.getList();
-        model.addAttribute("questionList", questionList);
+        List<QuestionResponseDTO> questionResponseDTOList = this.questionService.getList();
+        model.addAttribute("questionResponseDTOList", questionResponseDTOList);
 
         return "question_list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String questionCreate(Model model) {
         model.addAttribute("questionCreateDTO", new QuestionCreateDTO());   // 빈 dto 전달
@@ -36,6 +38,7 @@ public class QuestionController {
         return "question_form"; // question_form.html 렌더링
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String questionCreate(@Valid @ModelAttribute("questionCreateDTO") QuestionCreateDTO dto, BindingResult bindingResult, Model model, Principal principal) {
 
@@ -53,9 +56,9 @@ public class QuestionController {
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
 
-        Question question = this.questionService.getQuestion(id);
+        QuestionResponseDTO questionResponseDTO = this.questionService.getQuestion(id);
 
-        model.addAttribute("question", question);
+        model.addAttribute("questionResponseDTO", questionResponseDTO);
 
         return "question_detail";
     }

@@ -5,7 +5,7 @@ import com.sesac.itall.domain.member.Member;
 import java.util.List;
 
 public interface QuestionService {
-    List<Question> getList();
+    List<QuestionResponseDTO> getList();
     Question createQuestion(QuestionCreateDTO dto, String email);
-    Question getQuestion(Long id);
+    QuestionResponseDTO getQuestion(Long id);
 }

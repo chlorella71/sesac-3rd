@@ -5,13 +5,20 @@ import com.sesac.itall.domain.question_category.QuestionCategory;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Getter
 @Setter
 public class QuestionCreateDTO {
+
+    private String formattedRegdate;
 
     @NotBlank(message= "제목을 입력해주세요.")
     private String title;

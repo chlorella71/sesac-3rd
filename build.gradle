@@ -24,6 +24,10 @@ repositories {
 }
 
 dependencies {
+
+	// spring
+	implementation("org.springframework.boot:spring-boot-starter")
+
 	//jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
@@ -33,7 +37,6 @@ dependencies {
 	//spring-security
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	testImplementation 'org.springframework.security:spring-security-test'
 
 	//validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -50,6 +53,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// devtools 개발용 도구
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	//h2database
@@ -60,10 +64,19 @@ dependencies {
 
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = "UTF-8"
+}
+
+bootRun {
+	jvmArgs = ["-Duser.timezone=Asia/Seoul"]
 }

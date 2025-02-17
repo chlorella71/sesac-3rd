@@ -3,16 +3,18 @@
     <table class="table">
         <thead>
         <tr>
-            <th>제목</th>
+            <th style="width:50%">제목</th>
+            <th>작성자</th>
             <th>작성일시</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="question, index : ${questionList}">
-            <td>
+        <tr class="text-center" th:each="question, index : ${questionResponseDTOList}">
+            <td class="text-start">
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.title}"></a>
             </td>
-            <td th:text="${question.regdate}"></td>
+            <td><span th:if="${question.nickname != null}" th:text="${question.nickname}"></span></td>
+            <td th:text="${question.formattedRegdate}"></td>
         </tr>
         </tbody>
     </table>

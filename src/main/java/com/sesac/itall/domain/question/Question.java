@@ -28,8 +28,8 @@ public class Question {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(columnDefinition = "DATE", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)   // 시간까지 저장 가능
     private Date regdate;
 
     @ManyToOne(fetch = FetchType.LAZY)

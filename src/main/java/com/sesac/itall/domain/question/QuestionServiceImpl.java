@@ -20,8 +20,13 @@ public class QuestionServiceImpl implements QuestionService{
     private final MemberRepository memberRepository;
 
     @Override
-    public List<Question> getList() {
-        return this.questionRepository.findAll();
+    public List<QuestionResponseDTO> getList() {
+
+        List<Question> questionList = this.questionRepository.findAll();
+
+        return questionList.stream()
+                .map(QuestionResponseDTO::new)
+                .toList();  // 엔티티 리스트를 DTO 리스트로 변환
     }
 
     @Override
@@ -47,14 +52,11 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     @Override
-    public Question getQuestion(Long id) {
+    public QuestionResponseDTO getQuestion(Long id) {
 
-        Optional<Question> question = this.questionRepository.findById(id);
+        Question question = this.questionRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("question not found"));
 
-        if (question.isPresent()) {
-            return question.get();
-        } else {
-            throw new DataNotFoundException("question not found");
-        }
+        return new QuestionResponseDTO(question);
     }
 }
