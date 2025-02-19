@@ -37,7 +37,7 @@ public class Answer {
     private Question question;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AnswerLike> answerLikes;
+    private List<AnswerLike> answerLikeList;
 
     @PrePersist
     protected void onCreate() {

@@ -1,5 +1,8 @@
 package com.sesac.itall.domain.question;
 
+import com.sesac.itall.domain.answer.AnswerCreateDTO;
+import com.sesac.itall.domain.answer.AnswerResponseDTO;
+import com.sesac.itall.domain.answer.AnswerService;
 import com.sesac.itall.domain.question_category.QuestionCategoryRepository;
 import com.sesac.itall.domain.question_category.QuestionCategoryService;
 import jakarta.validation.Valid;
@@ -20,6 +23,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final QuestionCategoryService questionCategoryService;
+    private final AnswerService answerService;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -54,11 +58,16 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id) {
+    public String detail(Model model, @PathVariable("id") Long id, AnswerCreateDTO answerCreateDTO) {
 
+        // 질문 정보를 가져옴
         QuestionResponseDTO questionResponseDTO = this.questionService.getQuestion(id);
 
+        // 해당 질문의 답변 리스트 가져오기
+        List<AnswerResponseDTO> answerList = this.answerService.getAnswerListByQuestion(id);
+
         model.addAttribute("questionResponseDTO", questionResponseDTO);
+        model.addAttribute("answerList", answerList);   // 답변 리스트 추가
 
         return "question_detail";
     }

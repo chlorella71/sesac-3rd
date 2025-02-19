@@ -20,7 +20,7 @@ public class AnswerResponseDTO {
     public AnswerResponseDTO(Answer answer) {
         this.id = answer.getId();
         this.content = answer.getContent();
-        this.formattedRegdate = formattedRegdate(answer.getRegdate());
+        this.formattedRegdate = (answer.getRegdate() != null) ? formattedRegdate(answer.getRegdate()) : "날짜 없음";
         this.nickname = (answer.getMember() != null) ? answer.getMember().getNickname() : "익명"; //  작성자 닉네임 실정
         this.questionId = answer.getQuestion().getId(); // 어떤 질문에 달린 답변인지 알기 위해 추가
     }
