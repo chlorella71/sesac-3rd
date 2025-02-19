@@ -12,6 +12,16 @@
                     </div>
                     <div th:text="${questionResponseDTO.formattedRegdate}"></div>
                 </div>
+                <h5 th:text="|${#lists.size(questionResponseDTO.answerList)}개의 답변이 있습니다|"></h5>
+                <div>
+                    <ul>
+                        <li th:each="answer : ${questionResponseDTO.answerList}" th:text="${answer.content}"></li>
+                    </ul>
+                </div>
+                <form th:action="@{|/answer/create/${questionResponseDTO.id}|}" method="post">
+                    <textarea name="content" id="content" rows="15"></textarea>
+                    <input type="submit" value="답변등록">
+                </form>
             </div>
         </div>
     </div>

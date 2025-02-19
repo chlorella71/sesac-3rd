@@ -1,5 +1,6 @@
 package com.sesac.itall.domain.question;
 
+import com.sesac.itall.domain.answer.AnswerResponseDTO;
 import lombok.Getter;
 
 import java.text.SimpleDateFormat;
@@ -8,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class QuestionResponseDTO {
@@ -17,6 +20,7 @@ public class QuestionResponseDTO {
     private String content;
     private String formattedRegdate;
     private String nickname;  // 작성자 정보 추가
+    private List<AnswerResponseDTO> answerList; // AnswerResponseDTO 리스트로 변경
 
     public QuestionResponseDTO(Question question) {
         this.id= question.getId();
@@ -24,6 +28,11 @@ public class QuestionResponseDTO {
         this.content= question.getContent();
         this.formattedRegdate= formattedRegdate(question.getRegdate());
         this.nickname = (question.getMember() != null) ? question.getMember().getNickname() : "익명";    // 작성자 닉네임 설정
+
+        // Answer 리스트를 AnswerResponseDTO 리스트로 변환하여 저장
+        this.answerList = question.getAnswerList().stream()
+                .map(AnswerResponseDTO::new)
+                .collect(Collectors.toList());
     }
 
     public static String formattedRegdate(Date date) {
@@ -41,7 +50,7 @@ public class QuestionResponseDTO {
         long hours= duration.toHours(); // 경과 시간(시간)
         long minutes = duration.toMinutes();    // 경과 시간(분)
 
-        if (minutes < 4) {
+        if (minutes < 5) {
             return "방금 전";
         } else if (minutes < 60) {
             return minutes + "분 전"; // 1시간 이내

@@ -24,7 +24,8 @@ public class Answer {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(columnDefinition = "DATE", nullable = false)
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date regdate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,5 +38,12 @@ public class Answer {
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnswerLike> answerLikes;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.regdate == null) {
+            this.regdate = new Date();
+        }
+    }
 
 }

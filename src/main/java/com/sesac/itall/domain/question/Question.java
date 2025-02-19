@@ -45,7 +45,7 @@ public class Question {
     private QuestionStatus status;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Answer> answers;
+    private List<Answer> answerList;
 
     @PrePersist
     protected void onCreate() {
@@ -53,7 +53,7 @@ public class Question {
             this.status = QuestionStatus.ANSWERED;
         }
         if (this.regdate == null) {
-            this.regdate =new Date();
+            this.regdate = new Date();
         }
     }
 

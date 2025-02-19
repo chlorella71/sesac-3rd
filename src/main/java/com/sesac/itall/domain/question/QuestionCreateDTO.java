@@ -18,7 +18,7 @@ import java.util.Date;
 @Setter
 public class QuestionCreateDTO {
 
-    private String formattedRegdate;
+//    private String formattedRegdate;
 
     @NotBlank(message= "제목을 입력해주세요.")
     private String title;
