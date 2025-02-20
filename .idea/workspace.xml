@@ -4,69 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/../.idea/sesac-3rd.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/.idea/dbnavigator.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/ItallApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer/Answer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer/AnswerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer_like/AnswerLike.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeId.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/common/DataNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberCreateDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/member/MemberStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/Question.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionCreateDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question/QuestionStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/domain/question_category/QuestionCategoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/java/com/sesac/itall/security/UserSecurityService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/static/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/static/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/static/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/form_errors.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/layout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/login_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/navbar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/question_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/question_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/question_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/main/resources/templates/signup_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/itall/src/test/java/com/sesac/itall/ItallApplicationTests.java" beforeDir="false" />
+    <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="3 commit">
+      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-02-19.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerModifyDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionModifyDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/answer_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/ItallApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/ItallApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question_form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,20 +80,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Gradle.itall [:ItallApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jeonghuijun/git/sesac-3rd/itall&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Gradle.itall [:ItallApplication.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jeonghuijun/git/sesac-3rd/itall",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "File.Encoding"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
@@ -148,8 +108,12 @@
   </component>
   <component name="RunManager">
     <configuration name="ItallApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="LOGGING_LEVEL_ROOT" value="INFO" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.sesac.itall.ItallApplication" />
       <module name="itall.main" />
+      <option name="VM_PARAMETERS" value="-Duser.timezone=Asia/Seoul" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.sesac.itall.*" />
@@ -191,24 +155,38 @@
       <option name="project" value="LOCAL" />
       <updated>1739702842557</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="2 commit">
+      <option name="closed" value="true" />
+      <created>1739704085866</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739704085866</updated>
+    </task>
+    <task id="LOCAL-00004" summary="2 commit">
+      <option name="closed" value="true" />
+      <created>1739704099333</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739704099333</updated>
+    </task>
+    <task id="LOCAL-00005" summary="3 commit">
+      <option name="closed" value="true" />
+      <created>1739704134014</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739704134014</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberCreateDto.java</url>
-          <line>16</line>
-          <properties field="nickname" class="com.sesac.itall.domain.member.MemberCreateDto" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="2 commit" />
+    <MESSAGE value="3 commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="3 commit" />
   </component>
 </project>
