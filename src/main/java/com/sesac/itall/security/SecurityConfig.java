@@ -22,10 +22,13 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((authorizationManagerRequestMatcherRegistry ->
-                {authorizationManagerRequestMatcherRegistry.requestMatchers(new AntPathRequestMatcher("/**"))
-                        .permitAll();}))
+                {authorizationManagerRequestMatcherRegistry
+                        .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()   // h2 콘솔 접근 허용
+                        .requestMatchers(new AntPathRequestMatcher("/answer-like/toggle")).authenticated()  // 추천 기능은 로그인 사용자만 가능
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()  // 나머지 url은 전체 허용
+                ;}))
                 .csrf((httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer
-                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))))
+                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**", "/answer-like/toggle"))))  // 추천 api에 csrf 예외 적용
                 .headers((httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN

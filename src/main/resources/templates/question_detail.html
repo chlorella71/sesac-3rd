@@ -42,6 +42,9 @@
                 </div>
             </div>
             <div class="my-3">
+<!--                <th:block sec:authorize="isAuthenticated()">-->
+                    <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-email="${#authentication.isAuthenticated() ? #authentication.getPrincipal().getUsername() : null}" th:classappend="${answerLikeResponseDTO != null and answerLikeResponseDTO.liked} ? 'btn-success' : 'btn-outline-secondary'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTO != null ? answerLikeResponseDTO.likeCount : 0}"></span></a>
+<!--                </th:block>-->
                 <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}" class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="삭제"></a>
             </div>
@@ -58,14 +61,16 @@
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
 </div>
-<script layout:fragment="script" type='text/javascript'>
-    const delete_elements = document.getElementsByClassName("delete");
-    Array.from(delete_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-</script>
+
+<!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
+<th:block sec:authorize="isAuthenticated()">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</th:block>
+
+<th:block layout:fragment="script" type='text/javascript'>
+<!--    <script src="/js/csrfHandler.js"></script>  &lt;!&ndash; csrf 토큰 처리 &ndash;&gt;-->
+    <script src="/js/deleteHandler.js"></script>
+    <script src="/js/likeHandler.js"></script>
+</th:block>
 </html>
