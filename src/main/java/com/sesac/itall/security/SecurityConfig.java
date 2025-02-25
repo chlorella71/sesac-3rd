@@ -28,7 +28,8 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()  // 나머지 url은 전체 허용
                 ;}))
                 .csrf((httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer
-                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**", "/answer-like/toggle"))))  // 추천 api에 csrf 예외 적용
+                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))  // 추천 api에 csrf 예외 적용
+                        .ignoringRequestMatchers(new AntPathRequestMatcher("/answer-like/toggle"))))
                 .headers((httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN

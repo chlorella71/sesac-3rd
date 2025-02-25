@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
         indexes = {
                 @Index(name = "idx_answer_like_member", columnList = "member_id"),  // member_id 개별 인덱스
                 @Index(name = "idx_answer_like_answer", columnList = "answer_id"),  // answer_id 개별 인덱스
-                @Index(name = "idx_answer_like_composite", columnList = "answer_id, member_id") // answer_id, member_id 복합 인덱스
+//                @Index(name = "idx_answer_like_composite", columnList = "answer_id, member_id") // answer_id, member_id 복합 인덱스
         })
 public class AnswerLike {
 
@@ -47,7 +47,7 @@ public class AnswerLike {
     public AnswerLike(Member member, Answer answer) {
         this.member= member;
         this.answer= answer;
-        this.liked= false;
+        this.liked= true;
         this.regdate = LocalDateTime.now(); // 생성 시점에 자동 설정
         this.modifydate = null; // 최초 생성 시에는 수정 기록 없음
     }

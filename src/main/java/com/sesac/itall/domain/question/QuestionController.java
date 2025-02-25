@@ -3,12 +3,17 @@ package com.sesac.itall.domain.question;
 import com.sesac.itall.domain.answer.AnswerCreateDTO;
 import com.sesac.itall.domain.answer.AnswerResponseDTO;
 import com.sesac.itall.domain.answer.AnswerService;
+import com.sesac.itall.domain.answer_like.AnswerLikeResponseDTO;
+import com.sesac.itall.domain.answer_like.AnswerLikeService;
 import com.sesac.itall.domain.question_category.QuestionCategoryRepository;
 import com.sesac.itall.domain.question_category.QuestionCategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -26,6 +34,7 @@ public class QuestionController {
     private final QuestionService questionService;
     private final QuestionCategoryService questionCategoryService;
     private final AnswerService answerService;
+    private final AnswerLikeService answerLikeService;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -61,7 +70,9 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Long id, AnswerCreateDTO answerCreateDTO) {
+    public String detail(Model model, @PathVariable("id") Long id, AnswerCreateDTO answerCreateDTO, @AuthenticationPrincipal UserDetails userDetails) {
+
+        Optional<UserDetails> userDetailsOptional = Optional.ofNullable(userDetails);
 
         // 질문 정보를 가져옴
         QuestionResponseDTO questionResponseDTO = this.questionService.getQuestion(id);
@@ -69,8 +80,28 @@ public class QuestionController {
         // 해당 질문의 답변 리스트 가져오기
         List<AnswerResponseDTO> answerList = this.answerService.getAnswerListByQuestion(id);
 
+        // 모든 답변의 추천정보를 저장할 맵 (로그인 여부 관계없이)
+        Map<Long, AnswerLikeResponseDTO> answerLikeResponseDTOMap = new HashMap<>();
+
+        for (AnswerResponseDTO answer : answerList) {
+            // 로그인 여부에 관계없이 답변추천 정보는 항상 가져오기
+            AnswerLikeResponseDTO answerLikeResponseDTO = answerLikeService.getAnswerLikeInfo(answer.getId());
+
+            // 로그인한 경우에는 사용자의 추천 여부(liekd)도 확인
+            if (userDetailsOptional.isPresent()) {
+                answerLikeResponseDTO.setLiked(answerLikeService.getLikeStatus(userDetailsOptional.get().getUsername(), answer.getId()).isLiked());
+            }
+//            } else {
+//                // 로그인하지 않은 경우 liked = false 로 설정
+//                answerLikeResponseDTO.setLiked(false);
+//            }
+
+            answerLikeResponseDTOMap.put(answer.getId(), answerLikeResponseDTO);
+        }
+
         model.addAttribute("questionResponseDTO", questionResponseDTO);
         model.addAttribute("answerList", answerList);   // 답변 리스트 추가
+        model.addAttribute("answerLikeResponseDTOMap", answerLikeResponseDTOMap);   // 추천 정보 추가
 
         return "question_detail";
     }

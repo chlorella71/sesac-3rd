@@ -1,5 +1,7 @@
 <html layout:decorate="~{layout}">
+qwe
 <div layout:fragment="content" class="container my-3">
+    ert
     <!-- 질문 -->
     <h2 class="border-bottom py-2" th:text="${questionResponseDTO.title}"></h2>
     <div class="card my-3">
@@ -24,6 +26,7 @@
         </div>
     </div>
     <!-- 답변의 갯수 표시 -->
+    zz
     <h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(questionResponseDTO.answerList)}개의 답변이 있습니다|"></h5>
     <!-- 답변 반복 시작 -->
     <div class="card my-3" th:each="answer : ${answerList}">
@@ -43,8 +46,9 @@
             </div>
             <div class="my-3">
 <!--                <th:block sec:authorize="isAuthenticated()">-->
-                    <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-email="${#authentication.isAuthenticated() ? #authentication.getPrincipal().getUsername() : null}" th:classappend="${answerLikeResponseDTO != null and answerLikeResponseDTO.liked} ? 'btn-success' : 'btn-outline-secondary'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTO != null ? answerLikeResponseDTO.likeCount : 0}"></span></a>
+<!--                    <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-email="${#authentication.isAuthenticated() ? #authentication.getPrincipal().getUsername() : null}" th:classappend="${answerLikeResponseDTO != null and answerLikeResponseDTO.liked} ? 'btn-success' : 'btn-outline-secondary'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTO != null ? answerLikeResponseDTO.likeCount : 0}"></span></a>-->
 <!--                </th:block>-->
+                <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:classappend="${answerLikeResponseDTOMap[answer.id] != null and answerLikeResponseDTOMap[answer.id].liked} ? 'btn-success text-white' : 'btn-outline-secondary text-black'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].likeCount : 0}"></span></a>
                 <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}" class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="삭제"></a>
             </div>
@@ -60,17 +64,31 @@
         <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
+    <p>로그인 상태: <span th:text="${#authorization.expression('isAuthenticated()') ? '인증됨' : '비인증'}"></span></p>
+
+    <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
+    <th:block sec:authorize="isAuthenticated()">
+        <!--    &lt;!&ndash; csrf 토큰을 javascript 변수에 삽입 &ndash;&gt;-->
+        <!--    <script type="text/javascript">-->
+        <!--        let csrfToken = "[[${_csrf.token}]]";-->
+        <!--        let csrfHeader = "[[${_csrf.headerName}]]";-->
+        <!--    </script>-->
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    </th:block>
+
 </div>
 
-<!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
-<th:block sec:authorize="isAuthenticated()">
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-</th:block>
 
+
+<!-- javascript 파일 연결 -->
 <th:block layout:fragment="script" type='text/javascript'>
 <!--    <script src="/js/csrfHandler.js"></script>  &lt;!&ndash; csrf 토큰 처리 &ndash;&gt;-->
     <script src="/js/deleteHandler.js"></script>
     <script src="/js/likeHandler.js"></script>
 </th:block>
+<script type="text/javascript">
+    let isAuthenticated = [[${#authorization.expression('isAuthenticated()')}]];
+    console.log("사용자 로그인 상태:", isAuthenticated);
+</script>
 </html>

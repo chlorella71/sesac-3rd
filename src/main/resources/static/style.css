@@ -1,0 +1,7 @@
+.bg-green {
+    background-color: #198754 !important; /* Bootstrap btn-success 색상 */
+}
+
+.bg-white {
+    background-color: #fff !important; /* 원래 색상 (하얀색) */
+}

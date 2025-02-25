@@ -37,7 +37,7 @@ public class AnswerLikeService {
             // 데이터가 아예 없는 경우 예외 처리 또는 새로운 객체 생성 후 저장
             AnswerLike newAnswerLike = new AnswerLike(member, answer);
             answerLikeRepository.save(newAnswerLike);
-            return new AnswerLikeResponseDTO(answer.getId(), false, 0L, List.of());
+            return new AnswerLikeResponseDTO(answer.getId(), true, 1L, List.of(member.getNickname()));
         }
 
         AnswerLike answerLike = optionalAnswerLike.get();
@@ -65,5 +65,40 @@ public class AnswerLikeService {
 
         // dto로 응답 반환
         return new AnswerLikeResponseDTO(answer.getId(), answerLike.isLiked(), likeCount, nicknameList);
+    }
+
+
+    // 특정 답변(answerId)의 추천 정보 가져오기 (추천이 없을 경우 기본값 반환)
+    @Transactional(readOnly = true)
+    public AnswerLikeResponseDTO getAnswerLikeInfo(Long answerId) {
+
+        // 추천 개수 조회
+        Long likeCount = answerLikeRepository.countByAnswerId(answerId);    // 추천 개수 조회
+
+        // 추천한 사용자 닉네임 목록 조회 (추천한 사용자가 없을 경우 빈 리스트 반환)
+        List<String> nicknameList = answerLikeRepository.findNicknameListByAnswerId(answerId);
+
+        // 로그인 여부와 관계없이 liked는 false (기본값) -> 로그인하지 않으면 추천 안한 상태로 하기 위함?
+        return new AnswerLikeResponseDTO(answerId, false, likeCount != null ? likeCount : 0, nicknameList != null ? nicknameList : List.of()); // 기본 liked 값은 false
+    }
+
+    // 특정 답변(answerId)의 추천 정보 가져오기 (로그인 사용자)
+    @Transactional(readOnly = true)
+    public AnswerLikeResponseDTO getLikeStatus(String email, Long answerId) {
+
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new DataNotFoundException("사용자를 찾을 수 없습니다."));
+
+        // 추천 개수 조회
+        Long likeCount = answerLikeRepository.countByAnswerId(answerId);
+
+        // 추천한 사용자 닉네임 목록 조회
+        List<String> nicknameList = answerLikeRepository.findNicknameListByAnswerId(answerId);
+
+        // 현재 사용자가 해당 답변을 추천했는지 확인 (추천이 없으면 'false' 반환)
+        boolean liked = answerLikeRepository.findLikeStatusByAnswerIdAndMemberId(answerId, member.getId())
+                .orElse(false);
+
+        return new AnswerLikeResponseDTO(answerId, liked, likeCount !=null ? likeCount : 0, nicknameList != null ? nicknameList : List.of());
     }
 }
