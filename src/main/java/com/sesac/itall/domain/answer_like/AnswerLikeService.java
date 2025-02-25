@@ -32,15 +32,23 @@ public class AnswerLikeService {
 
         Optional<AnswerLike> optionalAnswerLike = answerLikeRepository.findByAnswerIdAndMemberId(answer.getId(), member.getId());
 
+        boolean liked;
+
         // optional로 기존 추천 여부 확인하는 방법(orElseGet보다 debugging이 쉬움?)
         if (optionalAnswerLike.isEmpty()) {
             // 데이터가 아예 없는 경우 예외 처리 또는 새로운 객체 생성 후 저장
             AnswerLike newAnswerLike = new AnswerLike(member, answer);
             answerLikeRepository.save(newAnswerLike);
-            return new AnswerLikeResponseDTO(answer.getId(), true, 1L, List.of(member.getNickname()));
+//            answerLikeRepository.flush();   // db에 즉시 반영 (트랜잭션 내에서만)
+            liked = true;   // 새로 추천된 상태로 변경
+        } else {
+            // 기존 추천 상태 변경 (추천 추가 / 취소)
+            AnswerLike answerLike = optionalAnswerLike.get();
+            answerLike.updateAnswerLike();
+            answerLikeRepository.save(answerLike);
+//            answerLikeRepository.flush();
+            liked = answerLike.isLiked();
         }
-
-        AnswerLike answerLike = optionalAnswerLike.get();
 
 //        // 기존 추천 여부 확인
 //        AnswerLike answerLike = answerLikeRepository.findByAnswerIdAndMemberId(answer.getId(), member.getId())
@@ -49,10 +57,6 @@ public class AnswerLikeService {
 //                    answerLikeRepository.save(newAnswerLike);   // 반드시 저장(db가 null이 되지 않기 위해?)
 //                    return newAnswerLike;
 //                });   // 없으면 객체 생성
-
-        // 추천 상태 변경 (추천 추가 / 취소)
-        answerLike.updateAnswerLike();
-        answerLikeRepository.save(answerLike);  // db에 변경된 상태 저장
 
         // 총 추천 개수 가져오기
         long likeCount = answerLikeRepository.countByAnswerId(answer.getId());
@@ -64,7 +68,7 @@ public class AnswerLikeService {
                 .toList();  // java 16 부터 사용 가능 (또는 `.collect(Collectors.toList())` 사용)
 
         // dto로 응답 반환
-        return new AnswerLikeResponseDTO(answer.getId(), answerLike.isLiked(), likeCount, nicknameList);
+        return new AnswerLikeResponseDTO(answer.getId(), liked, likeCount, nicknameList);
     }
 
 
