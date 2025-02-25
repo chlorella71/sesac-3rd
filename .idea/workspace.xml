@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/tooltipHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer_like/AnswerLikeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/likeHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/likeHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
