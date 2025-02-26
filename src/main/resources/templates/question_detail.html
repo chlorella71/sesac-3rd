@@ -48,7 +48,11 @@ qwe
 <!--                <th:block sec:authorize="isAuthenticated()">-->
 <!--                    <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-email="${#authentication.isAuthenticated() ? #authentication.getPrincipal().getUsername() : null}" th:classappend="${answerLikeResponseDTO != null and answerLikeResponseDTO.liked} ? 'btn-success' : 'btn-outline-secondary'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTO != null ? answerLikeResponseDTO.likeCount : 0}"></span></a>-->
 <!--                </th:block>-->
-                <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-nickname-list="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].nicknameList : ''}" th:classappend="${answerLikeResponseDTOMap[answer.id] != null and answerLikeResponseDTOMap[answer.id].liked} ? 'btn-success text-white' : 'btn-outline-secondary text-black'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].likeCount : 0}"></span></a>
+                <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-nickname-list="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].nicknameList != null ? #strings.arrayJoin(answerLikeResponseDTOMap[answer.id].nicknameList, ',') : '' : ''}" th:classappend="${answerLikeResponseDTOMap[answer.id] != null and answerLikeResponseDTOMap[answer.id].liked} ? 'btn-success text-white' : 'btn-outline-secondary text-black'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].likeCount : 0}"></span></a>
+                <!-- 추천차 목록 모달 버튼 -->
+                <button class="btn btn-outline-secondary open-modal" th:data-answer-id="${answer.id}" data-modal-type="nicknameList" data-modal-title="추천한 사용자" th:data-nickname-list="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].nicknameList != null ? #strings.arrayJoin(answerLikeResponseDTOMap[answer.id].nicknameList, ',') : '' : ''}">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}" class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="삭제"></a>
             </div>
@@ -64,6 +68,18 @@ qwe
         <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
+
+    <!-- 추천자 목록 모달 -->
+    <div th:each="answer : ${answerList}" th:id="|likeModal-${answer.id}|" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">추천한 사용자</h3>
+            <ul class="modal-content-body">
+                <!-- 동적으로 내용이 삽입됨 -->
+            </ul>
+        </div>
+    </div>
+
     <p>로그인 상태: <span th:text="${#authorization.expression('isAuthenticated()') ? '인증됨' : '비인증'}"></span></p>
 
     <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
@@ -86,7 +102,8 @@ qwe
 <!--    <script src="/js/csrfHandler.js"></script>  &lt;!&ndash; csrf 토큰 처리 &ndash;&gt;-->
     <script src="/js/deleteHandler.js"></script>
     <script src="/js/likeHandler.js"></script>
-    <script src="/js/tooltipHandler.js"></script>
+<!--    <script src="/js/tooltipHandler.js"></script>-->
+    <script type="module" src="/js/modalHandler.js"></script>
 </th:block>
 <script type="text/javascript">
     let isAuthenticated = [[${#authorization.expression('isAuthenticated()')}]];

@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/tooltipHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-02-25.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalRenderer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/tooltipHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/tooltipHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
