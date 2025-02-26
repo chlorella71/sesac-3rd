@@ -1,6 +1,7 @@
 package com.sesac.itall.domain.member;
 
 import com.sesac.itall.domain.answer_like.AnswerLike;
+import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.question.Question;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -44,6 +45,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnswerLike> answerLikes;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Blog blog;
 
     @PrePersist
     protected void onCreate() {

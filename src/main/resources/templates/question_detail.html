@@ -50,9 +50,9 @@ qwe
 <!--                </th:block>-->
                 <a href="javascript:void(0);" class="like btn btn-sm btn-outline-secondary" th:data-answer-id="${answer.id}" th:data-nickname-list="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].nicknameList != null ? #strings.arrayJoin(answerLikeResponseDTOMap[answer.id].nicknameList, ',') : '' : ''}" th:classappend="${answerLikeResponseDTOMap[answer.id] != null and answerLikeResponseDTOMap[answer.id].liked} ? 'btn-success text-white' : 'btn-outline-secondary text-black'">추천<span class="badge rounded-pill bg-success like-count" th:text="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].likeCount : 0}"></span></a>
                 <!-- 추천차 목록 모달 버튼 -->
-                <button class="btn btn-outline-secondary open-modal" th:data-answer-id="${answer.id}" data-modal-type="nicknameList" data-modal-title="추천한 사용자" th:data-nickname-list="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].nicknameList != null ? #strings.arrayJoin(answerLikeResponseDTOMap[answer.id].nicknameList, ',') : '' : ''}">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a href="javascript:void(0);" class="btn btn-sm btn-outline-secondary open-modal" th:data-answer-id="${answer.id}" data-modal-type="nicknameList" data-modal-title="추천한 사용자" th:data-nickname-list="${answerLikeResponseDTOMap[answer.id] != null ? answerLikeResponseDTOMap[answer.id].nicknameList != null ? #strings.arrayJoin(answerLikeResponseDTOMap[answer.id].nicknameList, ',') : '' : ''}">
+<!--                    <i class="fas fa-bars"></i>-->목록
+                </a>
                 <a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="수정"></a>
                 <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}" class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()" th:if="${answer.email != null and #authentication.getPrincipal().getUsername() == answer.email}" th:text="삭제"></a>
             </div>
