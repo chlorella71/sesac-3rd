@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberCreateDto {
+public class MemberCreateDTO {
 
     @NotEmpty(message = "이메일은 필수항목입니다.")
     private String email;

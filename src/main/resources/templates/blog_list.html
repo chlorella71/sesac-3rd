@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width:50%">블로그 제목</th>
+            <th>블로그 소개</th>
+            <th>생성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="blog : ${blogList}">
+            <td class="text-start">
+                <a th:href="@{|/blog/${blog.id}|}" th:text="${blog.title}"></a>
+            </td>
+            <td th:text="${blog.intro}"></td>
+            <td th:text="${#temporals.format(blog.regdate, 'yyyy-MM-dd')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    &lt;!&ndash; 로그인 상태에 따른 블로그 생성 버튼 &ndash;&gt;-->
+<!--    <div th:if="${isLoggedIn}">-->
+<!--        <a th:href="@{/blog/create}" class="btn btn-primary">블로그 생성하기</a>-->
+<!--    </div>-->
+</div>
+</html>

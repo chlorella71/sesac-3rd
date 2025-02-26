@@ -4,10 +4,13 @@ import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.folder.Folder;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Setter
 @Getter
 @Entity
 @Table(name = "post")
@@ -28,6 +31,12 @@ public class Post {
 
     @Column
     private LocalDateTime modifydate;
+
+    @Column
+    private LocalDateTime draftdate;
+
+    @Column(name = "is_draft")
+    private boolean draft;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id", nullable = false)

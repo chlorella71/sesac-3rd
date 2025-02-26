@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/Blog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/Folder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogCreateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogUpdateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/Blog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/Blog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/Folder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/Folder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberCreateDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +58,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>

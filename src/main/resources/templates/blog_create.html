@@ -1,0 +1,18 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2>블로그 생성</h2>
+    <form th:action="@{/blog/create}" th:object="${blogCreateDTO}" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">블로그 제목</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="블로그 제목을 입력하세요">
+            <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="intro" class="form-label">블로그 소개</label>
+            <textarea class="form-control" id="intro" th:field="*{intro}" rows="3" placeholder="블로그 소개를 입력하세요"></textarea>
+            <div class="text-danger" th:if="${#fields.hasErrors('intro')}" th:errors="*{intro}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">블로그 생성</button>
+    </form>
+</div>
+</html>

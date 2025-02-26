@@ -17,12 +17,12 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/signup")
-    public String signup(MemberCreateDto memberCreateDto) {
+    public String signup(MemberCreateDTO memberCreateDto) {
         return "signup_form";
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid MemberCreateDto memberCreateDto, BindingResult bindingResult) {
+    public String signup(@Valid MemberCreateDTO memberCreateDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "signup_form";   // 유효성 검사 실패 시 회원가입 폼 다시 띄움
         }

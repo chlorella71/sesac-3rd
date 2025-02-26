@@ -4,15 +4,17 @@ import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.folder.Folder;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "folder_category")
 public class FolderCategory {
 
@@ -32,6 +34,19 @@ public class FolderCategory {
     private Blog blog;
 
     // 카테고리에 속한 폴더들
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "folderCategory", cascade = CascadeType.ALL)
     private List<Folder> folderList = new ArrayList<>();
+
+    // 생성자
+    public FolderCategory(String name, Blog blog) {
+        this.name = name;
+        this.blog = blog;
+        this.regdate = LocalDateTime.now();
+    }
+
+    // 폴더 추가 메서드
+    public void addFolder(Folder folder) {
+        this.folderList.add(folder);
+        folder.setCategory(this);
+    }
 }
