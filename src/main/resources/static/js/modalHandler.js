@@ -1,4 +1,5 @@
 import { renderNicknameList } from "./modalRenderer.js";    // 모듈 가져오기
+import { renderCategoryCreateForm } from "./categoryRenderer.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     function openModal(modalId, title, data, modalType) {

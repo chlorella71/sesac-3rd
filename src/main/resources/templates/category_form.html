@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2>카테고리 생성</h2>
+    <h3 th:text="${blog.title}">블로그 제목</h3>
+
+    <form th:action="@{|/blog/${blog.id}/category/create|}" th:object="${CategoryCreateDTO}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">카테고리 이름</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="카테고리 이름을 입력하세요">
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:error="*{name}"></div>
+        </div>
+
+<!--        <div class="mb-3">-->
+<!--            <label for="description" class="form-label">카테고리 설명</label>-->
+<!--            <textarea class="form-control" id="description" th:field="*{description}" rows="3" placeholder="카테고리에 대한 설명을 입력하세요"></textarea>-->
+<!--        </div>-->
+
+        <button type="submit" class="btn btn-primary">카테고리 생성</button>
+        <a th:href="@{|/blog/${blog.id}|}" class="btn btn-secondary">취소</a>
+    </form>
+</div>
+
+</html>

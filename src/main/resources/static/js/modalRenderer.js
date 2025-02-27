@@ -33,3 +33,121 @@ export function renderNicknameList(container, data) {
 
     container.appendChild(list);
 }
+
+/**
+ * 카테고리 폼을 렌더링하는 함수
+ * @param {HTMLElement} container - 내용을 넣을 컨테이너
+ * @param {Object} data - 초기 데이터 (필요한 경우}
+ */
+export function renderCatetoryCreateForm(container, data) {
+    // 폼 생성
+    const form = document.createElement('form');
+    form.id = 'categoryCreateDTO';
+    form.method = 'post';
+
+    // CSRF 토큰 추가 (서버 사이드 템플릿 대신 직접 추가)
+    const csrfToken = document.querySelector('meta[name="_csrf"]');
+    cosnt csrfHeader = document.querySelector('meta[name="_csrf_header"]');
+
+    if (csrfToken && csrfHeader) {
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = csrfToken.getAttribute('content');
+        csrfInput.value = csrfHeader.getAttribute('content');
+        form.appendChild(csrfInput);
+    }
+
+    // 블로그 ID 가져오기 (URL에서 추출 또는 다른 방법으로)
+    const blogId = getBlogIdFromURL();  // 이 함수는 구현 필요
+    form.action = `/blog/${blogId}/category/create`;
+
+    // 카테고리 이름 입력 필드
+    const formGroup = document.createElement('div');
+    formGroup.classList.add('mb-3');
+
+    const label = document.createElement('label');
+    label.htmlFor = 'categoryName';
+    label.classList.add('form-label');
+    label.textContent = '카테고리 이름';
+    formGroup.appendChild(label);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.classList.add('form-control');
+    input.id = 'categoryName';
+    input.name = 'name';
+    input.required = true;
+    formGroup.appendChild(input);
+
+    const feedback = document.createElement('div');
+    feedback.classList.add('invalid-feedback');
+    feedback.textContent = '카테고리 이름을 입력해주세요.';
+    formGroup.appendChild(feedback);
+
+    form.appendChild(formGroup);
+
+    // 버튼 그룹
+    const buttonGroup = document.createElement('div');
+    buttonGroup.classList.add('modal-buttons');
+
+    // 버튼 그룹
+    const buttonGroup = document.createElement('div');
+    buttonGroup.classList.add('modal-buttons');
+
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.classList.add('btn', 'btn-secondary', 'modal-close');
+    cancelButton.textContent = '취소';
+    cancelButton.addEventListener('click', function() {
+        // 가장 가까운 모달 찾아서 닫기
+        const modal = this.closet('.modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+    buttonGroup.appendChild(cancelButton);
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.classList.add('btn', 'btn-primary');
+    submitButton.textContent = '생성';
+    buttonGroup.appendChild(submitButton);
+
+    form.appendChild(buttonGroup);
+
+    // 폼 제출 이벤트 핸들러
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 유효성 검사
+        if (!input.value.trim()) {
+            input.classList.add('is-invalid');
+            return;
+        }
+
+        // 폼 제출
+        this.submit();
+    });
+
+    // 컨테이너에 폼 추가
+    container.appendChild(form);
+}
+
+/**
+ * URL에서 블로그 ID 추출
+ * @returns {string} 블로그 ID
+ */
+function getBlogIdFromURL() {
+    // URL 경로에서 블로그 ID 추출
+    // 예: "/blog/123/view" -> "123"
+    const path = window.location.pathname;
+    const match = path.match(/\blog\/(\d+)/);
+
+    if (match && match[1]) {
+        return match[1];
+    }
+
+    // 기본값 또는 오류 처리
+    console.error('블로그 ID를 URL에서 찾을 수 없습니다.');
+    return '';
+}

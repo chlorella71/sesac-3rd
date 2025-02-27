@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2>블로그 설정</h2>
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">기본 설정</a>>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{|/blog/${blog.id}/settings/category|}">카테고리 관리</a>
+        </li>
+    </ul>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">블로그 정보 수정</h5>
+        </div>
+        <div class="card-body">
+            <form th:action="@{|/blog/${blog.id}/settings/update|}" method="post" th:object="${blogUpdateDTO}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <div class="mb-3">
+                    <label for="title" clas="form-label">블로그 제목</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="intro" class="form-label">블로그 소개</label>
+                    <textarea class="form-control" id="intro" th:field="*{intro}" rows="5"></textarea>
+                    <div class="text-danger" th:if="${#fields.hasErrors('intro')}" th:errors="*{intro}"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">저장</button>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

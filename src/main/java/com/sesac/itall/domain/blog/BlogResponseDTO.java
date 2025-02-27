@@ -13,6 +13,7 @@ public class BlogResponseDTO {
     private String intro;
     private LocalDateTime regdate;
     private String nickname;
+    private String email;
 
     // 포스트 개수
     private long postCount;
@@ -24,5 +25,6 @@ public class BlogResponseDTO {
         this.regdate = blog.getRegdate();
         this.nickname = blog.getMember().getNickname();
         this.postCount = blog.getPostList().size();
+        this.email = blog.getMember().getEmail();
     }
 }

@@ -5,15 +5,15 @@
     <div class="blog-header py-3 mb-4 border-bottom">
         <div class="row">
             <div class="col-md-8">
-                <h1 class="blog-title" th:text="${blog.title}">블로그 제목</h1>
-                <p class="blog-description text-muted" th:text="${blog.intro}">블로그 소개</p>
+                <h1 class="blog-title" th:text="${blogResponseDTO.title}">블로그 제목</h1>
+                <p class="blog-description text-muted" th:text="${blogResponseDTO.intro}">블로그 소개</p>
             </div>
             <div class="col-md-4 text-right d-flex justify-content-end align-items-center">
                 <span class="blog-author text-muted">
                     <i class="bi bi-person-circle"></i>
-                    <span th:text="${blog.nickname}">작성자</span>
+                    <span th:text="${blogResponseDTO.nickname}">작성자</span>
                 </span>
-                <span class="ms-3 text-muted" th:text="${#temporals.format(blog.regdate, 'yyyy-MM-dd')}">작성일</span>
+                <span class="ms-3 text-muted" th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy-MM-dd')}">작성일</span>
             </div>
         </div>
     </div>
@@ -22,20 +22,73 @@
         <!-- 왼쪽 사이드바 (카테고리 목록) -->
         <div class="col-md-3">
             <div class="card mb-3">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">카테고리</h5>
+                    <!-- 플러스 버튼(소유자만 볼 수 있음) -->
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#categoryModal" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                        <i class="bi bi-plus"></i>
+                    </button>
                 </div>
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" th:if="${folderCategoryList.isEmpty()}">
                             <span class="text-muted">카테고리가 없습니다.</span>
                         </li>
-                        <li class="list-group-item" th:each="category : ${categories}">
+                        <li class="list-group-item" th:each="category : ${folderCategoryList}">
                             <a href="#" th:text="${category.name}">카테고리 이름</a>
                         </li>
                     </ul>
                 </div>
             </div>
+
+            <!-- 카테고리 생성 모달 -->
+            <div class="modal" id="categoryModal">
+                <div class="modal-content">
+                    <span class="close">$times;</span>
+                    <h3 class="modal-title">카테고리 생성</h3>
+                    <div class="modal-content-body">
+                        <!-- 폼은 자바스크립트로 동적 생성됨 -->
+
+<!--                        <form id="categoryCreateDTO" th:action="@{|/blog/${blogResponseDTO.id}/category/create|}" method="post">-->
+<!--                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+<!--                            <div class="mb-3">-->
+<!--                                <label for="categoryName" class="form-label">카테고리 이름</label>-->
+<!--                                <input type="text" class="form-control" id="categoryName" name="name" required>-->
+<!--                                <div class="invalid-feedback">카테고리 이름을 입력해주세요.</div>-->
+<!--                            </div>-->
+<!--                            <div class="modal-buttons">-->
+<!--                                <button type="button" class="btn btn-secondary modal-close">취소</button>-->
+<!--                                <button type="submit" class="btn btn-primary">생성</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+
+<!--                        </form>-->
+<!--                        <div class="modal-header">-->
+<!--                            <h5 class="modal-title" id="categoryModalLabel">카테고리 생성</h5>-->
+<!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                        </div>-->
+<!--                        <div class="modal-body">-->
+<!--                            <form id="categoryCreateDTO" th:action="@{|/blog/${blogResponseDTO.id}/category/create|}" method="post">-->
+<!--                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="categoryName" class="form-label">카테고리 이름</label>-->
+<!--                                    <input type="text" class="form-control" id="categoryName" name="name" required>-->
+<!--                                    <div class="invalid-feedback">카테고리 이름을 입력해주세요.</div>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                        <div class="modal-footer">-->
+<!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>-->
+<!--                            <button type="button" class="btn btn-primary" onclick="document.getElementById('categoryCreateDTO').submit()">생성</button>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+<!--            &lt;!&ndash; 2. 카테고리 버튼 수정 &ndash;&gt;-->
+<!--            <button type="button" class="btn btn-sm btn-outline-primary open-modal" data-modal-id="categoryModal" data-modal-title="카테고리 생성" data-modal-type="categoryCreateDTO" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">-->
+<!--                <i class="bi bi-plus"></i>-->
+<!--            </button>-->
 
 <!--            &lt;!&ndash; 블로그 관리 링크 (블로그 소유자인 경우에만 표시) &ndash;&gt;-->
 <!--            <div class="card mb-3" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blog.email}">-->
@@ -71,22 +124,27 @@
 
                     <div class="mb-3">
                         <strong>블로그 이름:</strong>
-                        <span th:text="${blog.title}">블로그 제목</span>
+                        <span th:text="${blogResponseDTO.title}">블로그 제목</span>
                     </div>
 
                     <div class="mb-3">
                         <strong>블로그 소개:</strong>
-                        <p th:text="${blog.intro}">블로그 소개 내용</p>
+                        <p th:text="${blogResponseDTO.intro}">블로그 소개 내용</p>
                     </div>
 
                     <div class="mb-3">
                         <strong>작성자:</strong>
-                        <span th:text="${blog.nickname}">작성자 이름</span>
+                        <span th:text="${blogResponseDTO.nickname}">작성자 이름</span>
                     </div>
 
                     <div class="mb-3">
                         <strong>생성일:</strong>
-                        <span th:text="${#temporals.format(blog.regdate, 'yyyy년 MM월 dd일')}">생성일</span>
+                        <span th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy년 MM월 dd일')}">생성일</span>
+                    </div>
+
+                    <!-- 블로그 소유자인 경우 설정 버튼 표시 -->
+                    <div class="mt-4" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                        <a th:href="@{|/blog/${blogResponseDTO.id}/settings|}" class="btn btn-primary">설정</a>
                     </div>
                 </div>
             </div>
@@ -95,4 +153,9 @@
     </div>
 
 </div>
+
+<th:block layout:fragment="script" type='text/javascript'>
+    <script type="module" src="/js/modalHandler.js"></script>
+</th:block>
+
 </html>
