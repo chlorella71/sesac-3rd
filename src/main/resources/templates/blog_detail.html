@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <!-- 블로그 헤더 섹션 -->
+    <div class="blog-header py-3 mb-4 border-bottom">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="blog-title" th:text="${blog.title}">블로그 제목</h1>
+                <p class="blog-description text-muted" th:text="${blog.intro}">블로그 소개</p>
+            </div>
+            <div class="col-md-4 text-right d-flex justify-content-end align-items-center">
+                <span class="blog-author text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    <span th:text="${blog.nickname}">작성자</span>
+                </span>
+                <span class="ms-3 text-muted" th:text="${#temporals.format(blog.regdate, 'yyyy-MM-dd')}">작성일</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- 왼쪽 사이드바 (카테고리 목록) -->
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0">카테고리</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:if="${folderCategoryList.isEmpty()}">
+                            <span class="text-muted">카테고리가 없습니다.</span>
+                        </li>
+                        <li class="list-group-item" th:each="category : ${categories}">
+                            <a href="#" th:text="${category.name}">카테고리 이름</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+<!--            &lt;!&ndash; 블로그 관리 링크 (블로그 소유자인 경우에만 표시) &ndash;&gt;-->
+<!--            <div class="card mb-3" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blog.email}">-->
+<!--                <div class="card-header">-->
+<!--                    <h5 class="mb-0">블로그 관리</h5>-->
+<!--                </div>-->
+<!--                <div class="card-body p-0">-->
+<!--                    <ul class="list-group list-group-flush">-->
+<!--                        <li class="list-group-item">-->
+<!--                            <a href="#">블로그 정보 수정</a>-->
+<!--                        </li>-->
+<!--                        <li clss="list-group-item">-->
+<!--                            <a href="#">카테고리 관리</a>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item">-->
+<!--                            <a href="#">새 글 작성</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+        <!-- 메인 컨텐츠 영역 -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">블로그 정보</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        이 블로그는 아직 개발 중입니다. 곧 더 많은 콘텐츠가 추가될 예정입니다.
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>블로그 이름:</strong>
+                        <span th:text="${blog.title}">블로그 제목</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>블로그 소개:</strong>
+                        <p th:text="${blog.intro}">블로그 소개 내용</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>작성자:</strong>
+                        <span th:text="${blog.nickname}">작성자 이름</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>생성일:</strong>
+                        <span th:text="${#temporals.format(blog.regdate, 'yyyy년 MM월 dd일')}">생성일</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</html>

@@ -1,5 +1,6 @@
 package com.sesac.itall.domain.blog;
 
+import com.sesac.itall.domain.folder_category.FolderCategory;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,24 @@ public class BlogController {
     }
 
     //TODO: 블로그 상세 페이지 구현
+    @GetMapping("/{id}")
+    public String blogDetail(@PathVariable("id") Long id, Model model) {
+        try {
+            Blog blog = blogService.getBlogById(id);
+
+            BlogResponseDTO blogResponseDTO = new BlogResponseDTO(blog);
+            model.addAttribute("blog", blogResponseDTO);
+
+            // 블로그의 카테고리 목록 가져오기
+            List<FolderCategory> folderCategoryList = blog.getFolderCategoryList();
+            model.addAttribute("folderCategoryList", folderCategoryList);
+
+            return "blog_detail";
+        } catch (IllegalArgumentException e) {
+            // 예외 처리: 존재하지 않는 블로그 ID인 경우 리다이렉트
+            return "redirect:/blog/list";
+        }
+    }
 
     // 내 블로그 (로그인 required)
     @GetMapping("/my")

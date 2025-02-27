@@ -112,4 +112,10 @@ public class BlogService {
         Blog blog = new Blog(blogCreateDTO.getTitle(), blogCreateDTO.getIntro(), member);
         return blogRepository.save(blog);
     }
+
+    // 블로그 상세
+    public Blog getBlogById(Long id) {
+        return blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 블로그가 존재하지 않습니다. ID: " + id));
+    }
 }
