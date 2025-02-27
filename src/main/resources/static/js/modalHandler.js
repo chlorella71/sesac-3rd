@@ -1,5 +1,5 @@
 import { renderNicknameList } from "./modalRenderer.js";    // 모듈 가져오기
-import { renderCategoryCreateForm } from "./categoryRenderer.js";
+import { renderCategoryCreateForm } from "./modalRenderer.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     function openModal(modalId, title, data, modalType) {
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const modalTitle= modal.querySelector("modal-title");
+        const modalTitle= modal.querySelector(".modal-title");
         const modalContent = modal.querySelector(".modal-content-body");
 
         // 제목 변경 (제공된 경우)
@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
             switch(modalType) {
                 case "nicknameList":
                     renderNicknameList(modalContent, data);
+                    break;
+                case "categoryCreateForm":
+                    renderCategoryCreateForm(modalContent, data);
                     break;
                 default:
                     // 기본값은 추천자 목록
@@ -100,6 +103,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         case "nicknameList":
                             renderNicknameList(modalContent, data);
                             break;
+                        case "categoryCreateForm":
+                            renderCategoryCreateForm(modalContent, data);
+                            break;
                         default:
                             // 기본값은 추천자 목록
                             renderNicknameList(modalContent, data);
@@ -148,6 +154,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 switch(modalType) {
                     case "nicknameList":
                         data = this.dataset.nicknameList;
+                        break;
+                    case "categoryCreateForm":
+                        // 카테고리 생성 폼에 필요한 데이터
+                        data = {
+                            blogId: this.dataset.blogId || getBlogIdFromURL()
+                        };
                         break;
                     default:
                         data = this.dataset.modalData;

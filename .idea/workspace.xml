@@ -5,30 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryCreateDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap-icons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/modal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/font/bootstrap-icons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/font/bootstrap-icons.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/font/bootstrap-icons.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/font/bootstrap-icons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/font/fonts/bootstrap-icons.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/font/fonts/bootstrap-icons.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_setting.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/category_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/folder_category_setting.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -25,7 +25,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">카테고리</h5>
                     <!-- 플러스 버튼(소유자만 볼 수 있음) -->
-                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#categoryModal" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                    <button type="button" class="btn btn-sm btn-outline-primary open-modal" data-modal-id="categoryModal" data-modal-title="카테고리 생성" data-modal-type="categoryCreateForm" data-blog-id="${blogResponseDTO.id}" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
                         <i class="bi bi-plus"></i>
                     </button>
                 </div>
@@ -44,7 +44,7 @@
             <!-- 카테고리 생성 모달 -->
             <div class="modal" id="categoryModal">
                 <div class="modal-content">
-                    <span class="close">$times;</span>
+                    <span class="close">&times;</span>
                     <h3 class="modal-title">카테고리 생성</h3>
                     <div class="modal-content-body">
                         <!-- 폼은 자바스크립트로 동적 생성됨 -->
@@ -151,6 +151,12 @@
         </div>
 
     </div>
+
+    <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
+    <th:block sec:authorize="isAuthenticated()">
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    </th:block>
 
 </div>
 

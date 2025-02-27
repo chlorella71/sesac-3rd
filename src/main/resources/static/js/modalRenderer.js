@@ -39,7 +39,7 @@ export function renderNicknameList(container, data) {
  * @param {HTMLElement} container - 내용을 넣을 컨테이너
  * @param {Object} data - 초기 데이터 (필요한 경우}
  */
-export function renderCatetoryCreateForm(container, data) {
+export function renderCategoryCreateForm(container, data) {
     // 폼 생성
     const form = document.createElement('form');
     form.id = 'categoryCreateDTO';
@@ -47,13 +47,15 @@ export function renderCatetoryCreateForm(container, data) {
 
     // CSRF 토큰 추가 (서버 사이드 템플릿 대신 직접 추가)
     const csrfToken = document.querySelector('meta[name="_csrf"]');
-    cosnt csrfHeader = document.querySelector('meta[name="_csrf_header"]');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]');
 
     if (csrfToken && csrfHeader) {
         const csrfInput = document.createElement('input');
         csrfInput.type = 'hidden';
-        csrfInput.name = csrfToken.getAttribute('content');
-        csrfInput.value = csrfHeader.getAttribute('content');
+        csrfInput.name = '_csrf';   // 스프링 시큐리티 기본값 또는 서버 설정에 맞춰 조정
+        csrfInput.value = csrfToken.getAttribute('content');
+//        csrfInput.name = csrfToken.getAttribute('name');
+//        csrfInput.value = csrfHeader.getAttribute('content');
         form.appendChild(csrfInput);
     }
 
@@ -90,17 +92,13 @@ export function renderCatetoryCreateForm(container, data) {
     const buttonGroup = document.createElement('div');
     buttonGroup.classList.add('modal-buttons');
 
-    // 버튼 그룹
-    const buttonGroup = document.createElement('div');
-    buttonGroup.classList.add('modal-buttons');
-
     const cancelButton = document.createElement('button');
     cancelButton.type = 'button';
     cancelButton.classList.add('btn', 'btn-secondary', 'modal-close');
     cancelButton.textContent = '취소';
     cancelButton.addEventListener('click', function() {
         // 가장 가까운 모달 찾아서 닫기
-        const modal = this.closet('.modal');
+        const modal = this.closest('.modal');
         if (modal) {
             modal.style.display = 'none';
         }
@@ -141,7 +139,7 @@ function getBlogIdFromURL() {
     // URL 경로에서 블로그 ID 추출
     // 예: "/blog/123/view" -> "123"
     const path = window.location.pathname;
-    const match = path.match(/\blog\/(\d+)/);
+    const match = path.match(/\/blog\/(\d+)/);
 
     if (match && match[1]) {
         return match[1];
