@@ -1,5 +1,4 @@
-import { renderNicknameList } from "./modalRenderer.js";    // 모듈 가져오기
-import { renderCategoryCreateForm } from "./modalRenderer.js";
+import { renderNicknameList, renderCategoryCreateForm, renderCategoryEditForm } from "./modalRenderer.js";    // 모듈 가져오기
 
 document.addEventListener("DOMContentLoaded", function () {
     function openModal(modalId, title, data, modalType) {
@@ -28,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 case "categoryCreateForm":
                     renderCategoryCreateForm(modalContent, data);
+                    break;
+                case "categoryEditForm":
+                    renderCategoryEditForm(modalContent, data);
                     break;
                 default:
                     // 기본값은 추천자 목록
@@ -106,6 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         case "categoryCreateForm":
                             renderCategoryCreateForm(modalContent, data);
                             break;
+                        case "categoryEditForm":
+                            renderCategoryEditForm(modalContent, data);
+                            break;
                         default:
                             // 기본값은 추천자 목록
                             renderNicknameList(modalContent, data);
@@ -166,6 +171,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 openModal(modalId, title, data, modalType);
+            }
+        });
+    });
+
+    document.querySelectorAll(".edit-category").forEach(button => {
+        button.addEventListener("click", function() {
+            const categoryId = this.dataset.categoryId;
+            const categoryName = this.dataset.categoryName;
+
+            if (!categoryId) {
+                console.error("카테고리 ID가 없습니다.");
+                return;
+            }
+
+            // 모달 열기
+            const modal = document.getElementById("editCategoryModal");
+            if (modal) {
+                const modalContent = modal.querySelector(".modal-content-body");
+                if (modalContent) {
+                    modalContent.innerHTML = "";
+                    renderCategoryEditForm(modalContent, {
+                        categoryId: categoryId,
+                        categoryName: categoryName
+                    });
+                }
+                modal.style.display = "block";
             }
         });
     });
@@ -239,4 +270,111 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
+
+    // 카테고리 삭제 버튼 이벤트 처리
+    document.querySelectorAll(".delete-category").forEach(button => {
+        button.addEventListener("click", function() {
+            const categoryId = this.dataset.categoryId;
+            const categoryName = this.dataset.categoryName;
+
+            if (!categoryId) {
+                console.error("카테고리 ID가 없습니다.");
+                return;
+            }
+
+            if (confirm(`"${categoryName}" 카테고리를 정말 삭제하시겠습니까?`)) {
+                deleteCategory(categoryId);
+            }
+        });
+    });
+
+    // 저장 버튼 클릭 이벤트 위임 처리
+    document.addEventListener("click", function(e) {
+        if (e.target && e.target.classList.contains("save-category")) {
+            const categoryId = e.target.dataset.categoryId;
+            saveCategory(categoryId);
+        }
+    });
+
+    // 카테고리 저장 기능
+    function saveCategory(categoryId) {
+        const nameInput = document.getElementById("editCategoryName");
+        const newName = nameInput.value.trim();
+
+        if (!newName) {
+            nameInput.classList.add("is-invalid");
+            return;
+        }
+
+//        const blogId = getBlogIdFromURL();
+        let blogId = '';
+        const path = window.location.pathname;
+        const match = path.match(/\/blog\/(\d+)/);
+        if (match && match[1]) {
+            blogId = match[1];
+        } else {
+            console.error('블로그 ID를 URL에서 찾을 수 없습니다.');
+        }
+
+        const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+
+        // 저장 버튼 상태 업데이트
+        const saveButton = document.querySelector(".save-category");
+        const originalText = saveButton.textContent;
+        saveButton.textContent = "저장 중...";
+        saveButton.disabled = true;
+
+        fetch(`/blog/${blogId}/category/${categoryId}/update`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                [csrfHeader]: csrfToken
+            },
+            body: JSON.stringify({ name: newName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // 성공적으로 업데이트 된 경우
+                // UI 업데이트 (카테고리 이름 변경)
+                const categoryElement = document.querySelector(`[data-category-id="${categoryId}"]`);
+                if (categoryElement) {
+                    categoryElement.textContent = newName;
+                }
+
+                // 편집/삭제 버튼의 data-category-name 속성 업데이트
+                document.querySelectorAll(`.edit-category[data-category-id="${categoryId}"]`).forEach(btn => {
+                    btn.dataset.categoryName = newName;
+                });
+
+                document.querySelectorAll(`.delete-category[data-category-id=${categoryId}""]`).forEach(btn => {
+                    btn.dataset.categoryName = newName;
+                });
+
+                // 모달 닫기
+                const modal = document.getElementById("editCategoryModal");
+                if (modal) {
+                    modal.style.display = "none";
+                }
+
+                // 성공 메세지
+                alert("카테고리가 성공적으로 수정되었습니다.");
+            } else {
+                // 실패 시 오류 메시지
+                alert(data.message || "카테고리 수정 중 오류가 발생했습니다.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("카테고리 수정 중 오류가 발생했습니다.");
+        })
+        .finally(() => {
+            // 버튼 상태 복원
+            saveButton.textContent = originalText;
+            saveButton.disabled = false;
+        });
+    }
+
+    // 카테고리 삭제 기능
 });

@@ -36,6 +36,14 @@
                         </li>
                         <li class="list-group-item" th:each="category : ${folderCategoryList}">
                             <a href="#" th:text="${category.name}">카테고리 이름</a>
+                            <div class="category-actions" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                                <button type="button" class="btn btn-sm edit-category" th:data-category-id="${category.id}" th:data-category-name="${category.name}">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm delete-category" th:data-category-id="${category.id}" th:data-category-name="${category.name}" th:if="${category.name != '기본 카테고리'}">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -48,67 +56,20 @@
                     <h3 class="modal-title">카테고리 생성</h3>
                     <div class="modal-content-body">
                         <!-- 폼은 자바스크립트로 동적 생성됨 -->
-
-<!--                        <form id="categoryCreateDTO" th:action="@{|/blog/${blogResponseDTO.id}/category/create|}" method="post">-->
-<!--                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-<!--                            <div class="mb-3">-->
-<!--                                <label for="categoryName" class="form-label">카테고리 이름</label>-->
-<!--                                <input type="text" class="form-control" id="categoryName" name="name" required>-->
-<!--                                <div class="invalid-feedback">카테고리 이름을 입력해주세요.</div>-->
-<!--                            </div>-->
-<!--                            <div class="modal-buttons">-->
-<!--                                <button type="button" class="btn btn-secondary modal-close">취소</button>-->
-<!--                                <button type="submit" class="btn btn-primary">생성</button>-->
-<!--                            </div>-->
-<!--                        </form>-->
-
-<!--                        </form>-->
-<!--                        <div class="modal-header">-->
-<!--                            <h5 class="modal-title" id="categoryModalLabel">카테고리 생성</h5>-->
-<!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                        </div>-->
-<!--                        <div class="modal-body">-->
-<!--                            <form id="categoryCreateDTO" th:action="@{|/blog/${blogResponseDTO.id}/category/create|}" method="post">-->
-<!--                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-<!--                                <div class="mb-3">-->
-<!--                                    <label for="categoryName" class="form-label">카테고리 이름</label>-->
-<!--                                    <input type="text" class="form-control" id="categoryName" name="name" required>-->
-<!--                                    <div class="invalid-feedback">카테고리 이름을 입력해주세요.</div>-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                        <div class="modal-footer">-->
-<!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>-->
-<!--                            <button type="button" class="btn btn-primary" onclick="document.getElementById('categoryCreateDTO').submit()">생성</button>-->
-<!--                        </div>-->
                     </div>
                 </div>
             </div>
 
-<!--            &lt;!&ndash; 2. 카테고리 버튼 수정 &ndash;&gt;-->
-<!--            <button type="button" class="btn btn-sm btn-outline-primary open-modal" data-modal-id="categoryModal" data-modal-title="카테고리 생성" data-modal-type="categoryCreateDTO" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">-->
-<!--                <i class="bi bi-plus"></i>-->
-<!--            </button>-->
-
-<!--            &lt;!&ndash; 블로그 관리 링크 (블로그 소유자인 경우에만 표시) &ndash;&gt;-->
-<!--            <div class="card mb-3" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blog.email}">-->
-<!--                <div class="card-header">-->
-<!--                    <h5 class="mb-0">블로그 관리</h5>-->
-<!--                </div>-->
-<!--                <div class="card-body p-0">-->
-<!--                    <ul class="list-group list-group-flush">-->
-<!--                        <li class="list-group-item">-->
-<!--                            <a href="#">블로그 정보 수정</a>-->
-<!--                        </li>-->
-<!--                        <li clss="list-group-item">-->
-<!--                            <a href="#">카테고리 관리</a>-->
-<!--                        </li>-->
-<!--                        <li class="list-group-item">-->
-<!--                            <a href="#">새 글 작성</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!-- 카테고리 수정 모달 -->
+            <div class="modal" id="editCategoryModal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 class="modal-title">카테고리 수정</h3>
+                    <div class="modal-content-body">
+                        <!-- 폼은 자바스크립트로 동적 생성됨 -->
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 메인 컨텐츠 영역 -->

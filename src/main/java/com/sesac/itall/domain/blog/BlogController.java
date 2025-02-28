@@ -99,52 +99,52 @@ public class BlogController {
         return "redirect:/blog/" + blog.getId();
     }
 
-    /**
-     * 블로그 설정 페이지
-     */
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/{id}/settings")
-    public String blogSettings(@PathVariable("id") Long id, Model model, Principal principal) {
-
-        Blog blog = blogService.getBlogById(id);
-
-        // 블로그 소유 여부 확인
-        if (!blog.getMember().getEmail().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
-        }
-
-        // 업데이트 DTO 생성 및 초기값 설정
-        BlogUpdateDTO blogUpdateDTO = new BlogUpdateDTO();
-        blogUpdateDTO.setTitle(blog.getTitle());
-        blogUpdateDTO.setIntro(blog.getIntro());
-
-        model.addAttribute("blog", blog);
-        model.addAttribute("blogUpdateDTO", blogUpdateDTO);
-
-        return "blog_settings";
-    }
-
-    /**
-     * 블로그 정보 업데이트
-     */
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{id}/settings/update")
-    public String updateBlog(@PathVariable("id") Long id, @Valid @ModelAttribute BlogUpdateDTO blogUpdateDTO, BindingResult bindingResult, Principal principal, Model model) {
-        Blog blog = blogService.getBlogById(id);
-
-        // 블로그 소유 여부 확인
-        if (!blog.getMember().getEmail().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
-        }
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("blog", blog);
-            return "blog_settings";
-        }
-
-        // 블로그 정보 업데이트
-        blogService.updateBlog(id, blogUpdateDTO.getTitle(), blogUpdateDTO.getIntro());
-
-        return "redirect:/blog/" +id;
-    }
+//    /**
+//     * 블로그 설정 페이지
+//     */
+//    @PreAuthorize("isAuthenticated()")
+//    @GetMapping("/{id}/settings")
+//    public String blogSettings(@PathVariable("id") Long id, Model model, Principal principal) {
+//
+//        Blog blog = blogService.getBlogById(id);
+//
+//        // 블로그 소유 여부 확인
+//        if (!blog.getMember().getEmail().equals(principal.getName())) {
+//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
+//        }
+//
+//        // 업데이트 DTO 생성 및 초기값 설정
+//        BlogUpdateDTO blogUpdateDTO = new BlogUpdateDTO();
+//        blogUpdateDTO.setTitle(blog.getTitle());
+//        blogUpdateDTO.setIntro(blog.getIntro());
+//
+//        model.addAttribute("blog", blog);
+//        model.addAttribute("blogUpdateDTO", blogUpdateDTO);
+//
+//        return "blog_settings";
+//    }
+//
+//    /**
+//     * 블로그 정보 업데이트
+//     */
+//    @PreAuthorize("isAuthenticated()")
+//    @PostMapping("/{id}/settings/update")
+//    public String updateBlog(@PathVariable("id") Long id, @Valid @ModelAttribute BlogUpdateDTO blogUpdateDTO, BindingResult bindingResult, Principal principal, Model model) {
+//        Blog blog = blogService.getBlogById(id);
+//
+//        // 블로그 소유 여부 확인
+//        if (!blog.getMember().getEmail().equals(principal.getName())) {
+//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
+//        }
+//
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("blog", blog);
+//            return "blog_settings";
+//        }
+//
+//        // 블로그 정보 업데이트
+//        blogService.updateBlog(id, blogUpdateDTO.getTitle(), blogUpdateDTO.getIntro());
+//
+//        return "redirect:/blog/" +id;
+//    }
 }

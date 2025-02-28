@@ -47,7 +47,7 @@ public class Member {
     private List<AnswerLike> answerLikes;
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Blog blog;
+    private Blog blog = null;
 
     @PrePersist
     protected void onCreate() {
