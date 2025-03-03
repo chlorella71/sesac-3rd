@@ -452,8 +452,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 폴더 추가 버튼 이벤트 처리
     document.querySelectorAll(".add-folder").forEach(button => {
-        button.addEventListener("click", function() {
-//            e.stopPropagation(); // 이벤트 버블링 방지
+        button.addEventListener("click", function(e) {
+            e.stopPropagation(); // 이벤트 버블링 방지(이벤트 전파 중지)
 
             const categoryId = this.dataset.categoryId;
 
@@ -462,30 +462,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            // 폴더 목록 표시/숨김 토글
+            // 폴더 목록 참조
             const folderList = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
             if (folderList) {
-                // 폴더 목록이 비어있으면 폴더 생성 모달 표시
-                if (folderList.children.length === 0 || folderList.style.display === 'none') {
-                    // 모달 열기
-                    const modal = document.getElementById("folderModal");
-                    if (modal) {
-                        const modalContent = modal.querySelector(".modal-content-body");
-                        if (modalContent) {
-                            modalContent.innerHTML = "";
-                            renderFolderCreateForm(modalContent, {
-                                categoryId: categoryId
-                            });
-                        }
-                        modal.style.display = "block";
+                // 폴더 생성 모달 표시
+                const modal = document.getElementById("folderModal");
+                if (modal) {
+                    const modalContent = modal.querySelector(".modal-content-body");
+                    if (modalContent) {
+                        modalContent.innerHTML = "";
+                        renderFolderCreateForm(modalContent, {
+                            categoryId: categoryId
+                        });
                     }
+                    modal.style.display = "block";
                 }
 
-                // 폴더 목록 토글
+                // 폴더 목록 표시 (이미 표시되어 있다면 그대로 유지)
                 if (folderList.style.display === 'none') {
                     folderList.style.display = 'block';
-                } else {
-                    folderList.style.display = 'none';
                 }
             }
         });
@@ -686,9 +681,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 폴더 수정 버튼 이벤트 위임 처리
     document.addEventListener("click", function(e) {
-        if (e.target && e.target.classList.contains("edit-folder")) {
-            const folderId = e.target.dataset.folderId;
-            const folderName = e.target.dataset.folderName;
+
+        // 클릭된 요소 자체가 편집 버튼이거나, 버튼 내의 아이콘이 클릭된 경우
+        const editButton = e.target.closest(".edit-folder");
+        if (editButton) {
+            const folderId = editButton.dataset.folderId;
+            const folderName = editButton.dataset.folderName;
 
             if (!folderId) {
                 console.error("폴더 ID가 없습니다.");
