@@ -1,4 +1,4 @@
-import { renderNicknameList, renderCategoryCreateForm, renderCategoryEditForm } from "./modalRenderer.js";    // 모듈 가져오기
+import { renderNicknameList, renderCategoryCreateForm, renderCategoryEditForm, getBlogIdFromURL } from "./modalRenderer.js";    // 모듈 가져오기
 
 document.addEventListener("DOMContentLoaded", function () {
     function openModal(modalId, title, data, modalType) {
@@ -306,15 +306,15 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-//        const blogId = getBlogIdFromURL();
-        let blogId = '';
-        const path = window.location.pathname;
-        const match = path.match(/\/blog\/(\d+)/);
-        if (match && match[1]) {
-            blogId = match[1];
-        } else {
-            console.error('블로그 ID를 URL에서 찾을 수 없습니다.');
-        }
+        const blogId = getBlogIdFromURL();
+//        let blogId = '';
+//        const path = window.location.pathname;
+//        const match = path.match(/\/blog\/(\d+)/);
+//        if (match && match[1]) {
+//            blogId = match[1];
+//        } else {
+//            console.error('블로그 ID를 URL에서 찾을 수 없습니다.');
+//        }
 
         const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
         const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
@@ -338,19 +338,44 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 // 성공적으로 업데이트 된 경우
                 // UI 업데이트 (카테고리 이름 변경)
-                const categoryElement = document.querySelector(`[data-category-id="${categoryId}"]`);
-                if (categoryElement) {
-                    categoryElement.textContent = newName;
-                }
+//                const categoryElements = document.querySelectorAll(`[data-category-id="${categoryId}"]`);
+//                categoryElements.forEach(categoryElement => {
+//                    // 링크 텍스트나 다른 텍스트 요소 업데이트
+//                    categoryElement.textContent = newName;
+//                    categoryElement.innerText = newName;
+//                });
 
                 // 편집/삭제 버튼의 data-category-name 속성 업데이트
-                document.querySelectorAll(`.edit-category[data-category-id="${categoryId}"]`).forEach(btn => {
+                document.querySelectorAll(`.delete-category[data-category-id="${categoryId}"]`).forEach(btn => {
                     btn.dataset.categoryName = newName;
                 });
 
-                document.querySelectorAll(`.delete-category[data-category-id=${categoryId}""]`).forEach(btn => {
+                document.querySelectorAll(`.delete-category[data-category-id="${categoryId}"]`).forEach(btn => {
                     btn.dataset.categoryName = newName;
                 });
+
+                // 리스트 아이템의 내부 텍스트 업데이트
+                const listItems = document.querySelectorAll(`.list-group-item[data-category-id="${categoryId}"`);
+                listItems.forEach(item => {
+                    const link = item.querySelector('a');
+                    if (link) {
+                        link.textContent = newName;
+                    }
+                });
+
+
+//                if (categoryElement) {
+//                    categoryElement.textContent = newName;
+//                }
+//
+//                // 편집/삭제 버튼의 data-category-name 속성 업데이트
+//                document.querySelectorAll(`.edit-category[data-category-id="${categoryId}"]`).forEach(btn => {
+//                    btn.dataset.categoryName = newName;
+//                });
+//
+//                document.querySelectorAll(`.delete-category[data-category-id="${categoryId}"]`).forEach(btn => {
+//                    btn.dataset.categoryName = newName;
+//                });
 
                 // 모달 닫기
                 const modal = document.getElementById("editCategoryModal");
@@ -359,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 // 성공 메세지
-                alert("카테고리가 성공적으로 수정되었습니다.");
+//                alert("카테고리가 성공적으로 수정되었습니다.");
             } else {
                 // 실패 시 오류 메시지
                 alert(data.message || "카테고리 수정 중 오류가 발생했습니다.");
@@ -377,4 +402,51 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 카테고리 삭제 기능
+    function deleteCategory(categoryId) {
+        const blogId = getBlogIdFromURL();
+        const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content
+
+        fetch(`/blog/${blogId}/category/${categoryId}/delete`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                [csrfHeader]: csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // 성공적으로 삭제된 경우 UI에서 카테고리 요소 제거
+                const categoryItem = document.querySelector(`.list-group-item:has([data-category-id="${categoryId}"])`);
+                if (categoryItem) {
+                    categoryItem.remove();
+                } else {
+                    // :has 선택자가 지원되지 않는 브라우저를 위한 대체 코드
+                    document.querySelectorAll(".list-group-item").forEach(item => {
+                        if (item.querySelector(`[data-category-id="${categoryId}"]`)) {
+                            item.remove();
+                        }
+                    });
+                }
+
+                alert("카테고리가 성공적으로 삭제되었습니다.");
+
+                // 카테고리가 모두 삭제된 경우 메세지 표시
+                const categoryList = document.querySelector(".list-group");
+                if (categoryList && categoryList.children.length === 0) {
+                    const emptyMessage = document.createElement("li");
+                    emptyMessage = document.createElement("li");
+                    emptyMessage.innerHTML = '<span class="text-muted">카테고리가 없습니다.</span>';
+                    categoryList.appendChild(emptyMessage);
+                }
+            } else {
+                alert(data.message || "카테고리 삭제 중 오류가 발생했습니다.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("카테고리 삭제 중 오류가 발생했씁니다.");
+        })
+    }
 });

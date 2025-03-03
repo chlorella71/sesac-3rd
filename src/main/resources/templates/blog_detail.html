@@ -34,7 +34,7 @@
                         <li class="list-group-item" th:if="${folderCategoryList.isEmpty()}">
                             <span class="text-muted">카테고리가 없습니다.</span>
                         </li>
-                        <li class="list-group-item" th:each="category : ${folderCategoryList}">
+                        <li class="list-group-item" th:each="category : ${folderCategoryList}" th:attr="data-category-id=${category.id}">
                             <a href="#" th:text="${category.name}">카테고리 이름</a>
                             <div class="category-actions" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
                                 <button type="button" class="btn btn-sm edit-category" th:data-category-id="${category.id}" th:data-category-name="${category.name}">

@@ -216,3 +216,31 @@
     overflow-y: auto;
 }
 */
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category-actions {
+    display: none;
+}
+
+.list-group-item:hover .category-actions {
+    display: flex;
+}
+
+.edit-category, .delete-category {
+    padding: 0.15rem 0.4rem;
+    font-size: 0.8rem;
+    margin-left: 0.2rem;
+}
+
+.edit-category {
+    color: #6c757d;
+}
+
+.delete-category {
+    color: #dc3545;
+}

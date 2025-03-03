@@ -135,7 +135,7 @@ export function renderCategoryCreateForm(container, data) {
  * URL에서 블로그 ID 추출
  * @returns {string} 블로그 ID
  */
-function getBlogIdFromURL() {
+export function getBlogIdFromURL() {
     // URL 경로에서 블로그 ID 추출
     // 예: "/blog/123/view" -> "123"
     const path = window.location.pathname;

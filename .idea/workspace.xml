@@ -5,22 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-02-27.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryUpdateDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-02-28.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-03-01.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-03-02.0.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-20.0.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryCreateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryCreateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-21.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-22.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-23.0.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +78,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "DefaultHtmlFileTemplate": "HTML File",
-    "Gradle.itall [:ItallApplication.main()].executor": "Debug",
+    "Gradle.itall [:ItallApplication.main()].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
