@@ -1,9 +1,11 @@
 package com.sesac.itall.domain.member;
 
+import com.sesac.itall.domain.folder_category.FolderCategoryCreateDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/signup")
-    public String signup(MemberCreateDTO memberCreateDto) {
+    public String signup(Model model) {
+        model.addAttribute("memberCreateDto", new MemberCreateDTO());
         return "signup_form";
     }
 

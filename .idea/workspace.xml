@@ -5,39 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-03-03.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/category.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/tooltip.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/common/csrf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/common/modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/blog-modal-handler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/category/category.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/delete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/like.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/modal-open-handler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/modals/category-renderer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/modals/folder-renderer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/modals/nickname-renderer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/modals/renderer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/tooltip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/common-page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/folder-category-settings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/question-detail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/utils/dom.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-24.0.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/modal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/folder_category_setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/folder_category_setting.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/signup_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/signup_form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
