@@ -430,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 }
 
-                alert("카테고리가 성공적으로 삭제되었습니다.");
+//                alert("카테고리가 성공적으로 삭제되었습니다.");
 
                 // 카테고리가 모두 삭제된 경우 메세지 표시
                 const categoryList = document.querySelector(".list-group");
@@ -568,7 +568,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 폴더 편집 버튼
         const editButton = document.createElement('button');
         editButton.type = 'button';
-        editButton.classList.add('btn', 'btn-sm', 'edit-folder');
+        editButton.classList.add('btn', 'btn-sm', 'edit-folder'); // class="btn btn-sm edit-folder"
         editButton.dataset.folderId = folder.id;
         editButton.dataset.folderName = folder.name;
         editButton.innerHTML = '<i class="bi bi-pencil"></i>';
@@ -592,7 +592,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 카테고리 클릭 시 폴더 목록 토글 기능
     document.querySelectorAll('.list-group-item a').forEach(categoryLink => {
         categoryLink.addEventListener('click', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // 얼음~~~
 
             // 해당 카테고리의 ID 찾기
             const categoryItem = this.closest('.list-group-item');
@@ -647,6 +647,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 folderListElement.dataset.loaded = 'true';
 
                 // 폴더 목록 렌더링
+//                if(data.folders) {
+//                    renderFolderList(categoryId, data.folders);
+//                } else {
+//                    renderFolderList(categoryId, []);
+//                }
                 renderFolderList(categoryId, data.folders || []);
             })
             .catch(error => {

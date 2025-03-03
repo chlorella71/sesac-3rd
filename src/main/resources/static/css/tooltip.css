@@ -1,0 +1,29 @@
+/**
+ * 툴팁 관련 스타일
+ */
+
+.tooltip-box {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8); /* 검정 반투명 배경 */
+    color: #fff; /* 흰색 글씨 */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: normal; /* 자동 줄바꿈 허용 */
+    z-index: 1000;
+    opacity: 0; /* 기본적으로 숨김 */
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: flex-start;
+    max-height: 200px; /* 최대 높이 지정 (대략 10줄) */
+    overflow-y: auto; /* 10개 이상이면 스크롤 생성 */
+}
+
+/* 툴팁을 표시할 때 */
+.tooltip-box.show {
+    opacity: 1;
+    transform: translateY(0);
+}

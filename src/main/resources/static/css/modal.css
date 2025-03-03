@@ -1,6 +1,10 @@
-/* 모달 스타일 */
+/**
+ * 모달 관련 스타일
+ */
+
+/* 모달 기본 스타일 */
 .modal {
-    display: none;
+    display: none;  /* 기본적으로 숨김 */
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -11,63 +15,66 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+/* 모달 내부 컨텐츠 */
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     width: 80%;
     max-width: 500px;
-    border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
-    position: absolute;
-    right: 15px;
-    top: 10px;
+    cursor: pointer;
+    line-height: 1;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: #333;
     text-decoration: none;
-    cursor: pointer;
 }
 
 .modal-title {
     margin-top: 0;
     margin-bottom: 20px;
-    font-size: 1.5rem;
+    color: #333;
+    font-size: 1.5em;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
 }
 
 .modal-content-body {
-    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
-.modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-/* 닉네임 목록 스타일 */
-.nickname-list {
+/* 목록 스타일 공통 */
+.modal-content-body ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+/* 닉네임 목록 스타일 */
 .nickname-list li {
-    padding: 8px 10px;
+    padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
 
@@ -75,65 +82,14 @@
     border-bottom: none;
 }
 
-/* 폼 요소 스타일 */
-.form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
+/* 모달 버튼 스타일 */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.form-control {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-}
-
-.form-control:focus {
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-.is-invalid {
-    border-color: #dc3545;
-}
-
-.invalid-feedback {
-    display: none;
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: -8px;
-    margin-bottom: 10px;
-}
-
-.is-invalid + .invalid-feedback {
-    display: block;
-}
-
-/* 로딩 및 에러 메시지 */
-.loading {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-}
-
-.error {
-    text-align: center;
-    padding: 20px;
-    color: #dc3545;
-}
-
-.no-data {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-style: italic;
-}
-
-/* 버튼 스타일 */
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -172,4 +128,18 @@
     color: #fff;
     background-color: #5a6268;
     border-color: #545b62;
+}
+
+/* 모달 열기 버튼 스타일 */
+.open-modal {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.open-modal:hover {
+    background-color: #e9ecef;
 }

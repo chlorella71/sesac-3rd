@@ -98,13 +98,19 @@ qwe
 
 
 <!-- javascript 파일 연결 -->
+<!--<th:block layout:fragment="script" type='text/javascript'>-->
+<!--&lt;!&ndash;    <script src="/js/csrfHandler.js"></script>  &lt;!&ndash; csrf 토큰 처리 &ndash;&gt;&ndash;&gt;-->
+<!--    <script src="/js/deleteHandler.js"></script>-->
+<!--    <script src="/js/likeHandler.js"></script>-->
+<!--&lt;!&ndash;    <script src="/js/tooltipHandler.js"></script>&ndash;&gt;-->
+<!--    <script type="module" src="/js/modalHandler.js"></script>-->
+<!--</th:block>-->
+
+<!-- javascript 파일 연결 - 페이지별 JS 파일 사용 -->
 <th:block layout:fragment="script" type='text/javascript'>
-<!--    <script src="/js/csrfHandler.js"></script>  &lt;!&ndash; csrf 토큰 처리 &ndash;&gt;-->
-    <script src="/js/deleteHandler.js"></script>
-    <script src="/js/likeHandler.js"></script>
-<!--    <script src="/js/tooltipHandler.js"></script>-->
-    <script type="module" src="/js/modalHandler.js"></script>
+    <script type="module" src="/js/pages/question-detail.js"></script>
 </th:block>
+
 <script type="text/javascript">
     let isAuthenticated = [[${#authorization.expression('isAuthenticated()')}]];
     console.log("사용자 로그인 상태:", isAuthenticated);

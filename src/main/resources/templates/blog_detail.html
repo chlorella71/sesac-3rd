@@ -25,7 +25,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">카테고리</h5>
                     <!-- 플러스 버튼(소유자만 볼 수 있음) -->
-                    <button type="button" class="btn btn-sm btn-outline-primary open-modal" data-modal-id="categoryModal" data-modal-title="카테고리 생성" data-modal-type="categoryCreateForm" data-blog-id="${blogResponseDTO.id}" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                    <button type="button" class="btn btn-sm btn-outline-primary open-modal" data-modal-id="categoryModal" data-modal-title="카테고리 생성" data-modal-type="categoryCreateForm" th:data-blog-id="${blogResponseDTO.id}" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
                         <i class="bi bi-plus"></i>
                     </button>
                 </div>
@@ -155,8 +155,14 @@
 
 </div>
 
+<!--<th:block layout:fragment="script" type='text/javascript'>-->
+<!--    <script type="module" src="/js/modalHandler.js"></script>-->
+<!--</th:block>-->
+
+
+<!-- javascript 파일 연결 - 페이지별 JS 파일 사용 -->
 <th:block layout:fragment="script" type='text/javascript'>
-    <script type="module" src="/js/modalHandler.js"></script>
+    <script type="module" src="/js/pages/blog-detail.js"></script>
 </th:block>
 
 </html>

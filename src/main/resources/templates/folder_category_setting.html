@@ -54,8 +54,15 @@
     </div>
 </div>
 
-<!-- javascript -->
-<th:block layout:fragment="script">
-    <script src="/js/deleteHandler.js"></script>
+<!--&lt;!&ndash; javascript &ndash;&gt;-->
+<!--<th:block layout:fragment="script">-->
+<!--    <script src="/js/deleteHandler.js"></script>-->
+<!--</th:block>-->
+
+<!-- javascript 파일 연결 - 페이지별 JS 파일 사용 -->
+<th:block layout:fragment="script" type="module">
+    <script src="/js/pages/folder-category-settings.js"></script>
 </th:block>
+</html>
+
 </html>
