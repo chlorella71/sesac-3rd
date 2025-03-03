@@ -217,7 +217,8 @@
 }
 */
 
-.list-group-item {
+/* 카테고리 관련 */
+/*.list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -242,5 +243,106 @@
 }
 
 .delete-category {
+    color: #dc3545;
+}*/
+.list-group-item {
+    padding: 10px 15px;
+}
+
+.list-group-item > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.category-actions {
+    display: none;
+}
+
+.list-group-item:hover .category-actions {
+    display: flex;
+}
+
+.edit-category, .delete-category, .add-folder {
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    background: none;
+    border: none;
+}
+
+/* 폴더 관련 스타일 */
+.folder-list {
+    border-left: 1px solid #dee2e6;
+    padding-left: 15px;
+    margin-top: 10px;
+    display: none;
+}
+
+.folder-list[style*="display: block"] {
+    animation: slideDown 0.3s ease-out;
+}
+
+/*
+@keyframes slideDown {
+    from { max-height: 0; opacity: 0; }
+    to { max-height: 500px; opacity: 1; }
+}*/
+
+.folder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    margin: 2px 0;
+    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+}
+
+.folder-name {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.folder-name i {
+    margin-right: 8px;
+    color: #ffc107;
+}
+
+.folder-name:hover {
+    color: #0d6efd;
+}
+
+.folder-actions {
+    display: none;
+}
+
+.folder-item:last-child {
+    border-bottom: none;
+}
+
+.folder-item:hover .folder-actions {
+    display: flex;
+}
+
+
+.edit-folder, .delete-folder {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 0.8rem;
+    padding: 0.15rem 0.4rem;
+    margin-left: 0.2rem;
+}
+
+.edit-folder:hover {
+    color: #0d6efd;
+}
+
+.delete-folder:hover {
     color: #dc3545;
 }

@@ -237,3 +237,211 @@ export function renderCategoryEditForm(container, data) {
     // 컨테이너에 폼 추가
     container.appendChild(form);
 }
+
+/**
+ * 폴더 생성 폼을 렌더링하는 함수
+ * @param {HTMLElement} container - 내용을 넣을 컨테이너
+ * @param {Object} data - 카테고리 정보 (categoryId 등)
+ */
+export function renderFolderCreateForm(container, data) {
+    // 데이터 검증
+    if (!data || !data.categoryId) {
+        container.innerHTML = '<p class="text-danger">카테고리 정보가 올바르지 않습니다.</p>';
+        return;
+    }
+
+    const blogId = getBlogIdFromURL();
+    const categoryId = data.categoryId;
+
+    // 폼 생성
+    const form = document.createElement('form');
+    form.id = 'folderCreateForm';
+    form.method = 'post';
+    form.action = `/blog/${blogId}/category/${categoryId}/folder/create`;
+
+    // CSRF 토큰 추가
+    const csrfToken = document.querySelector('meta[name="_csrf"]');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]');
+
+    if (csrfToken && csrfHeader) {
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_csrf';
+        csrfInput.value = csrfToken.getAttribute('content');
+        form.appendChild(csrfInput);
+    }
+
+    // 카테고리 ID 히든 필드
+    const categoryIdInput = document.createElement('input');
+    categoryIdInput.type = 'hidden';
+    categoryIdInput.name = 'categoryId';
+    categoryIdInput.value = categoryId;
+    form.appendChild(categoryIdInput);
+
+    // 폴더 이름 입력 필드
+    const formGroup = document.createElement('div');
+    formGroup.classList.add('mb-3');
+
+    const label = document.createElement('label');
+    label.htmlFor = 'folderName';
+    label.classList.add('form-label');
+    label.textContent = '폴더 이름';
+    formGroup.appendChild(label);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.classList.add('form-control');
+    input.id = 'folderName';
+    input.name = 'name';
+    input.required = true;
+    formGroup.appendChild(input);
+
+    const feedback = document.createElement('div');
+    feedback.classList.add('invalid-feedback');
+    feedback.textContent = '폴더 이름을 입력해주세요.';
+    formGroup.appendChild(feedback);
+
+    form.appendChild(formGroup);
+
+    // 버튼 그룹
+    const buttonGroup = document.createElement('div');
+    buttonGroup.classList.add('modal-buttons');
+
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.classList.add('btn', 'btn-secondary', 'modal-close');
+    cancelButton.textContent = '취소';
+    cancelButton.addEventListener('click', function() {
+        const modal = this.closest('.modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+    buttonGroup.appendChild(cancelButton);
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.classList.add('btn', 'btn-primary');
+    submitButton.textContent = '생성';
+    buttonGroup.appendChild(submitButton);
+
+    form.appendChild(buttonGroup);
+
+    // 폼 제출 이벤트 핸들러
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 유효성 검사
+        if (!input.value.trim()) {
+            input.classList.add('is-invalid');
+            return;
+        }
+
+        // 폼 데이터 (hidden input 포함)를 FormData 객체로 수집
+        const formData = new FormData(this);
+        const folderData = {
+            name: formData.get('name'),
+            categoryId: formData.get('categoryId')
+        };
+
+        // 폼 제출 이벤트 발생
+        const event = new CustomEvent('folderFormSubmit', {
+            detail: { categoryId, folderData }
+        });
+        document.dispatchEvent(event);
+
+//        // AJAX로 폴더 생성 요청
+//        createFolder(categoryId, input.value.trim());
+    });
+
+    // 컨테이너에 폼 추가
+    container.appendChild(form);
+}
+
+/**
+ * 폴더 수정 폼을 렌더링하는 함수
+ * @param {HTMLElement} container - 내용을 넣을 컨테이너
+ * @param {Object} data - 폴더 정보 (folderId, folderName 등)
+ */
+export function renderFolderEditForm(container, data) {
+    // 데이터 검증
+    if (!data || !data.folderId) {
+        container.innerHTML = '<p class="text-danger">폴더 정보가 올바르지 않습니다.</p>';
+        return;
+    }
+
+    const blogId = getBlogIdFromURL();
+    const folderId = data.folderId;
+    const folderName = data.folderName || '';
+
+    // 폼 생성
+    const form = document.createElement('form');
+    form.id = 'folderEditForm';
+    form.classList.add('folder-edit-form');
+
+    // CSRF 토큰 추가
+    const csrfToken = document.querySelector('meta[name="_csrf"]');
+    const csrfHeader = document.querySelector('meta[name="_csrf_header"]');
+
+    if (csrfToken && csrfHeader) {
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_csrf';
+        csrfInput.value = csrfToken.content;
+        form.appendChild(csrfInput);
+    }
+
+    // 폴더 이름 입력 필드
+    const formGroup = document.createElement('div');
+    formGroup.classList.add('mb-3');
+
+    const label = document.createElement('label');
+    label.htmlFor = 'editFolderName';
+    label.classList.add('form-label');
+    label.textContent = '폴더 이름';
+    formGroup.appendChild(label);
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.classList.add('form-control');
+    input.id = 'editFolderName';
+    input.name = 'name';
+    input.value = folderName;
+    input.required = true;
+    formGroup.appendChild(input);
+
+    const feedback = document.createElement('div');
+    feedback.classList.add('invalid-feedback');
+    feedback.textContent = '폴더 이름을 입력해주세요.';
+    formGroup.appendChild(feedback);
+
+    form.appendChild(formGroup);
+
+    // 버튼 그룹
+    const buttonGroup = document.createElement('div');
+    buttonGroup.classList.add('modal-buttons');
+
+    const cancelButton = document.createElement('button');
+    cancelButton.type = 'button';
+    cancelButton.classList.add('btn', 'btn-secondary', 'modal-close');
+    cancelButton.textContent = '취소';
+    cancelButton.addEventListener('click', function() {
+        const modal = this.closest('.modal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+    buttonGroup.appendChild(cancelButton);
+
+    const submitButton = document.createElement('button');
+    submitButton.type = 'button';
+    submitButton.classList.add('btn', 'btn-primary', 'save-folder');
+    submitButton.textContent = '저장';
+    submitButton.dataset.folderId = folderId;
+    buttonGroup.appendChild(submitButton);
+
+    form.appendChild(buttonGroup);
+
+    // 컨테이너에 폼 추가
+    container.appendChild(form);
+}

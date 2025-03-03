@@ -4,6 +4,7 @@ import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.blog.BlogRepository;
 import com.sesac.itall.domain.common.DataNotFoundException;
 import com.sesac.itall.domain.folder.Folder;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.parameters.P;
@@ -157,5 +158,16 @@ public class FolderCategoryService {
 
         // 카테고리 삭제
         folderCategoryRepository.delete(folderCategory);
+    }
+
+    /**
+     * 카테고리 ID로 카테고리 조회
+     * @param categoryId 카테고리 ID
+     * @return 카테고리
+     * @throws EntityNotFoundException 카테고리가 존재하지 않는 경우
+     */
+    public FolderCategory getCategoryById(Long categoryId) {
+        return folderCategoryRepository.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("카테고리를 찾을 수 없습니다. ID: " + categoryId));
     }
 }
