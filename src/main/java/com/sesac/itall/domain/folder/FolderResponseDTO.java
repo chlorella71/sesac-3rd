@@ -31,13 +31,15 @@ public class FolderResponseDTO {
         }
 
         // 자식 폴더 정보
-        this.childFolderCount = folder.getChildFolderList().size();
-        this.childFolderIdList = folder.getChildFolderList().stream()
-                .map(Folder::getId)
-                .collect(Collectors.toList());
+        this.childFolderCount = folder.getChildFolderList() != null ? folder.getChildFolderList().size() : 0;
+        this.childFolderIdList = folder.getChildFolderList() != null ?
+                folder.getChildFolderList().stream()
+                    .map(Folder::getId)
+                    .collect(Collectors.toList()) :
+                List.of();
 
         // 포스트 정보
-        this.postCount = folder.getPost().size();
+        this.postCount = folder.getPost() != null ? folder.getPost().size() : 0;
 
         // 카테고리 정보
         if (folder.getFolderCategory() != null) {

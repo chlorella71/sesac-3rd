@@ -30,6 +30,7 @@ public class FolderController {
 
     /**
      * 폴더 생성 API - Ajax 요청 처리
+     * 상위 폴더 ID가 제공되면 하위 폴더로 생성
      */
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/{blogId}/category/{categoryId}/folder/create")
@@ -59,8 +60,20 @@ public class FolderController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
 
+            // 상위 폴더 확인 (있는 경우)
+            Folder parentFolder = null;
+            if (folderCreateDTO.getParentFolderId() != null) {
+                parentFolder = folderService.getFolderById(folderCreateDTO.getParentFolderId());
+                // 상위 폴더가 같은 카테고리에 속하는지 확인
+                if (!parentFolder.getFolderCategory().getId().equals(categoryId)) {
+                    response.put("success", false);
+                    response.put("message", "상위 폴더가 동일한 카테고리에 속하지 않습니다.");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+                }
+            }
+
             // 폴더 생성
-            Folder folder = folderService.createFolder(folderCreateDTO.getName(), category, null);
+            Folder folder = folderService.createFolder(folderCreateDTO.getName(), category, parentFolder);
 
             // 응답 데이터
             FolderResponseDTO folderResponseDTO = new FolderResponseDTO(folder);
@@ -87,6 +100,7 @@ public class FolderController {
 
     /**
      * 카테고리별 폴더 목록 API
+     * 계층 구조를 포함한 폴더 목록 반환
      */
     @GetMapping("/{blogId}/category/{categoryId}/folders")
     @ResponseBody
@@ -108,8 +122,11 @@ public class FolderController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
 
-            // 폴더 목록 조회
-            List<FolderResponseDTO> folders = folderService.getRootFoldersByCategoryId(categoryId);
+            // 카테고리의 모든 폴더 목록 조회 (부모-자식 관계 포함)
+            List<FolderResponseDTO> folders = folderService.getAllFoldersByCategoryId(categoryId);
+
+//            // 폴더 목록 조회
+//            List<FolderResponseDTO> folders = folderService.getRootFoldersByCategoryId(categoryId);
 
             response.put("success", true);
             response.put("folders", folders);
@@ -126,6 +143,48 @@ public class FolderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+    /**
+     * 특정 폴더의 하위 폴더 목록 조회 API
+     */
+    @GetMapping("/{blogId}/folder/{folderId}/subfolders")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getSubfolders(@PathVariable("blogId") Long blogId, @PathVariable("folderId") Long folderId) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            // 블로그 존재 확인
+            blogService.getBlogById(blogId);
+
+            // 폴더 존재 확인
+            Folder folder = folderService.getFolderById(folderId);
+
+            // 해당 폴더가 블로그에 속하는지 확인
+            if (!folder.getFolderCategory().getBlog().getId().equals(blogId)) {
+                response.put("success", false);
+                response.put("message", "해당 블로그의 폴더가 아닙니다.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+
+            // 하위 폴더 목록 조회
+            List<FolderResponseDTO> subfolders = folderService.getSubfoldersByParentId(folderId);
+
+            response.put("success", true);
+            response.put("subfolders", subfolders);
+
+            return ResponseEntity.ok(response);
+        } catch (EntityNotFoundException e) {
+            response.put("success", false);
+            response.put("messsage", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "하위 폴더 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
 
     /**
      * 폴더 수정 API - Ajax 요청 처리
@@ -178,6 +237,7 @@ public class FolderController {
 
     /**
      * 폴더 삭제 API - Ajax 요청 처리
+     * 하위 폴더가 있는 경우 함께 삭제
      */
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/{blogId}/folder/{folderId}/delete")
@@ -199,7 +259,10 @@ public class FolderController {
             }
 
             // 폴더 삭제
-            folderService.deleteFolder(folderId);
+            folderService.deleteFolderWithSubfolders(folderId);
+
+//            // 폴더 삭제
+//            folderService.deleteFolder(folderId);
 
             response.put("success", true);
             response.put("message", "폴더가 성공적으로 삭제되었습니다.");
@@ -220,4 +283,6 @@ public class FolderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
+
 }

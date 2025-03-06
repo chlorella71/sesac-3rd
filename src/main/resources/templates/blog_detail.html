@@ -155,6 +155,47 @@
 
 </div>
 
+<!-- 폴더 계층 구조를 위한 추가 스타일 -->
+<th:block layout:fragment="style">
+    <style>
+        /* 폴더 계층 구조 관련 스타일 */
+        .folder-children {
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+            border-left: 1px solid #dee2e6;
+            margin-left: 0.25rem;
+        }
+
+        .folder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem 0;
+            margin: 0.25rem 0;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s;
+        }
+
+        .folder-item:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .add-subfolder {
+            margin-right: 0.25rem;
+            color: #28a745;
+        }
+
+        .add-subfolder:hover {
+            color: #218838;
+        }
+
+        .folder-name small {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+    </style>
+</th:block>
+
 <!--<th:block layout:fragment="script" type='text/javascript'>-->
 <!--    <script type="module" src="/js/modalHandler.js"></script>-->
 <!--</th:block>-->

@@ -7,6 +7,8 @@ import { initializeModalEvents } from "../common/modal.js";
 import { initializeCategoryHandlers } from "../features/category/category.js";
 import { initializeFolderHandlers } from "../features/category/folder.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
+import { initializeFolderHierarchy } from "../features/category/folder-hierarchy.js";
+
 
 /**
  * 블로그 상세 페이지 초기화 함수
@@ -22,6 +24,9 @@ function initializeBlogDetailPage() {
 
     // 폴더 기능 초기화
     initializeFolderHandlers();
+
+    // 폴더 계층 구조 초기화
+    initializeFolderHierarchy();
 
     // 모달 열기 버튼 이벤트 초기화
     document.querySelectorAll('.open-modal').forEach(button => {

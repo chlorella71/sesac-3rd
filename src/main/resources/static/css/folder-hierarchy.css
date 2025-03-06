@@ -1,0 +1,69 @@
+/**
+ * 폴더 계층 구조를 위한 추가 CSS 스타일
+ * 파일 경로: /static/css/folder-hierarchy.css
+ */
+
+/* 폴더 계층 구조 관련 스타일 */
+.folder-children {
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    border-left: 1px solid #dee2e6;
+    margin-left: 0.25rem;
+}
+
+.folder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0;
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+
+.folder-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.add-subfolder {
+    margin-right: 0.25rem;
+    color: #28a745;
+}
+
+.add-subfolder:hover {
+    color: #218838;
+}
+
+.folder-name {
+    display: flex;
+    align-items: center;
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.folder-name:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.folder-name i {
+    margin-right: 0.5rem;
+    transition: transform 0.2s;
+}
+
+.folder-name i.bi-folder2-open {
+    color: #ffc107;
+}
+
+/* 하위 폴더 열고 닫는 애니메이션 */
+.folder-children {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+.folder-children[style*="display: block"] {
+    max-height: 1000px;
+}
