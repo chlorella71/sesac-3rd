@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}">
-qwe
+<!--qwe-->
 <div layout:fragment="content" class="container my-3">
-    ert
+<!--    ert-->
     <!-- 질문 -->
     <h2 class="border-bottom py-2" th:text="${questionResponseDTO.title}"></h2>
     <div class="card my-3">
@@ -80,7 +80,7 @@ qwe
         </div>
     </div>
 
-    <p>로그인 상태: <span th:text="${#authorization.expression('isAuthenticated()') ? '인증됨' : '비인증'}"></span></p>
+<!--    <p>로그인 상태: <span th:text="${#authorization.expression('isAuthenticated()') ? '인증됨' : '비인증'}"></span></p>-->
 
     <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
     <th:block sec:authorize="isAuthenticated()">

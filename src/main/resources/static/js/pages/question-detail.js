@@ -16,7 +16,7 @@ function initializeQuestionDetailPage() {
     console.log('질문 상세 페이지 초기화');
 
     // 삭제 버튼 이벤트 핸들러 초기화
-    initializeDeleteHandlers();
+//    initializeDeleteHandlers();
 
     // 모달 이벤트 초기화
     initializeModalEvents();

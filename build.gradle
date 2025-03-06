@@ -67,6 +67,9 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	//mariadb
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
+
 }
 
 tasks.named('test') {

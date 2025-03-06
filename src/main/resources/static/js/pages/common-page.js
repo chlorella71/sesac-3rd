@@ -12,7 +12,7 @@ function initializeCommonPage() {
     console.log('공통 페이지 초기화');
 
     // 삭제 버튼 이벤트 핸들러 초기화
-    initializeDeleteHandlers();
+//    initializeDeleteHandlers();
 }
 
 // 페이지 로드시 초기화
