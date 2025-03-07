@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout/layout}">
 <!--qwe-->
 <div layout:fragment="content" class="container my-3">
 <!--    ert-->
@@ -62,7 +62,7 @@
     <!-- 답변 작성 -->
     <form th:action="@{|/answer/create/${questionResponseDTO.id}|}" th:object="${answerCreateDTO}" method="post" class="my-3">
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-            <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+            <div th:replace="~{common/form_errors :: formErrorsFragment}"></div>
         </div>
         <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control" rows="10"></textarea>
         <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>

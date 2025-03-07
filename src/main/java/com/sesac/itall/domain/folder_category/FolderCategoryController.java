@@ -44,7 +44,7 @@ public class FolderCategoryController {
         model.addAttribute("blog", blog);
         model.addAttribute("categoryCreateDTO", new FolderCategoryCreateDTO());
 
-        return "category_form";
+        return "category/category_form";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -52,7 +52,7 @@ public class FolderCategoryController {
     public String createCategory(@PathVariable("blogId") Long blogId, @Valid @ModelAttribute("categoryCreateDTO") FolderCategoryCreateDTO folderCategoryCreateDTO, BindingResult bindingResult, Principal principal) {
 
         if (bindingResult.hasErrors()) {
-            return "category_form";
+            return "category/category_form";
         }
 
         try {
@@ -79,60 +79,60 @@ public class FolderCategoryController {
 //        return "redirect:/blog/" + blogId;
     }
 
-    // 카테고리 수정 폼
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/{blogId}/category/{categoryId}/edit")
-    public String editCategoryForm(@PathVariable("blogId") Long blogId, @PathVariable("categoryId") Long categoryId, Model model, Principal principal) {
+//    // 카테고리 수정 폼
+//    @PreAuthorize("isAuthenticated()")
+//    @GetMapping("/{blogId}/category/{categoryId}/edit")
+//    public String editCategoryForm(@PathVariable("blogId") Long blogId, @PathVariable("categoryId") Long categoryId, Model model, Principal principal) {
+//
+//        try {
+//            // 카테고리 정보를 DTO로 받아옴
+//            FolderCategoryResponseDTO folderCategoryResponseDTO = folderCategoryService.getCategoryResponseDTO(categoryId, principal.getName());
+//
+//            // 수정용 dto 생성 및 초기값 설정
+//            FolderCategoryUpdateDTO folderCategoryUpdateDTO = new FolderCategoryUpdateDTO();
+////            folderCategoryUpdateDTO.setId(folderCategoryResponseDTO.getId());
+//            folderCategoryUpdateDTO.setName(folderCategoryResponseDTO.getName());
+////            folderCategoryUpdateDTO.setBlogId(folderCategoryResponseDTO.getBlogId());
+//
+//            model.addAttribute("blogId", blogId);
+//            model.addAttribute("categoryId", categoryId);
+//            model.addAttribute("categoryResponseDTO", folderCategoryResponseDTO);
+//            model.addAttribute("categoryUpdateDTO", folderCategoryUpdateDTO);
+//
+//            return "category_edit";
+//        } catch (AccessDeniedException e) {
+//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
+//        } catch (EntityNotFoundException e) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다.");
+//        }
+//    }
 
-        try {
-            // 카테고리 정보를 DTO로 받아옴
-            FolderCategoryResponseDTO folderCategoryResponseDTO = folderCategoryService.getCategoryResponseDTO(categoryId, principal.getName());
-
-            // 수정용 dto 생성 및 초기값 설정
-            FolderCategoryUpdateDTO folderCategoryUpdateDTO = new FolderCategoryUpdateDTO();
-//            folderCategoryUpdateDTO.setId(folderCategoryResponseDTO.getId());
-            folderCategoryUpdateDTO.setName(folderCategoryResponseDTO.getName());
-//            folderCategoryUpdateDTO.setBlogId(folderCategoryResponseDTO.getBlogId());
-
-            model.addAttribute("blogId", blogId);
-            model.addAttribute("categoryId", categoryId);
-            model.addAttribute("categoryResponseDTO", folderCategoryResponseDTO);
-            model.addAttribute("categoryUpdateDTO", folderCategoryUpdateDTO);
-
-            return "category_edit";
-        } catch (AccessDeniedException e) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다.");
-        }
-    }
-
-    // 카테고리 수정 처리
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping("/{blogId}/category/{categoryId}/edit")
-    public String editCategory(@PathVariable("blogId") Long blogId, @PathVariable("categoryId") Long categoryId, @Valid @ModelAttribute("categoryUpdateDTO") FolderCategoryUpdateDTO folderCategoryUpdateDTO, BindingResult bindingResult, Principal principal, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            try {
-                FolderCategoryResponseDTO folderCategoryResponseDTO = folderCategoryService.getCategoryResponseDTO(categoryId, principal.getName());
-                model.addAttribute("blogId", blogId);
-                model.addAttribute("categoryId", categoryId);
-                model.addAttribute("folderCategoryResponseDTO", folderCategoryResponseDTO);
-            } catch (Exception e) {
-                //TODO: 오류처리
-            }
-            return "category_edit";
-        }
-
-        try {
-            folderCategoryService.updateCategory(blogId, categoryId, folderCategoryUpdateDTO, principal.getName());
-            return "redirect:/blog/" + blogId;
-        } catch (AccessDeniedException e) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다.");
-        }
-    }
+//    // 카테고리 수정 처리
+//    @PreAuthorize("isAuthenticated()")
+//    @PostMapping("/{blogId}/category/{categoryId}/edit")
+//    public String editCategory(@PathVariable("blogId") Long blogId, @PathVariable("categoryId") Long categoryId, @Valid @ModelAttribute("categoryUpdateDTO") FolderCategoryUpdateDTO folderCategoryUpdateDTO, BindingResult bindingResult, Principal principal, Model model) {
+//
+//        if (bindingResult.hasErrors()) {
+//            try {
+//                FolderCategoryResponseDTO folderCategoryResponseDTO = folderCategoryService.getCategoryResponseDTO(categoryId, principal.getName());
+//                model.addAttribute("blogId", blogId);
+//                model.addAttribute("categoryId", categoryId);
+//                model.addAttribute("folderCategoryResponseDTO", folderCategoryResponseDTO);
+//            } catch (Exception e) {
+//                //TODO: 오류처리
+//            }
+//            return "category_edit";
+//        }
+//
+//        try {
+//            folderCategoryService.updateCategory(blogId, categoryId, folderCategoryUpdateDTO, principal.getName());
+//            return "redirect:/blog/" + blogId;
+//        } catch (AccessDeniedException e) {
+//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
+//        } catch (EntityNotFoundException e) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다.");
+//        }
+//    }
 
     // 카테고리 삭제 처리 - AJAX 요청 처리
     @PreAuthorize("isAuthenticated()")

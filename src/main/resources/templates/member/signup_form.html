@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout/layout}">
 <div layout:fragment="content" class="container my-3">
     <div class="my-3 border-bottom">
         <div>
@@ -6,7 +6,7 @@
         </div>
     </div>
     <form th:action="@{/member/signup}" th:object="${memberCreateDto}" method="post">
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div th:replace="~{common/form_errors :: formErrorsFragment}"></div>
         <div>
             <label for="email" class="form-label">이메일</label>
             <input type="text" th:field="*{email}" class="form-control">

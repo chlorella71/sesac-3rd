@@ -41,7 +41,7 @@ public class QuestionController {
         List<QuestionResponseDTO> questionResponseDTOList = this.questionService.getList();
         model.addAttribute("questionResponseDTOList", questionResponseDTOList);
 
-        return "question_list";
+        return "question/question_list";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -51,7 +51,7 @@ public class QuestionController {
         model.addAttribute("categories", questionCategoryService.getAllCategories());   // 카테고리 리스트 전달
         model.addAttribute("isModify", false);   // 등록인지 수정인지 구분
 
-        return "question_form"; // question_form.html 렌더링
+        return "question/question_form"; // question_form.html 렌더링
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -60,7 +60,7 @@ public class QuestionController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", questionCategoryService.getAllCategories());
-            return "question_form"; // 유효성 검사 실패시 다시 폼으로 이동
+            return "question/question_form"; // 유효성 검사 실패시 다시 폼으로 이동
         }
 
         String email = principal.getName(); // 현재 로그인한 사용자 정보 가져오기
@@ -103,7 +103,7 @@ public class QuestionController {
         model.addAttribute("answerList", answerList);   // 답변 리스트 추가
         model.addAttribute("answerLikeResponseDTOMap", answerLikeResponseDTOMap);   // 추천 정보 추가
 
-        return "question_detail";
+        return "question/question_detail";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -128,7 +128,7 @@ public class QuestionController {
         model.addAttribute("categories", questionCategoryService.getAllCategories());
         model.addAttribute("isModify", true);   // 수정인지 구분
 
-        return "question_form";
+        return "question/question_form";
 
     }
 
@@ -137,7 +137,7 @@ public class QuestionController {
     public String questionModify(@Valid QuestionModifyDTO questionModifyDTO, BindingResult bindingResult, Principal principal) {
 
         if (bindingResult.hasErrors()) {
-            return "question_form";
+            return "question/question_form";
         }
 
         if (questionModifyDTO.getId() == null) {

@@ -328,70 +328,6 @@ export function createFolder(categoryId, folderData) {
     });
 }
 
-///**
-// * 폴더 생성 API 호출 함수
-// * @param {string} categoryId - 카테고리 ID
-// * @param {Object} folderData - 폴더 데이터 (name, parentFolderId)
-// */
-//function createFolder(categoryId, folderData) {
-//    const blogId = getBlogIdFromURL();
-//    const csrfInfo = addCsrfToHeaders();
-//
-//    if (!csrfInfo) {
-//        alert('CSRF 토큰이 없습니다. 다시 로그인해주세요.');
-//        return;
-//    }
-//
-//    // 저장 버튼 상태 업데이트
-//    const submitButton = document.querySelector('#folderCreateForm button[type="submit"], #subfolderCreateForm button[type="submit"]');
-//    const originalText = submitButton ? submitButton.textContent : '생성';
-//    if (submitButton) {
-//        submitButton.textContent = '생성 중...';
-//        submitButton.disabled = true;
-//    }
-//
-//    fetch(`/blog/${blogId}/category/${categoryId}/folder/create`, {
-//        method: 'POST',
-//        headers: {
-//            'Content-Type': 'application/json',
-//            [csrfInfo.header]: csrfInfo.token
-//        },
-//        body: JSON.stringify(folderData)
-//    })
-//    .then(response => response.json())
-//    .then(data => {
-//        if (data.success) {
-//            // 성공적으로 생성된 경우 UI 업데이트
-//            addFolderToUI(categoryId, data.folder);
-//
-//            // 모달 닫기
-//            const modal = document.getElementById('folderModal');
-//            if (modal) {
-//                modal.style.display = 'none';
-//            }
-//        } else {
-//            // 실패 시 오류 메시지
-//            alert(data.message || '폴더 생성 중 오류가 발생했습니다.');
-//        }
-//    })
-//    .catch(error => {
-//        console.error('Error:', error);
-//        alert('폴더 생성 중 오류가 발생했습니다.');
-//    })
-//    .finally(() => {
-//        // 버튼 상태 복원
-//        if (submitButton) {
-//            submitButton.textContent = originalText;
-//            submitButton.disabled = false;
-//        }
-//    });
-//}
-
-/**
- * UI에 폴더 추가 함수 (계층 구조 지원)
- * @param {string} categoryId - 카테고리 ID
- * @param {Object} folder - 폴더 정보 객체
- */
 /**
  * UI에 폴더 추가 함수 (계층 구조 지원)
  * @param {string} categoryId - 카테고리 ID
@@ -739,55 +675,6 @@ export function deleteFolder(folderId) {
     });
 }
 
-///**
-// * 폴더 삭제 함수 (하위 폴더 처리 포함)
-// * @param {string} folderId - 폴더 ID
-// */
-//export function deleteFolder(folderId) {
-//    const blogId = getBlogIdFromURL();
-//    const csrfInfo = addCsrfToHeaders();
-//
-//    if (!csrfInfo) {
-//        alert('CSRF 토큰이 없습니다. 다시 로그인해주세요.');
-//        return;
-//    }
-//
-//    // 폴더 삭제 전 확인
-//    const folderItem = document.querySelector(`.folder-item[data-folder-id="${folderId}"]`);
-//    const folderName = folderItem?.querySelector('.folder-name')?.textContent?.trim() || '선택한 폴더';
-//    const childContainer = document.querySelector(`.folder-children[data-parent-id="${folderId}"]`);
-//
-//    let confirmMessage = `"${folderName}" 폴더를 삭제하시겠습니까?`;
-//    if (childContainer && childContainer.children.length > 0) {
-//        confirmMessage += "\n\n주의: 모든 하위 폴더도 함께 삭제됩니다.";
-//    }
-//
-//    if (!confirm(confirmMessage)) {
-//        return;
-//    }
-//
-//    fetch(`/blog/${blogId}/folder/${folderId}/delete`, {
-//        method: 'POST',
-//        headers: {
-//            'Content-Type': 'application/json',
-//            [csrfInfo.header]: csrfInfo.token
-//        }
-//    })
-//    .then(response => response.json())
-//    .then(data => {
-//        if (data.success) {
-//            // 성공적으로 삭제된 경우 UI에서 폴더와 하위 폴더 모두 제거
-//            removeFolderFromUI(folderId);
-//        } else {
-//            alert(data.message || '폴더 삭제 중 오류가 발생했습니다.');
-//        }
-//    })
-//    .catch(error => {
-//        console.error('Error:', error);
-//        alert('폴더 삭제 중 오류가 발생했습니다.');
-//    });
-//}
-
 /**
  * UI에서 폴더 제거 함수 (하위 폴더 포함)
  * @param {string} folderId - 폴더 ID
@@ -817,6 +704,3 @@ function removeFolderFromUI(folderId) {
         folderList.innerHTML = '<div class="py-2 text-muted small">폴더가 없습니다.</div>';
     }
 }
-
-//// 모듈 내보내기
-//export {};

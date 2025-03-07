@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout/layout}">
 <div layout:fragment="content" class="container my-3">
     <h2>블로그 생성</h2>
     <form th:action="@{/blog/create}" th:object="${blogCreateDTO}" method="post">

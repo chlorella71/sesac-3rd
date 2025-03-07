@@ -5,19 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/folder-hierarchy.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder-hierarchy-origin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder-hierarchy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-03-06.0.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/common/csrf.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/common/csrf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-27.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/blog/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder_category/FolderCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/member/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/question/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/csrfHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/deleteHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder-hierarchy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder-hierarchy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/category/folder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/likeHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/modalService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/tooltipHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/answer_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/answer/answer_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog_setting.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/category_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/category/category_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/folder_category_setting.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/form_errors.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/form_errors.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/login_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question/question_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question/question_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question/question_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/signup_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/signup_form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,10 +118,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/static/css" />
-      <recent name="$PROJECT_DIR$/src/main/resources/static/js/features" />
-      <recent name="$PROJECT_DIR$/src/main/resources/static/js" />
-      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/common" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/category" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/layout/fragments" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/member" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/question" />
     </key>
   </component>
   <component name="RunManager">
@@ -203,11 +224,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java</url>
           <line>59</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

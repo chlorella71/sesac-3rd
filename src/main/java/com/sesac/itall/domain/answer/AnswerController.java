@@ -69,7 +69,7 @@ public class AnswerController {
     public String answerModify(@Valid AnswerModifyDTO answerModifyDTO, BindingResult bindingResult, Principal principal) {
 
         if (bindingResult.hasErrors()) {
-            return "answer_form";
+            return "answer/answer_form";
         }
 
         if (answerModifyDTO.getId() == null) {

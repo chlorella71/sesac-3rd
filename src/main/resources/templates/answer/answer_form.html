@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout/layout}">
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2">답변 수정</h5>
     <form th:object="${answerModifyDTO}" method="post">
@@ -8,7 +8,7 @@
 <!--        <input type="hidden" th:field="*{id}" />-->
         <input type="hidden" th:field="*{questionId}" />
 
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div th:replace="~{common/form_errors :: formErrorsFragment}"></div>
 
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>

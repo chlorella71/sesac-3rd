@@ -1,9 +1,9 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout/layout}">
 <div layout:fragment="content" class="container">
     <h5 class="my-3 border-bottom pb-2" th:text="${isModify ? '질문 수정' : '질문 등록'}"></h5>
     <form th:object="${questionDTO}" th:action="${isModify ? '/question/modify/' + questionDTO.id : '/question/create'}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div th:replace="~{common/form_errors :: formErrorsFragment}"></div>
 
         <div class="mb-3">
             <label for="categoryId" class="form-label">카테고리</label>

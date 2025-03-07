@@ -40,7 +40,7 @@ public class BlogController {
             model.addAttribute("isLoggedIn", false);
         }
 
-        return "blog_list";
+        return "blog/blog_list";
     }
 
     //TODO: 블로그 상세 페이지 구현
@@ -56,7 +56,7 @@ public class BlogController {
             List<FolderCategory> folderCategoryList = blog.getFolderCategoryList();
             model.addAttribute("folderCategoryList", folderCategoryList);
 
-            return "blog_detail";
+            return "blog/blog_detail";
         } catch (IllegalArgumentException e) {
             // 예외 처리: 존재하지 않는 블로그 ID인 경우 리다이렉트
             return "redirect:/blog/list";
@@ -83,14 +83,14 @@ public class BlogController {
     @GetMapping("/create")
     public String createBlogForm(Model model) {
         model.addAttribute("blogCreateDTO", new BlogCreateDTO());
-        return "blog_create";
+        return "blog/blog_create";
     }
 
     // 블로그 생성 처리
     @PostMapping("/create")
     public String createBlog(@Valid BlogCreateDTO blogCreateDTO, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "blog_create";
+            return "blog/blog_create";
         }
 
         String email = principal.getName();
