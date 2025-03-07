@@ -2,12 +2,16 @@ package com.sesac.itall.domain.post;
 
 import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.blog.BlogService;
+import com.sesac.itall.domain.folder.Folder;
 import com.sesac.itall.domain.folder.FolderResponseDTO;
 import com.sesac.itall.domain.folder.FolderService;
+import com.sesac.itall.domain.folder_category.FolderCategory;
 import com.sesac.itall.domain.folder_category.FolderCategoryResponseDTO;
 import com.sesac.itall.domain.folder_category.FolderCategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/blog/{blogId}/post")
+@RequestMapping("/blog")
 @RequiredArgsConstructor
 public class PostController {
 
@@ -31,7 +35,7 @@ public class PostController {
 
     // 포스트 작성 폼
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/create")
+    @GetMapping("/{blogId}/post/create")
     public String createPostForm(@PathVariable("blogId") Long blogId, Model model, Principal principal) {
         try {
             Blog blog = blogService.getBlogById(blogId);
@@ -66,7 +70,7 @@ public class PostController {
 
     // 포스트 저장 처리
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/create")
+    @PostMapping("/{blogId}/post/create")
     public String createPost(@PathVariable("blogId") Long blogId,
                              @Valid @ModelAttribute("postCreateDTO") PostCreateDTO postCreateDTO,
                              BindingResult bindingResult,
@@ -103,6 +107,103 @@ public class PostController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "post/post_form";
+        }
+    }
+
+    /**
+     * 블로그의 모든 포스트 조회 API
+     */
+    @GetMapping("/{blogId}/posts")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getBlogPosts(@PathVariable("blogId") Long blogId) {
+        try {
+            // 블로그 존재 확인
+            Blog blog = blogService.getBlogById(blogId);
+
+            // 블로그의 모든 포스트 조회 (초안 제외)
+            List<PostResponseDTO> posts = postService.getPostsByBlogId(blogId);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("posts", posts);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "포스트 조회 중 오류가 발생했습니다: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
+    /**
+     * 특정 폴더의 모든 포스트 조회 API
+     */
+    @GetMapping("/{blogId}/folder/{folderId}/posts")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getFolderPosts(
+            @PathVariable("blogId") Long blogId,
+            @PathVariable("folderId") Long folderId) {
+        try {
+            // 블로그 존재 확인
+            Blog blog = blogService.getBlogById(blogId);
+
+            // 폴더가 블로그에 속하는지 확인
+            Folder folder = folderService.getFolderById(folderId);
+            if (!folder.getFolderCategory().getBlog().getId().equals(blogId)) {
+                throw new IllegalArgumentException("해당 블로그의 폴더가 아닙니다.");
+            }
+
+            // 폴더의 모든 포스트 조회
+            List<PostResponseDTO> posts = postService.getPostsByFolderId(folderId);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("posts", posts);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "폴더 포스트 조회 중 오류가 발생했습니다: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
+    /**
+     * 특정 카테고리의 모든 포스트 조회 API
+     */
+    @GetMapping("/{blogId}/category/{categoryId}/posts")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getCategoryPosts(
+            @PathVariable("blogId") Long blogId,
+            @PathVariable("categoryId") Long categoryId) {
+        try {
+            // 블로그 존재 확인
+            Blog blog = blogService.getBlogById(blogId);
+
+            // 카테고리가 블로그에 속하는지 확인
+            FolderCategory category = folderCategoryService.getCategoryById(categoryId);
+            if (!category.getBlog().getId().equals(blogId)) {
+                throw new IllegalArgumentException("해당 블로그의 카테고리가 아닙니다.");
+            }
+
+            // 카테고리의 모든 포스트 조회
+            List<PostResponseDTO> posts = postService.getPostsByCategoryId(categoryId);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            response.put("posts", posts);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "카테고리 포스트 조회 중 오류가 발생했습니다: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

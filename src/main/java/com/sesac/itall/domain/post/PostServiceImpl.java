@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
@@ -23,7 +26,7 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public Post createPost(Long blogId, PostCreateDTO postCreateDTO, String email) {
 
-// 블로그 조회
+        // 블로그 조회
         Blog blog = blogRepository.findById(blogId)
                 .orElseThrow(() -> new DataNotFoundException("블로그를 찾을 수 없습니다."));
 
@@ -51,5 +54,29 @@ public class PostServiceImpl implements PostService {
                 .build();
 
         return postRepository.save(post);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostResponseDTO> getPostsByBlogId(Long blogId) {
+        return postRepository.findByBlogIdAndDraftIsFalseOrderByRegdateDesc(blogId).stream()
+                .map(PostResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostResponseDTO> getPostsByFolderId(Long folderId) {
+        return postRepository.findByFolderIdAndDraftIsFalseOrderByRegdateDesc(folderId).stream()
+                .map(PostResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostResponseDTO> getPostsByCategoryId(Long categoryId) {
+        return postRepository.findPostsByCategoryId(categoryId).stream()
+                .map(PostResponseDTO::new)
+                .collect(Collectors.toList());
     }
 }

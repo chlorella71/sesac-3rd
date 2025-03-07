@@ -8,7 +8,8 @@ import { initializeCategoryHandlers } from "../features/category/category.js";
 import { initializeFolderHandlers } from "../features/category/folder.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { initializeFolderHierarchy } from "../features/category/folder-hierarchy.js";
-
+import { initializePostUIHandlers } from "../features/post/post-ui-handler.js";
+import { addPostStyles } from "../features/post/post-styles.js";
 
 /**
  * 블로그 상세 페이지 초기화 함수
@@ -27,6 +28,12 @@ function initializeBlogDetailPage() {
 
     // 폴더 계층 구조 초기화
     initializeFolderHierarchy();
+
+    // 포스트 UI 핸들러 초기화
+    initializePostUIHandlers();
+
+    // 포스트 스타일 추가
+    addPostStyles();
 
     // 모달 열기 버튼 이벤트 초기화
     document.querySelectorAll('.open-modal').forEach(button => {

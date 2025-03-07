@@ -108,8 +108,9 @@
 
         <!-- 메인 컨텐츠 영역 -->
         <div class="col-md-9">
-            <div class="card">
-                <div class="card-header">
+            <!-- 블로그 정보 카드 -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">블로그 정보</h5>
                     <!-- 포스트 작성 버튼 -->
                     <a th:href="@{|/blog/${blogResponseDTO.id}/post/create|}"
@@ -150,9 +151,29 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- 포스트 목록 영역 -->
+            <div class="card" id="post-container">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">포스트</h5>
+                    <span id="post-container-title">전체 포스트</span>
+                </div>
+                <div class="card-body">
+                    <div id="post-list-container">
+                        <!-- 기본 안내 메시지 -->
+                        <div class="alert alert-info" id="post-info-message">
+                            왼쪽의 카테고리나 폴더를 클릭하면 해당 항목의 포스트를 볼 수 있습니다.
+                        </div>
+                        <!-- 포스트 목록이 여기에 동적으로 표시됩니다 -->
+                        <div id="post-list" class="list-group"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+
 
     <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
     <th:block sec:authorize="isAuthenticated()">
@@ -199,6 +220,50 @@
         .folder-name small {
             font-size: 0.75rem;
             opacity: 0.7;
+        }
+
+         /* 포스트 목록 스타일 */
+        .post-item {
+            border-left: 3px solid #007bff;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .post-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(3px);
+        }
+
+        .post-item.draft {
+            border-left-color: #6c757d;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .post-content-preview {
+            color: #6c757d;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .folder-link.active, .category-link.active {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .draft-badge {
+            background-color: #6c757d;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-left: 5px;
         }
     </style>
 </th:block>

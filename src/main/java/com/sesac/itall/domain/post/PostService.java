@@ -18,19 +18,19 @@ public interface PostService {
 //
 //    // 포스트 상세 조회
 //    PostResponseDTO getPostById(Long postId);
-//
-//    // 블로그 내 모든 포스트 조회 (초안 제외)
-//    List<PostResponseDTO> getPostsByBlogId(Long blogId);
-//
+
+    // 블로그 내 모든 포스트 조회 (초안 제외)
+    List<PostResponseDTO> getPostsByBlogId(Long blogId);
+
 //    // 페이징된 블로그 내 포스트 조회
 //    Page<PostResponseDTO> getPostsByBlogId(Long blogId, Pageable pageable);
-//
-//    // 폴더 내 포스트 조회
-//    List<PostResponseDTO> getPostsByFolderId(Long folderId);
-//
-//    // 카테고리 내 포스트 조회
-//    List<PostResponseDTO> getPostsByCategoryId(Long categoryId);
-//
+
+    // 폴더 내 포스트 조회
+    List<PostResponseDTO> getPostsByFolderId(Long folderId);
+
+    // 카테고리 내 포스트 조회
+    List<PostResponseDTO> getPostsByCategoryId(Long categoryId);
+
 //    // 초안 목록 조회
 //    List<PostResponseDTO> getDraftsByBlogId(Long blogId, String email);
 //
