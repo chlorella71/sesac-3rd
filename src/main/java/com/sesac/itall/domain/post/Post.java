@@ -3,7 +3,9 @@ package com.sesac.itall.domain.post;
 import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.folder.Folder;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.cglib.core.Local;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "post")
 public class Post {
 
@@ -45,5 +48,36 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
+
+    // 엔티티 생성 시 자동으로 등록 날짜 설정
+    @PrePersist
+    protected void onCreate() {
+        if (this.regdate == null) {
+            this.regdate = LocalDateTime.now();
+        }
+        if (this.draft && this.draftdate == null) {
+            this.draftdate = LocalDateTime.now();
+        }
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        this.modifydate = LocalDateTime.now();
+    }
+
+    @Builder
+    public Post(String title, String content, boolean draft, Blog blog, Folder folder) {
+        this.title = title;
+        this.content = content;
+        this.draft = draft;
+        this.blog = blog;
+        this.folder = folder;
+        this.regdate = LocalDateTime.now();
+
+        // 초안인 경우 초안 날짜 설정
+        if (draft) {
+            this.draftdate = LocalDateTime.now();
+        }
+    }
 
 }

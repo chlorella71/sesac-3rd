@@ -111,6 +111,13 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="mb-0">블로그 정보</h5>
+                    <!-- 포스트 작성 버튼 -->
+                    <a th:href="@{|/blog/${blogResponseDTO.id}/post/create|}"
+                       class="btn btn-primary btn-sm"
+                       sec:authorize="isAuthenticated()"
+                       th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                        <i class="bi bi-pencil-square"></i> 포스트 작성
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info">
