@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 블로그 헤더 Fragment -->
+<div th:fragment="blogHeader(blogResponseDTO)" class="blog-header py-3 mb-4 border-bottom">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="blog-title" th:text="${blogResponseDTO.title}">블로그 제목</h1>
+            <p class="blog-description text-muted" th:text="${blogResponseDTO.intro}">블로그 소개</p>
+        </div>
+        <div class="col-md-4 text-right d-flex justify-content-end align-items-center">
+                <span class="blog-author text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    <span th:text="${blogResponseDTO.nickname}">작성자</span>
+                </span>
+            <span class="ms-3 text-muted" th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy-MM-dd')}">작성일</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
