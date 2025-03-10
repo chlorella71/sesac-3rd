@@ -6,8 +6,7 @@
 import { initializeModalEvents } from "../common/modal.js";
 import { initializeCategoryHandlers } from "../features/category/category.js";
 import { initializeFolderHandlers } from "../features/category/folder.js";
-//import { initializeFolderHierarchy } from "../features/category/folder-hierarchy.js";
-import { initializeFolderManager } from "../features/category/folder-hierarchy-manager.js";
+import { initializeFolderHierarchy } from "../features/category/folder-hierarchy.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { showAllPosts } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
@@ -24,8 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFolderHandlers();
 
     // 폴더 계층 구조 초기화
-//    initializeFolderHierarchy();
-    initializeFolderManager();
+    initializeFolderHierarchy();
 
     // 포스트 스타일 추가
     addPostStyles();
@@ -395,7 +393,6 @@ function renderPosts(posts, container) {
         const postItem = document.createElement('a');
         postItem.href = `/blog/${post.blogId}/post/${post.id}`;
         postItem.className = `list-group-item list-group-item-action post-item ${post.draft ? 'draft' : ''}`;
-        postItem.dataset.postId = post.id;
 
         // 포스트 내용 HTML
         postItem.innerHTML = `
@@ -412,23 +409,6 @@ function renderPosts(posts, container) {
                 <small class="text-muted">카테고리: ${post.categoryName}</small>
             </div>
         `;
-
-        // 클릭 이벤트 - SPA 동작을 위한 핸들러 추가
-        postItem.addEventListener('click', function(e) {
-            e.preventDefault();
-            const postId = this.dataset.postId;
-            const blogId = getBlogIdFromURL();
-
-            // 포스트 콘텐츠 로드
-            loadPostContent(blogId, postId);
-
-            // 히스토리 API로 URL 업데이트
-            history.pushState(
-                { type: 'post', blogId, postId },
-                '',
-                this.href
-            );
-        });
 
         container.appendChild(postItem);
     });
@@ -524,9 +504,6 @@ function publishDraft(blogId, postId) {
     });
 }
 
-/**
- * 포스트 상세 페이지 이벤트 설정
- */
 function setupPostDetailEvents() {
     // 발행 버튼 이벤트 리스너
     const publishButton = document.getElementById('publish-draft');
@@ -541,7 +518,7 @@ function setupPostDetailEvents() {
         });
     }
 
-    // 다른 이벤트 리스너들 추가 가능
+    // 다른 이벤트 리스너들...
 }
 
 /**

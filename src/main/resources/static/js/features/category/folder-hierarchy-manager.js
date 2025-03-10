@@ -8,7 +8,7 @@ import { initializeFolderHierarchy, loadFolderHierarchy } from "./folder-hierarc
 import { initializeFolderModals } from "./folder-modal-handler.js";
 import { createFolder, deleteFolder, updateFolder } from "./folder-api.js";
 import { handleFolderClick, addFolderToUI, removeFolderFromUI } from "./folder-ui-handler.js";
-import { loadFolderPostsList, loadFolderPostsContent } from "../post/post-folder-view.js";
+import { loadFolderPostsList, loadFolderPostsContent, addSidebarPostStyles } from "../post/post-folder-view.js";
 
 /**
  * 폴더 관련 기능 초기화 함수
