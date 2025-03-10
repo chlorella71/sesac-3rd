@@ -73,6 +73,36 @@ public class PostController {
         }
     }
 
+    /**
+     * AJAX 요청용 - 포스트 내용만 반환
+     */
+    @GetMapping("/{blogId}/post/{postId}/content")
+    public String getPostContent(@PathVariable("blogId") Long blogId,
+                                 @PathVariable("postId") Long postId,
+                                 Model model,
+                                 Principal principal) {
+        try {
+            // 포스트 상세 정보 조회
+            PostResponseDTO post = postService.getPostById(postId);
+
+            // 블로그 ID 검증 (해당 블로그의 포스트가 맞는지)
+            if (!post.getBlogId().equals(blogId)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 블로그의 포스트가 아닙니다.");
+            }
+
+            // 초안인 경우 작성자만 접근 가능
+            if (post.isDraft() && (principal == null || !post.getEmail().equals(principal.getName()))) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "작성자만 접근 가능한 초안입니다.");
+            }
+
+            model.addAttribute("post", post);
+
+            return "post/post_content :: postContent";
+        } catch (DataNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "포스트를 찾을 수 없습니다.", e);
+        }
+    }
+
     // 포스트 작성 폼
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/{blogId}/post/create")
@@ -138,12 +168,8 @@ public class PostController {
         try {
             Post post = postService.createPost(blogId, postCreateDTO, principal.getName());
 
-            // 초안인 경우 초안 목록으로, 아니면 포스트 목록으로 이동
-            if (post.isDraft()) {
-                return "redirect:/blog/" + blogId; // 초안 목록 페이지가 없으므로 블로그 메인으로 이동
-            } else {
-                return "redirect:/blog/" + blogId; // 포스트 상세 페이지가 없으므로 블로그 메인으로 이동
-            }
+            // 생성 후 해당 포스트 상세 페이지로 리다이렉트
+            return "redirect:/blog/" + blogId + "/post/" + post.getId();
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "post/post_form";
@@ -247,4 +273,120 @@ public class PostController {
         }
     }
 
+    /**
+     * 포스트 수정 폼 보기
+     */
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{blogId}/post/{postId}/edit")
+    public String editPostForm(@PathVariable("blogId") Long blogId,
+                               @PathVariable("postId") Long postId,
+                               Model model,
+                               Principal principal) {
+
+        // 블로그 정보 조회
+        Blog blog = blogService.getBlogById(blogId);
+        model.addAttribute("blog", blog);
+
+        // 포스트 정보 조회
+        PostResponseDTO post = postService.getPostById(postId);
+
+        // 권한 검사 - 본인 글만 수정 가능
+        if (!post.getEmail().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정 권한이 없습니다.");
+        }
+
+        // 포스트 수정을 위한 DTO 생성
+        PostUpdateDTO postUpdateDTO = new PostUpdateDTO();
+        postUpdateDTO.setId(postId);
+        postUpdateDTO.setTitle(post.getTitle());
+        postUpdateDTO.setContent(post.getContent());
+        postUpdateDTO.setFolderId(post.getFolderId());
+        postUpdateDTO.setDraft(post.isDraft());
+
+        model.addAttribute("postUpdateDTO", postUpdateDTO);
+
+        // 카테고리 목록 조회
+        List<FolderCategoryResponseDTO> categories = folderCategoryService.getCategoryResponseDTOListByBlogId(blogId);
+        model.addAttribute("categories", categories);
+
+        // 카테고리별 폴더 목록 조회
+        Map<Long, List<FolderResponseDTO>> foldersByCategory = new HashMap<>();
+        for (FolderCategoryResponseDTO category : categories) {
+            List<FolderResponseDTO> folders = folderService.getAllFoldersByCategoryId(category.getId());
+            foldersByCategory.put(category.getId(), folders);
+        }
+        model.addAttribute("foldersByCategory", foldersByCategory);
+
+        return "post/post_edit";
+    }
+
+    /**
+     * 포스트 수정 처리
+     */
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{blogId}/post/{postId}/edit")
+    public String editPost(@PathVariable("blogId") Long blogId,
+                           @PathVariable("postId") Long postId,
+                           @Valid @ModelAttribute PostUpdateDTO postUpdateDTO,
+                           BindingResult bindingResult,
+                           Principal principal,
+                           Model model) {
+
+        // 유효성 검사 실패 시
+        if (bindingResult.hasErrors()) {
+            // 블로그 정보 조회
+            Blog blog = blogService.getBlogById(blogId);
+            model.addAttribute("blog", blog);
+
+            // 카테고리 목록 조회
+            List<FolderCategoryResponseDTO> categories = folderCategoryService.getCategoryResponseDTOListByBlogId(blogId);
+            model.addAttribute("categories", categories);
+
+            // 카테고리별 폴더 목록 조회
+            Map<Long, List<FolderResponseDTO>> foldersByCategory = new HashMap<>();
+            for (FolderCategoryResponseDTO category : categories) {
+                List<FolderResponseDTO> folders = folderService.getAllFoldersByCategoryId(category.getId());
+                foldersByCategory.put(category.getId(), folders);
+            }
+            model.addAttribute("foldersByCategory", foldersByCategory);
+
+            return "post/post_edit";
+        }
+
+        try {
+            // 포스트 수정 처리
+            PostResponseDTO updatedPost = postService.updatePost(postUpdateDTO, principal.getName());
+
+            // 포스트 상세 페이지로 리다이렉트
+            return "redirect:/blog/" + blogId + "/post/" + postId;
+        } catch (ResponseStatusException e) {
+            // 권한 오류
+            model.addAttribute("errorMessage", e.getReason());
+            return "post/post_edit";
+        }
+    }
+
+    /**
+     * 포스트 삭제
+     */
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{blogId}/post/{postId}/delete")
+    public String deletePost(@PathVariable("blogId") Long blogId,
+                             @PathVariable("postId") Long postId,
+                             Principal principal) {
+
+        // 포스트 정보 조회
+        PostResponseDTO post = postService.getPostById(postId);
+
+        // 권한 검사 - 본인 글만 삭제 가능
+        if (!post.getEmail().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다.");
+        }
+
+        // 포스트 삭제 처리
+        postService.deletePost(postId, principal.getName());
+
+        // 블로그 메인 페이지로 리다이렉트
+        return "redirect:/blog/" + blogId;
+    }
 }
