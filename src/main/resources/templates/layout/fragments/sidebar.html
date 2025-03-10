@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <!-- 사이드바 Fragment -->
-<div th:fragment="sidebar(categories, blog)" class="col-md-3">
+<div th:fragment="sidebar(folderCategoryList, blogResponseDTO)" class="col-md-3">
     <div class="card mb-3">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">카테고리</h5>
@@ -11,47 +11,47 @@
                     data-modal-id="categoryModal"
                     data-modal-title="카테고리 생성"
                     data-modal-type="categoryCreateForm"
-                    th:data-blog-id="${blog.id}"
+                    th:data-blog-id="${blogResponseDTO.id}"
                     sec:authorize="isAuthenticated()"
-                    th:if="${#authentication.principal.username == blog.member.email}">
+                    th:if="${#authentication.principal.username == blogResponseDTO.email}">
                 <i class="bi bi-plus"></i>
             </button>
         </div>
         <div class="card-body p-0">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:if="${categories.isEmpty()}">
+                <li class="list-group-item" th:if="${folderCategoryList.isEmpty()}">
                     <span class="text-muted">카테고리가 없습니다.</span>
                 </li>
-                <li class="list-group-item" th:each="category : ${categories}" th:attr="data-category-id=${category.id}">
+                <li class="list-group-item" th:each="folderCategory : ${folderCategoryList}" th:attr="data-category-id=${folderCategory.id}">
                     <div class="d-flex justify-content-between align-items-center w-100">
-                        <a href="#" class="category-link" th:text="${category.name}" th:data-category-id="${category.id}">카테고리 이름</a>
+                        <a href="#" class="category-link" th:text="${folderCategory.name}" th:data-category-id="${folderCategory.id}">카테고리 이름</a>
                         <div class="d-flex">
                             <!-- 폴더 추가 버튼 -->
                             <button type="button" class="btn btn-sm btn-light me-1 add-folder"
-                                    th:data-category-id="${category.id}"
+                                    th:data-category-id="${folderCategory.id}"
                                     title="폴더 추가"
                                     sec:authorize="isAuthenticated()"
-                                    th:if="${#authentication.principal.username == blog.member.email}">
+                                    th:if="${#authentication.principal.username == blogResponseDTO.email}">
                                 <i class="bi bi-folder-plus"></i>
                             </button>
                             <!-- 카테고리 액션 버튼 -->
-                            <div class="category-actions" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blog.member.email}">
+                            <div class="category-actions" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
                                 <button type="button" class="btn btn-sm edit-category"
-                                        th:data-category-id="${category.id}"
-                                        th:data-category-name="${category.name}">
+                                        th:data-category-id="${folderCategory.id}"
+                                        th:data-category-name="${folderCategory.name}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                                 <button type="button" class="btn btn-sm delete-category"
-                                        th:data-category-id="${category.id}"
-                                        th:data-category-name="${category.name}"
-                                        th:if="${category.name != '기본 카테고리'}">
+                                        th:data-category-id="${folderCategory.id}"
+                                        th:data-category-name="${folderCategory.name}"
+                                        th:if="${folderCategory.name != '기본 카테고리'}">
                                     <i class="bi bi-x"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <!-- 폴더 목록 영역 (처음에는 접혀있음) -->
-                    <div class="folder-list mt-2 ps-3" th:attr="data-category-id=${category.id}" style="display: none;">
+                    <div class="folder-list mt-2 ps-3" th:attr="data-category-id=${folderCategory.id}" style="display: none;">
                         <!-- 여기에 폴더 목록이 동적으로 추가됨 -->
                     </div>
                 </li>

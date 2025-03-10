@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
+<!-- 블로그 모달 Fragment -->
+<div th:fragment="blogModals">
+    <!-- 폴더 생성 모달 -->
+    <div class="modal" id="folderModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">폴더 생성</h3>
+            <div class="modal-content-body">
+                <!-- 폼은 자바스크립트로 동적 생성됨 -->
+            </div>
+        </div>
+    </div>
 
+    <!-- 폴더 수정 모달 -->
+    <div class="modal" id="editFolderModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">폴더 수정</h3>
+            <div class="modal-content-body">
+                <!-- 폼은 자바스크립트로 동적 생성됨 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 카테고리 생성 모달 -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">카테고리 생성</h3>
+            <div class="modal-content-body">
+                <!-- 폼은 자바스크립트로 동적 생성됨 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 카테고리 수정 모달 -->
+    <div class="modal" id="editCategoryModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">카테고리 수정</h3>
+            <div class="modal-content-body">
+                <!-- 폼은 자바스크립트로 동적 생성됨 -->
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

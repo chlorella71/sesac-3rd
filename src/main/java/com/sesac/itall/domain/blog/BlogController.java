@@ -147,4 +147,14 @@ public class BlogController {
 //
 //        return "redirect:/blog/" +id;
 //    }
+
+    // AJAX 요청용 컨텐츠만 가져오는 API
+    @GetMapping("/{blogId}/content")
+    public String getBlogContent(@PathVariable Long blogId, Model model) {
+        Blog blog = blogService.getBlogById(blogId);
+        BlogResponseDTO blogResponseDTO = new BlogResponseDTO(blog);
+        model.addAttribute("blogResponseDTO", blogResponseDTO);
+
+        return "blog/blog_content :: blogContent";
+    }
 }

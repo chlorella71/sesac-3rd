@@ -10,14 +10,14 @@ public interface PostService {
     // 포스트 생성
     Post createPost(Long blogId, PostCreateDTO postCreateDTO, String email);
 
-//    // 포스트 수정
-//    Post updatePost(PostUpdateDTO postModifyDTO, String email);
-//
-//    // 포스트 삭제
-//    void deletePost(Long postId, String email);
-//
-//    // 포스트 상세 조회
-//    PostResponseDTO getPostById(Long postId);
+    // 포스트 수정
+    PostResponseDTO updatePost(PostUpdateDTO postModifyDTO, String email);
+
+    // 포스트 삭제
+    void deletePost(Long postId, String email);
+
+    // 포스트 상세 조회
+    PostResponseDTO getPostById(Long postId);
 
     // 블로그 내 모든 포스트 조회 (초안 제외)
     List<PostResponseDTO> getPostsByBlogId(Long blogId);

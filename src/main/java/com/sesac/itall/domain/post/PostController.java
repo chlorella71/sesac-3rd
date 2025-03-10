@@ -2,6 +2,7 @@ package com.sesac.itall.domain.post;
 
 import com.sesac.itall.domain.blog.Blog;
 import com.sesac.itall.domain.blog.BlogService;
+import com.sesac.itall.domain.common.DataNotFoundException;
 import com.sesac.itall.domain.folder.Folder;
 import com.sesac.itall.domain.folder.FolderResponseDTO;
 import com.sesac.itall.domain.folder.FolderService;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -32,6 +34,44 @@ public class PostController {
     private final BlogService blogService;
     private final FolderService folderService;
     private final FolderCategoryService folderCategoryService;
+
+    /**
+     * 포스트 상세 조회 전체 페이지
+     */
+    @GetMapping("/{blogId}/post/{postId}")
+    public String viewPost(@PathVariable("blogId") Long blogId,
+                           @PathVariable("postId") Long postId,
+                           Model model,
+                           Principal principal) {
+        try {
+            // 블로그 정보 조회
+            Blog blog = blogService.getBlogById(blogId);
+            model.addAttribute("blogResponseDTO", new com.sesac.itall.domain.blog.BlogResponseDTO(blog));
+
+            // 포스트 상세 정보 조회
+            PostResponseDTO post = postService.getPostById(postId);
+
+            // 블로그 ID 검증 (해당 블로그의 포스트가 맞는지)
+            if (!post.getBlogId().equals(blogId)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 블로그의 포스트가 아닙니다.");
+            }
+
+            // 초안인 경우 작성자만 접근 가능
+            if (post.isDraft() && (principal == null || !post.getEmail().equals(principal.getName()))) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "작성자만 접근 가능한 초안입니다.");
+            }
+
+            model.addAttribute("post", post);
+
+            // 블로그의 카테고리 목록 가져오기
+            List<FolderCategory> folderCategoryList = blog.getFolderCategoryList();
+            model.addAttribute("folderCategoryList", folderCategoryList);
+
+            return "blog/blog_detail";
+        } catch (DataNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "포스트를 찾을 수 없습니다.", e);
+        }
+    }
 
     // 포스트 작성 폼
     @PreAuthorize("isAuthenticated()")

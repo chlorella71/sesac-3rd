@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<!-- 블로그 메인 컨텐츠 Fragment -->
+<div th:fragment="blogContent(blogResponseDTO)">
+    <!-- 블로그 정보 카드 -->
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">블로그 정보</h5>
+            <!-- 포스트 작성 버튼 -->
+            <a th:href="@{|/blog/${blogResponseDTO.id}/post/create|}"
+               class="btn btn-primary btn-sm"
+               sec:authorize="isAuthenticated()"
+               th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                <i class="bi bi-pencil-square"></i> 포스트 작성
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                이 블로그는 아직 개발 중입니다. 곧 더 많은 콘텐츠가 추가될 예정입니다.
+            </div>
+
+            <div class="mb-3">
+                <strong>블로그 이름:</strong>
+                <span th:text="${blogResponseDTO.title}">블로그 제목</span>
+            </div>
+
+            <div class="mb-3">
+                <strong>블로그 소개:</strong>
+                <p th:text="${blogResponseDTO.intro}">블로그 소개 내용</p>
+            </div>
+
+            <div class="mb-3">
+                <strong>작성자:</strong>
+                <span th:text="${blogResponseDTO.nickname}">작성자 이름</span>
+            </div>
+
+            <div class="mb-3">
+                <strong>생성일:</strong>
+                <span th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy년 MM월 dd일')}">생성일</span>
+            </div>
+
+            <!-- 블로그 소유자인 경우 설정 버튼 표시 -->
+            <div class="mt-4" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                <a th:href="@{|/blog/${blogResponseDTO.id}/settings|}" class="btn btn-primary">설정</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 포스트 목록 영역 -->
+    <div class="card" id="post-container">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">포스트</h5>
+            <span id="post-container-title">전체 포스트</span>
+        </div>
+        <div class="card-body">
+            <div id="post-list-container">
+                <!-- 기본 안내 메시지 -->
+                <div class="alert alert-info" id="post-info-message">
+                    왼쪽의 카테고리나 폴더를 클릭하면 해당 항목의 포스트를 볼 수 있습니다.
+                </div>
+                <!-- 포스트 목록이 여기에 동적으로 표시됩니다 -->
+                <div id="post-list" class="list-group"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

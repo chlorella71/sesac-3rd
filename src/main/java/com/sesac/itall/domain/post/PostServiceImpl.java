@@ -79,4 +79,59 @@ public class PostServiceImpl implements PostService {
                 .map(PostResponseDTO::new)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PostResponseDTO getPostById(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new DataNotFoundException("포스트를 찾을 수 없습니다."));
+        return new PostResponseDTO(post);
+    }
+
+    @Override
+    @Transactional
+    public PostResponseDTO updatePost(PostUpdateDTO postUpdateDTO, String email) {
+        Post post = postRepository.findById(postUpdateDTO.getId())
+                .orElseThrow(() -> new DataNotFoundException("포스트를 찾을 수 없습니다."));
+
+        // 작성자 확인
+        if (!post.getBlog().getMember().getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정 권한이 없습니다.");
+        }
+
+        // 폴더 변경 확인
+        if (postUpdateDTO.getFolderId() != null && !post.getFolder().getId().equals(postUpdateDTO.getFolderId())) {
+            Folder newFolder = folderRepository.findById(postUpdateDTO.getFolderId())
+                    .orElseThrow(() -> new DataNotFoundException("폴더를 찾을 수 없습니다."));
+
+            // 같은 블로그의 폴더인지 확인
+            if (!newFolder.getFolderCategory().getBlog().getId().equals(post.getBlog().getId())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "해당 블로그의 폴더가 아닙니다.");
+            }
+
+            post.setFolder(newFolder);
+        }
+
+        // 내용 업데이트
+        post.setTitle(postUpdateDTO.getTitle());
+        post.setContent(postUpdateDTO.getContent());
+        post.setDraft(postUpdateDTO.isDraft());
+
+        Post updatedPost = postRepository.save(post);
+        return new PostResponseDTO(updatedPost);
+    }
+
+    @Override
+    @Transactional
+    public void deletePost(Long postId, String email) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new DataNotFoundException("포스트를 찾을 수 없습니다."));
+
+        // 작성자 확인
+        if (!post.getBlog().getMember().getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다.");
+        }
+
+        postRepository.delete(post);
+    }
 }
