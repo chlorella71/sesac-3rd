@@ -5,7 +5,7 @@
 
 import { initializeDeleteHandlers } from "../features/delete.js";
 import { initializeModalEvents } from "../common/modal.js";
-import { initializeCategoryHandlers } from "../features/category/category.js";
+import { initializeFolderCategory } from "../features/foldercategory/index.js";
 
 /**
  * 폴더/카테고리 설정 페이지 초기화 함수
@@ -19,8 +19,9 @@ function initializeCategorySettingsPage() {
     // 모달 이벤트 초기화
     initializeModalEvents();
 
-    // 카테고리 기능 초기화
-    initializeCategoryHandlers();
+    // 폴더 카테고리 기능 초기화
+    initializeFolderCategory();
+
 }
 
 // 페이지 로드시 초기화

@@ -26,14 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializePageSpecificFeatures() {
     const path = window.location.pathname;
 
-    // 블로그 상세 페이지
+    // 블로그 상세 페이지 - 이미 각 페이지 JS 파일에서 초기화하므로 여기서는 생략 가능
     if (path.match(/\/blog\/\d+$/)) {
-        import('./features/blog-modal-handler.js')
+        // 기본 매인 JS에서는 모듈 로딩만 하고 구체적인 초기화는 페이지 JS에서 처리
+        import('./pages/blog-detail.js')
             .then(module => {
-                console.log('블로그 모달 핸들러 초기화 완료');
+                console.log('블로그 상세 페이지 JS 로드 완료');
             })
             .catch(error => {
-                console.error('블로그 모달 핸들러 로드 실패:', error);
+                console.error('블로그 상세 페이지 JS 로드 실패:', error);
             });
     }
 

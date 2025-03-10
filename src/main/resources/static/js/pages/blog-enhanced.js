@@ -4,9 +4,7 @@
  */
 
 import { initializeModalEvents } from "../common/modal.js";
-import { initializeCategoryHandlers } from "../features/category/category.js";
-import { initializeFolderHandlers } from "../features/category/folder.js";
-import { initializeFolderHierarchy } from "../features/category/folder-hierarchy.js";
+import { initializeFolderCategory } from "../features/foldercategory/index.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { showAllPosts } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
@@ -16,14 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 기본 모달 이벤트 초기화
     initializeModalEvents();
 
-    // 카테고리 기능 초기화
-    initializeCategoryHandlers();
-
-    // 폴더 기능 초기화
-    initializeFolderHandlers();
-
-    // 폴더 계층 구조 초기화
-    initializeFolderHierarchy();
+    // 폴더카테고리 관련 이벤트 초기화
+    initializeFolderCategory();
 
     // 포스트 스타일 추가
     addPostStyles();
