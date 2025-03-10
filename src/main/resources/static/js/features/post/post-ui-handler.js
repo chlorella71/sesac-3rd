@@ -135,11 +135,21 @@ export function showAllPosts() {
     const postInfoMessage = document.getElementById('post-info-message');
     const containerTitle = document.getElementById('post-container-title');
 
+    // 필요한 DOM 요소가 없으면 함수 종료
+    if (!postList || !postInfoMessage) {
+        console.warn('포스트 목록 표시에 필요한 DOM 요소를 찾을 수 없습니다.');
+        return;
+    }
+
     // 로딩 메시지 표시
     postInfoMessage.textContent = '포스트를 불러오는 중...';
     postInfoMessage.style.display = 'block';
     postList.innerHTML = '';
     containerTitle.textContent = '전체 포스트';
+
+    if (containerTitle) {
+        containerTitle.textContent = '전체 포스트';
+    }
 
     // 모든 active 클래스 제거
     document.querySelectorAll('.folder-link.active, .category-link.active').forEach(el => {

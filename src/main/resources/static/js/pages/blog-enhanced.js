@@ -257,7 +257,10 @@ function loadPostContent(blogId, postId) {
  */
 function loadBlogContent(blogId) {
     const contentArea = document.getElementById('content-area');
-    if (!contentArea) return;
+    if (!contentArea) {
+        console.error('컨텐츠 영역을 찾을 수 없습니다.');
+        return;
+    }
 
     // 로딩 인디케이터 표시
     contentArea.innerHTML = `
@@ -278,8 +281,22 @@ function loadBlogContent(blogId) {
         .then(html => {
             contentArea.innerHTML = html;
 
-            // 포스트 목록 로드
-            showAllPosts();
+            // DOM이 완전히 업데이트될 시간을 주기 위해 지연 실행
+            setTimeout(() => {
+                const allPostsButton = document.getElementById('view-all-posts');
+                if (allPostsButton) {
+                    // 프로그래밍 방식으로 전체 포스트 버튼 클릭
+                    allPostsButton.click();
+                } else {
+                    // 버튼이 없으면 직접 함수 호출 시도
+                    try {
+                        const event = new Event('blogContentLoaded');
+                        document.dispatchEvent(event);
+                    } catch (err) {
+                        console.warn('이벤트 발생 오류:', err);
+                    }
+                }
+            }, 250);
         })
         .catch(error => {
             console.error('블로그 내용 로드 오류:', error);
@@ -287,6 +304,11 @@ function loadBlogContent(blogId) {
                 <div class="alert alert-danger">
                     <i class="bi bi-exclamation-triangle"></i>
                     블로그 내용을 불러오는 중 오류가 발생했습니다: ${error.message}
+                    <div class="mt-3">
+                        <button onclick="window.location.reload()" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-clockwise"></i> 새로고침
+                        </button>
+                    </div>
                 </div>
             `;
         });
@@ -430,6 +452,13 @@ function publishDraft(blogId, postId) {
         return;
     }
 
+     // 로딩 상태 표시 (선택적)
+    const publishButton = document.getElementById('publish-draft');
+    if (publishButton) {
+        publishButton.disabled = true;
+        publishButton.innerHTML = '<i class="bi bi-hourglass-split"></i> 처리 중...';
+    }
+
     // API 호출
     fetch(`/blog/${blogId}/post/${postId}/publish`, {
         method: 'POST',
@@ -446,9 +475,19 @@ function publishDraft(blogId, postId) {
     })
     .then(data => {
         if (data.success) {
-            alert(data.message);
-            // 페이지 새로고침
-            window.location.reload();
+            alert(data.message || '포스트가 성공적으로 발행되었습니다.');
+
+             // 1. 콘텐츠 영역 새로고침 대신 블로그 메인으로 리다이렉트
+            try {
+                loadBlogContent(blogId);
+
+                // 2. 히스토리 API로 URL 업데이트
+                history.pushState({ type: 'blog', blogId }, '', `/blog/${blogId}`);
+            } catch (navError) {
+                console.error('블로그 이동 중 오류:', navError);
+                // 오류 발생 시 강제 페이지 새로고침
+                window.location.href = `/blog/${blogId}`;
+            }
         } else {
             throw new Error(data.message || '포스트 발행 중 오류가 발생했습니다.');
         }
@@ -456,6 +495,12 @@ function publishDraft(blogId, postId) {
     .catch(error => {
         console.error('발행 오류:', error);
         alert(error.message || '포스트 발행 중 오류가 발생했습니다.');
+
+        // 버튼 상태 복원 (선택적)
+        if (publishButton) {
+            publishButton.disabled = false;
+            publishButton.innerHTML = '<i class="bi bi-check-circle"></i> 발행하기';
+        }
     });
 }
 
@@ -475,3 +520,27 @@ function setupPostDetailEvents() {
 
     // 다른 이벤트 리스너들...
 }
+
+/**
+ * 블로그 컨텐츠 로드 완료 후 이벤트 리스너
+ * - post-ui-handler.js의 showAllPosts와 연동
+ */
+document.addEventListener('blogContentLoaded', function() {
+    try {
+        // 전역 스코프에서 showAllPosts 함수 호출 시도
+        if (typeof showAllPosts === 'function') {
+            showAllPosts();
+        } else {
+            console.warn('showAllPosts 함수를 찾을 수 없습니다.');
+        }
+    } catch (error) {
+        console.error('포스트 목록 로드 실패:', error);
+
+        // 오류 발생 시 수동으로 DOM 업데이트 시도
+        const postInfoMessage = document.getElementById('post-info-message');
+        if (postInfoMessage) {
+            postInfoMessage.textContent = '포스트 목록을 불러오지 못했습니다. 페이지를 새로고침 해주세요.';
+            postInfoMessage.style.display = 'block';
+        }
+    }
+});

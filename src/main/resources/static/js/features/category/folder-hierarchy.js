@@ -22,20 +22,23 @@ export function initializeFolderHierarchy() {
         const folderId = folderItem.dataset.folderId;
         if (!folderId) return;
 
-        // 해당 폴더의 하위 폴더 컨테이너 찾기
-        const childContainer = document.querySelector(`.folder-children[data-parent-id="${folderId}"]`);
+        // 폴더 클릭 핸들러 호출
+        handleFolderClick(e);
 
-        if (childContainer) {
-            // 표시 상태 토글
-            const isHidden = childContainer.style.display === 'none';
-            childContainer.style.display = isHidden ? 'block' : 'none';
-
-            // 폴더 아이콘 업데이트
-            const folderIcon = folderLink.querySelector('i');
-            if (folderIcon) {
-                folderIcon.className = isHidden ? 'bi bi-folder2-open me-1' : 'bi bi-folder2 me-1';
-            }
-        }
+//        // 해당 폴더의 하위 폴더 컨테이너 찾기
+//        const childContainer = document.querySelector(`.folder-children[data-parent-id="${folderId}"]`);
+//
+//        if (childContainer) {
+//            // 표시 상태 토글
+//            const isHidden = childContainer.style.display === 'none';
+//            childContainer.style.display = isHidden ? 'block' : 'none';
+//
+//            // 폴더 아이콘 업데이트
+//            const folderIcon = folderLink.querySelector('i');
+//            if (folderIcon) {
+//                folderIcon.className = isHidden ? 'bi bi-folder2-open me-1' : 'bi bi-folder2 me-1';
+//            }
+//        }
     });
 
     // 하위 폴더 추가 버튼 이벤트
@@ -61,6 +64,63 @@ export function initializeFolderHierarchy() {
         const { categoryId, folderData } = e.detail;
         createFolder(categoryId, folderData);
     });
+
+    // 사이드바 포스트 스타일 추가
+    addSidebarPostStyles();
+}
+
+
+/**
+ * 폴더 클릭 이벤트 핸들러 - 폴더 확장 및 포스트 로드
+ * @param {Event} e - 클릭 이벤트
+ */
+function handleFolderClick(e) {
+    const folderLink = e.target.closest('.folder-name');
+    if (!folderLink) return;
+
+    const folderItem = folderLink.closest('.folder-item');
+    if (!folderItem) return;
+
+    const folderId = folderItem.dataset.folderId;
+    if (!folderId) return;
+
+    // 1. 하위 폴더 컨테이너 토글
+    const childContainer = document.querySelector(`.folder-children[data-parent-id="${folderId}"]`);
+    if (childContainer) {
+        const isHidden = childContainer.style.display === 'none';
+        childContainer.style.display = isHidden ? 'block' : 'none';
+
+        // 폴더 아이콘 업데이트
+        const folderIcon = folderLink.querySelector('i');
+        if (folderIcon) {
+            folderIcon.className = isHidden ? 'bi bi-folder2-open me-1' : 'bi bi-folder2 me-1';
+        }
+    }
+
+    // 2. 포스트 컨테이너 토글
+    let postsContainer = document.querySelector(`.folder-posts[data-folder-id="${folderId}"]`);
+
+    // 포스트 컨테이너가 없으면 생성
+    if (!postsContainer) {
+        postsContainer = document.createElement('div');
+        postsContainer.className = 'folder-posts ms-3 mt-2';
+        postsContainer.dataset.folderId = folderId;
+
+        // 로딩 메시지
+        postsContainer.innerHTML = '<div class="text-muted small">포스트를 불러오는 중...</div>';
+
+        // 폴더 아이템 다음에 삽입
+        folderItem.after(postsContainer);
+
+        // 포스트 목록 로드 (post-hierarchy.js에서 가져옴)
+        loadFolderPostsList(folderId, postsContainer);
+    } else {
+        // 이미 있으면 토글
+        postsContainer.style.display = postsContainer.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // 3. 메인 컨텐츠 영역 업데이트 (post-hierarchy.js에서 가져옴)
+    loadFolderPostsContent(folderId);
 }
 
 /**

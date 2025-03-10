@@ -6,6 +6,11 @@
 import { createElement, validateForm, getBlogIdFromURL } from "../../utils/dom.js";
 import { addCsrfToHeaders, getCsrfInfo } from "../../common/csrf.js";
 import { openModal, closeModal } from "../../common/modal.js";
+import {
+    loadFolderPostsList,
+    loadFolderPostsContent,
+    addSidebarPostStyles
+} from "./post-hierarchy.js";
 
 /**
  * 폴더 계층 구조 초기화 함수
