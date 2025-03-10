@@ -31,9 +31,9 @@ public interface PostService {
     // 카테고리 내 포스트 조회
     List<PostResponseDTO> getPostsByCategoryId(Long categoryId);
 
-//    // 초안 목록 조회
-//    List<PostResponseDTO> getDraftsByBlogId(Long blogId, String email);
-//
-//    // 초안을 정식 게시물로 발행
-//    Post publishDraft(Long postId, String email);
+    // 초안 목록 조회
+    List<PostResponseDTO> getDraftsByBlogId(Long blogId, String email);
+
+    // 초안을 정식 게시물로 발행
+    Post publishDraft(Long postId, String email);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -133,5 +134,46 @@ public class PostServiceImpl implements PostService {
         }
 
         postRepository.delete(post);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostResponseDTO> getDraftsByBlogId(Long blogId, String email) {
+        // 먼저 블로그 소유자 확인
+        Blog blog = blogRepository.findById(blogId)
+                .orElseThrow(() -> new DataNotFoundException("블로그를 찾을 수 없습니다."));
+
+        if (!blog.getMember().getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
+        }
+
+        // 초안 포스트 조회
+        return postRepository.findByBlogIdAndDraftIsTrueOrderByDraftdateDesc(blogId).stream()
+                .map(PostResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public Post publishDraft(Long postId, String email) {
+        // 포스트 조회
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new DataNotFoundException("포스트를 찾을 수 없습니다."));
+
+        // 권한 확인 (포스트 작성자인지)
+        if (!post.getBlog().getMember().getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "발행 권한이 없습니다.");
+        }
+
+        // 초안인지 확인
+        if (!post.isDraft()) {
+            throw new IllegalStateException("이미 발행된 포스트입니다.");
+        }
+
+        // 초안 상태 해제 및 등록일 업데이트
+        post.setDraft(false);
+        post.setRegdate(LocalDateTime.now()); // 발행 시점으로 등록일 업데이트
+
+        return postRepository.save(post);
     }
 }

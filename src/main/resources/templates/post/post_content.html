@@ -34,6 +34,10 @@
 
             <!-- 작성자용 버튼 -->
             <div class="d-flex justify-content-end mt-4" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == post.email}">
+                <!-- 초안인 경우 발행 버튼 표시 -->
+                <button th:if="${post.draft}" id="publish-draft" class="btn btn-success me-2" th:data-blog-id="${post.blogId}" th:data-post-id="${post.id}">
+                    <i class="bi bi-check-circle"></i> 발행하기
+                </button>
                 <a th:href="@{|/blog/${post.blogId}/post/${post.id}/edit|}" class="btn btn-outline-primary me-2">
                     <i class="bi bi-pencil"></i> 수정
                 </a>

@@ -389,4 +389,63 @@ public class PostController {
         // 블로그 메인 페이지로 리다이렉트
         return "redirect:/blog/" + blogId;
     }
+
+    /**
+     * 블로그 작성자의 초안 포스트 목록 조회 API
+     */
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{blogId}/drafts")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getDrafts(@PathVariable("blogId") Long blogId, Principal principal) {
+        try {
+            // 블로그 존재 확인
+            Blog blog = blogService.getBlogById(blogId);
+
+            // 블로그 소유자만 초안을 볼 수 있음
+            if (!blog.getMember().getEmail().equals(principal.getName())) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(Map.of("success", false, "message", "접근 권한이 없습니다."));
+            }
+
+            // 초안 포스트 목록 조회
+            List<PostResponseDTO> drafts = postService.getDraftsByBlogId(blogId, principal.getName());
+
+            return ResponseEntity.ok(Map.of("success", true, "posts", drafts));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("success", false, "message", "초안 조회 중 오류가 발생했습니다: " + e.getMessage()));
+        }
+    }
+
+    /**
+     * 초안을 정식 게시물로 발행
+     */
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{blogId}/post/{postId}/publish")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> publishDraft(
+            @PathVariable("blogId") Long blogId,
+            @PathVariable("postId") Long postId,
+            Principal principal) {
+
+        try {
+            // 블로그 확인
+            Blog blog = blogService.getBlogById(blogId);
+
+            // 포스트 발행
+            Post post = postService.publishDraft(postId, principal.getName());
+
+            return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "포스트가 성공적으로 발행되었습니다.",
+                    "post", new PostResponseDTO(post)
+            ));
+        } catch (ResponseStatusException e) {
+            return ResponseEntity.status(e.getStatusCode())
+                    .body(Map.of("success", false, "message", e.getReason()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("success", false, "message", "포스트 발행 중 오류가 발생했습니다: " + e.getMessage()));
+        }
+    }
 }

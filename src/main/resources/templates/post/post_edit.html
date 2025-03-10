@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout}">
+<div layout:fragment="content" class="container my-3">
+    <h2>포스트 수정</h2>
+    <h3 th:text="${blog.title}">블로그 제목</h3>
+
+    <form th:action="@{|/blog/${blog.id}/post/${postUpdateDTO.id}/edit|}" th:object="${postUpdateDTO}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="hidden" th:field="*{id}" />
+
+        <!-- 에러 메시지 표시 -->
+        <div th:replace="~{common/form_errors :: formErrorsFragment}"></div>
+
+        <!-- 포스트 제목 -->
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="제목을 입력하세요">
+            <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+
+        <!-- 폴더 선택 -->
+        <div class="mb-3">
+            <label for="folderId" class="form-label">폴더 선택</label>
+            <select class="form-select" id="folderId" th:field="*{folderId}">
+                <option value="">-- 폴더 선택 --</option>
+                <!-- 카테고리별로 그룹화된 폴더 목록 -->
+                <optgroup th:each="category : ${categories}" th:label="${category.name}">
+                    <option th:each="folder : ${foldersByCategory.get(category.id)}"
+                            th:value="${folder.id}"
+                            th:text="${folder.name}"></option>
+                </optgroup>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('folderId')}" th:errors="*{folderId}"></div>
+        </div>
+
+        <!-- 초안 여부 -->
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="draft" th:field="*{draft}">
+            <label class="form-check-label" for="draft">초안으로 저장</label>
+        </div>
+
+        <!-- 포스트 내용 -->
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" id="content" th:field="*{content}" rows="15" placeholder="내용을 입력하세요"></textarea>
+            <div class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+        </div>
+
+        <!-- 버튼 그룹 -->
+        <div class="d-flex justify-content-between">
+            <a th:href="@{|/blog/${blog.id}/post/${postUpdateDTO.id}|}" class="btn btn-secondary">취소</a>
+            <button type="submit" class="btn btn-primary">수정</button>
+        </div>
+    </form>
+</div>
+
+<!-- CSS 정의 -->
+<th:block layout:fragment="style">
+    <style>
+        textarea#content {
+            min-height: 300px;
+        }
+    </style>
+</th:block>
+
+</html>

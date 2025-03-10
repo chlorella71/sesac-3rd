@@ -7,6 +7,12 @@
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">블로그 정보</h5>
+            <!-- 초안 보기 버튼 (블로그 소유자만 볼 수 있음) -->
+            <button id="view-drafts" class="btn btn-sm btn-outline-secondary me-2"
+                    sec:authorize="isAuthenticated()"
+                    th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                <i class="bi bi-file-earmark-text"></i> 초안 보기
+            </button>
             <!-- 포스트 작성 버튼 -->
             <a th:href="@{|/blog/${blogResponseDTO.id}/post/create|}"
                class="btn btn-primary btn-sm"

@@ -15,8 +15,12 @@
         </div>
     </div>
 
-        <!-- 모달 영역 -->
-        <div th:replace="~{layout/fragments/modals :: blogModals}"></div>
+    <!-- 모달 영역 -->
+    <div th:replace="~{layout/fragments/modals :: blogModals}"></div>
+
+    <!-- 블로그 소유자 정보 (JavaScript에서 접근용) -->
+    <meta name="blog-owner-email" th:content="${blogResponseDTO.email}" />
+    <meta name="current-user-email" sec:authorize="isAuthenticated()" th:content="${#authentication.principal.username}" />
 
     <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
     <th:block sec:authorize="isAuthenticated()">
