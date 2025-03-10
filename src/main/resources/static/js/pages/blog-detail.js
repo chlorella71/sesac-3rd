@@ -4,7 +4,7 @@
  */
 
 import { initializeModalEvents } from "../common/modal.js";
-import { initializeFolderCategory } from "../features/foldercategory/index.js";
+import { initializeFolderCategory, toggleFolderList } from "../features/foldercategory/index.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { initializePostUIHandlers } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
@@ -31,6 +31,35 @@ function initializeBlogDetailPage() {
     document.querySelectorAll('.open-modal').forEach(button => {
         button.addEventListener('click', handleModalOpenClick);
     });
+
+    // 카테고리 클릭 이벤트 핸들러를 직접 등록 (이벤트 위임 방식으로 변경)
+    document.addEventListener('click', function(e) {
+        const categoryLink = e.target.closest('.category-name');
+        if (categoryLink) {
+            e.preventDefault();
+
+            const categoryItem = categoryLink.closest('.list-group-item');
+            if (categoryItem) {
+                const categoryId = categoryItem.dataset.categoryId;
+                if (categoryId) {
+                    console.log('카테고리 클릭:', categoryId);
+                    toggleFolderList(categoryId);
+                }
+            }
+        }
+    });
+
+    // 페이지 로드 시 자동으로 첫 번째 카테고리 펼치기 (선택적)
+    setTimeout(() => {
+        const firstCategory = document.querySelector('.list-group-item[data-category-id]');
+        if (firstCategory) {
+            const categoryId = firstCategory.dataset.categoryId;
+            if (categoryId) {
+                console.log('첫 번째 카테고리 자동 펼침:', categoryId);
+                toggleFolderList(categoryId);
+            }
+        }
+    }, 500); // DOM이 완전히 렌더링 된 후 실행하기 위해 약간의 지연 추가
 }
 
 // 페이지 로드시 초기화

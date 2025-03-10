@@ -15,18 +15,18 @@ export function fetchCategories() {
 
 /**
  * 폴더카테고리 생성 API 호출 함수
- * @param {string} categoryName - 폴더카테고리 이름
+ * @param {Object} categoryData - 폴더카테고리 데이터 (name 등)
  * @returns {Promise} 생성된 폴더카테고리 정보 Promise
  */
-export function createCategory(categoryName) {
-    if (!categoryName) {
+export function createCategory(categoryData) {
+    if (!categoryData || !categoryData.name) {
         return Promise.reject(new Error('폴더카테고리 이름이 필요합니다.'));
     }
 
-    const endpoint = `${getBlogApiBaseUrl()}/category/create`;
+    const endpoint = `${getBlogApiBaseUrl()}/category/create/ajax`;
     return callApi(endpoint, {
         method: 'POST',
-        body: { name: categoryName }
+        body: categoryData
     });
 }
 

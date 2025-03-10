@@ -104,7 +104,7 @@ function handleFolderExpandCollapse(e) {
  * @param {Event} e - 이벤트 객체
  */
 function handleAddFolder(e) {
-    e.stopPropagation(); // 이벤트 버블링 방지
+//    e.stopPropagation(); // 이벤트 버블링 방지
 
     const categoryId = this.dataset.categoryId;
     if (!categoryId) {
@@ -147,7 +147,7 @@ function handleAddFolder(e) {
                     }
                 });
             }
-            modal.style.display = 'block';
+            openModal(modal);
         }
 
         // 폴더 목록 표시 (이미 표시되어 있다면 그대로 유지)
@@ -200,7 +200,7 @@ function handleAddSubfolder(button) {
                 }
             });
         }
-        modal.style.display = 'block';
+        openModal(modal);
     }
 }
 
@@ -232,7 +232,7 @@ function handleFolderEdit(button) {
                 folderName: folderName
             });
         }
-        modal.style.display = 'block';
+        openModal(modal);
     }
 }
 
@@ -387,10 +387,14 @@ function handleFolderFormSubmit(e) {
  */
 export function loadFolders(categoryId) {
     const folderListElement = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
-    if (!folderListElement) return;
+    if (!folderListElement) {
+        console.error('폴더 목록 요소를 찾을 수 없습니다:', categoryId);
+        return;
+    }
 
     // 로딩 표시
     folderListElement.innerHTML = '<div class="text-center py-2"><small>폴더를 불러오는 중...</small></div>';
+    folderListElement.style.display = 'block'; // 목록을 표시 상태로 변경
 
     // 폴더 목록 API 호출
     FolderAPI.fetchFolders(categoryId)
@@ -417,7 +421,10 @@ export function loadFolders(categoryId) {
  */
 export function toggleFolderList(categoryId) {
     const folderList = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
-    if (!folderList) return;
+    if (!folderList) {
+        console.error('폴더 목록 요소를 찾을 수 없습니다:', categoryId);
+        return;
+    }
 
     // 토글 상태 변경
     const isCollapsed = folderList.style.display === 'none';
@@ -427,8 +434,9 @@ export function toggleFolderList(categoryId) {
         // 폴더 목록이 비어있고 처음 펼치는 경우만 데이터 로드
         if (folderList.children.length === 0 || folderList.dataset.loaded !== 'true') {
             loadFolders(categoryId);
+        } else {
+            folderList.style.display = 'block';
         }
-        folderList.style.display = 'block';
     } else {
         // 접는 경우
         folderList.style.display = 'none';

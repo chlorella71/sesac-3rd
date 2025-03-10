@@ -112,6 +112,40 @@
             border-radius: 3px;
             margin-left: 5px;
         }
+
+        /* 플로팅 알림 메시지 스타일 */
+        .alert-floating {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 250px;
+            max-width: 400px;
+            z-index: 1050;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 15px;
+            animation: slide-in 0.3s ease-out, fade-out 0.3s ease-in 2.7s forwards;
+        }
+
+        @keyframes slide-in {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-out {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 </th:block>
 

@@ -47,9 +47,13 @@ public class FolderCategoryController {
         return "category/category_form";
     }
 
+    // 폼 제출용 메소드 (HTML 응답) - 일반적인 폼 제출 시
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/{blogId}/category/create")
-    public String createCategory(@PathVariable("blogId") Long blogId, @Valid @ModelAttribute("categoryCreateDTO") FolderCategoryCreateDTO folderCategoryCreateDTO, BindingResult bindingResult, Principal principal) {
+    public String createCategory(@PathVariable("blogId") Long blogId,
+                                 @Valid @ModelAttribute("categoryCreateDTO") FolderCategoryCreateDTO folderCategoryCreateDTO,
+                                 BindingResult bindingResult,
+                                 Principal principal) {
 
         if (bindingResult.hasErrors()) {
             return "category/category_form";
@@ -65,74 +69,55 @@ public class FolderCategoryController {
             // 블로그 없음
             return "redirect:/blog/list";
         }
-
-//        Blog blog = blogService.getBlogById(blogId);
-//
-//        // 권한 확인
-//        if (!blog.getMember().getEmail().equals(principal.getName())) {
-//            return "redirect:/blog/" + blogId;
-//        }
-//
-//        // 카테고리 생성
-//        categoryService.createCategory(blog, FolderCategoryCreateDTO.getName());
-//
-//        return "redirect:/blog/" + blogId;
     }
 
-//    // 카테고리 수정 폼
-//    @PreAuthorize("isAuthenticated()")
-//    @GetMapping("/{blogId}/category/{categoryId}/edit")
-//    public String editCategoryForm(@PathVariable("blogId") Long blogId, @PathVariable("categoryId") Long categoryId, Model model, Principal principal) {
-//
-//        try {
-//            // 카테고리 정보를 DTO로 받아옴
-//            FolderCategoryResponseDTO folderCategoryResponseDTO = folderCategoryService.getCategoryResponseDTO(categoryId, principal.getName());
-//
-//            // 수정용 dto 생성 및 초기값 설정
-//            FolderCategoryUpdateDTO folderCategoryUpdateDTO = new FolderCategoryUpdateDTO();
-////            folderCategoryUpdateDTO.setId(folderCategoryResponseDTO.getId());
-//            folderCategoryUpdateDTO.setName(folderCategoryResponseDTO.getName());
-////            folderCategoryUpdateDTO.setBlogId(folderCategoryResponseDTO.getBlogId());
-//
-//            model.addAttribute("blogId", blogId);
-//            model.addAttribute("categoryId", categoryId);
-//            model.addAttribute("categoryResponseDTO", folderCategoryResponseDTO);
-//            model.addAttribute("categoryUpdateDTO", folderCategoryUpdateDTO);
-//
-//            return "category_edit";
-//        } catch (AccessDeniedException e) {
-//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
-//        } catch (EntityNotFoundException e) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다.");
-//        }
-//    }
+    // AJAX 요청용 메소드 (JSON 응답) - AJAX로 호출할 때 사용
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{blogId}/category/create/ajax")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createCategoryAjax(
+            @PathVariable("blogId") Long blogId,
+            @Valid @RequestBody FolderCategoryCreateDTO folderCategoryCreateDTO,
+            BindingResult bindingResult,
+            Principal principal) {
 
-//    // 카테고리 수정 처리
-//    @PreAuthorize("isAuthenticated()")
-//    @PostMapping("/{blogId}/category/{categoryId}/edit")
-//    public String editCategory(@PathVariable("blogId") Long blogId, @PathVariable("categoryId") Long categoryId, @Valid @ModelAttribute("categoryUpdateDTO") FolderCategoryUpdateDTO folderCategoryUpdateDTO, BindingResult bindingResult, Principal principal, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            try {
-//                FolderCategoryResponseDTO folderCategoryResponseDTO = folderCategoryService.getCategoryResponseDTO(categoryId, principal.getName());
-//                model.addAttribute("blogId", blogId);
-//                model.addAttribute("categoryId", categoryId);
-//                model.addAttribute("folderCategoryResponseDTO", folderCategoryResponseDTO);
-//            } catch (Exception e) {
-//                //TODO: 오류처리
-//            }
-//            return "category_edit";
-//        }
-//
-//        try {
-//            folderCategoryService.updateCategory(blogId, categoryId, folderCategoryUpdateDTO, principal.getName());
-//            return "redirect:/blog/" + blogId;
-//        } catch (AccessDeniedException e) {
-//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
-//        } catch (EntityNotFoundException e) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리를 찾을 수 없습니다.");
-//        }
-//    }
+        Map<String, Object> response = new HashMap<>();
+
+        // 유효성 검사 오류 처리
+        if (bindingResult.hasErrors()) {
+            response.put("success", false);
+            response.put("message", "입력값이 유효하지 않습니다.");
+            List<String> errors = bindingResult.getAllErrors().stream()
+                    .map(error -> error.getDefaultMessage())
+                    .collect(Collectors.toList());
+            response.put("errors", errors);
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        try {
+            FolderCategory category = folderCategoryService.createCategory(
+                    blogId, folderCategoryCreateDTO, principal.getName());
+
+            // 응답 데이터 구성
+            response.put("success", true);
+            response.put("message", "카테고리가 성공적으로 생성되었습니다.");
+            response.put("category", new FolderCategoryResponseDTO(category));
+
+            return ResponseEntity.ok(response);
+        } catch (AccessDeniedException e) {
+            response.put("success", false);
+            response.put("message", "접근 권한이 없습니다.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        } catch (EntityNotFoundException e) {
+            response.put("success", false);
+            response.put("message", "블로그를 찾을 수 없습니다.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "카테고리 생성 중 오류가 발생했습니다: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
 
     // 카테고리 삭제 처리 - AJAX 요청 처리
     @PreAuthorize("isAuthenticated()")

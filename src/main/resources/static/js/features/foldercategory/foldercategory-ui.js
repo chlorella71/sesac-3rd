@@ -5,6 +5,113 @@
 import { createElement } from "../../utils/dom.js";
 
 /**
+ * 카테고리 항목 요소 생성 함수
+ * @param {Object} category - 카테고리 데이터
+ * @returns {HTMLElement} 생성된 카테고리 요소
+ */
+export function createCategoryItemElement(category) {
+    const listItem = createElement('li', {
+        className: 'list-group-item d-flex justify-content-between align-items-center'
+    });
+    listItem.dataset.categoryId = category.id;
+
+    // 카테고리 이름 링크
+    const link = createElement('a', {
+        href: '#',
+        className: 'category-name'
+    }, category.name);
+    listItem.appendChild(link);
+
+    // 폴더 개수 뱃지
+    const badge = createElement('span', {
+        className: 'badge bg-primary rounded-pill'
+    }, `${category.folderCount}개 폴더`);
+    listItem.appendChild(badge);
+
+    // 액션 버튼 영역
+    const actionDiv = createElement('div', {
+        className: 'category-actions'
+    });
+
+    // 폴더 추가 버튼
+    const addFolderButton = createElement('button', {
+        type: 'button',
+        className: 'btn btn-sm add-folder',
+        title: '폴더 추가'
+    });
+    addFolderButton.dataset.categoryId = category.id;
+    addFolderButton.innerHTML = '<i class="bi bi-folder-plus"></i>';
+    actionDiv.appendChild(addFolderButton);
+
+    // 카테고리 수정 버튼
+    const editButton = createElement('button', {
+        type: 'button',
+        className: 'btn btn-sm edit-category',
+        title: '카테고리 수정'
+    });
+    editButton.dataset.categoryId = category.id;
+    editButton.dataset.categoryName = category.name;
+    editButton.innerHTML = '<i class="bi bi-pencil"></i>';
+    actionDiv.appendChild(editButton);
+
+    // 카테고리 삭제 버튼
+    const deleteButton = createElement('button', {
+        type: 'button',
+        className: 'btn btn-sm delete-category',
+        title: '카테고리 삭제'
+    });
+    deleteButton.dataset.categoryId = category.id;
+    deleteButton.dataset.categoryName = category.name;
+    deleteButton.innerHTML = '<i class="bi bi-x"></i>';
+    actionDiv.appendChild(deleteButton);
+
+    listItem.appendChild(actionDiv);
+
+    // 폴더 목록 컨테이너
+    const folderListContainer = createElement('div', {
+        className: 'folder-list',
+        style: 'display: none;'
+    });
+    folderListContainer.dataset.categoryId = category.id;
+
+    // 빈 폴더 메시지
+    if (!category.folderCount || category.folderCount === 0) {
+        folderListContainer.innerHTML = '<div class="py-2 text-muted small">폴더가 없습니다.</div>';
+    }
+
+    // 최종 요소 구성
+    const container = createElement('div', {
+        className: 'category-container'
+    });
+    container.appendChild(listItem);
+    container.appendChild(folderListContainer);
+
+    return container;
+}
+
+/**
+ * UI에 카테고리 추가 함수
+ * @param {Object} category - 카테고리 정보 객체
+ */
+export function addCategoryToUI(category) {
+    const categoryList = document.querySelector('.category-list');
+    if (!categoryList) {
+        console.error('카테고리 목록 요소를 찾을 수 없습니다.');
+        return;
+    }
+
+    // '카테고리가 없습니다' 메시지 제거
+    const emptyMessage = categoryList.querySelector('.text-muted');
+    if (emptyMessage) {
+        emptyMessage.remove();
+    }
+
+    // 새 카테고리 HTML 요소 생성 및 추가
+    const categoryElement = createCategoryItemElement(category);
+    categoryList.appendChild(categoryElement);
+}
+
+/**
  * 카테고리 UI 업데이트 함수
  * @param {string} categoryId - 카테고리 ID
  * @param {string} newName - 새 카테고리 이름
@@ -34,43 +141,25 @@ export function updateCategoryUI(categoryId, newName) {
  * @param {string} categoryId - 카테고리 ID
  */
 export function removeCategoryFromUI(categoryId) {
-    const categoryItem = document.querySelector(`.list-group-item[data-category-id="${categoryId}"]`);
-    if (categoryItem) {
-        categoryItem.remove();
+    // 카테고리 컨테이너 요소 찾기
+    const categoryContainer = document.querySelector(`.category-container .list-group-item[data-category-id="${categoryId}"]`).closest('.category-container');
+    if (categoryContainer) {
+        categoryContainer.remove();
+    } else {
+        // 이전 구조인 경우 단일 요소만 제거
+        const categoryItem = document.querySelector(`.list-group-item[data-category-id="${categoryId}"]`);
+        if (categoryItem) {
+            categoryItem.remove();
+        }
     }
 
     // 카테고리가 모두 삭제된 경우 메시지 표시
-    const categoryList = document.querySelector('.list-group');
-    if (categoryList && categoryList.children.length === 0) {
-        const emptyMessage = document.createElement('li');
-        emptyMessage.className = 'list-group-item';
-        emptyMessage.innerHTML = '<span class="text-muted">카테고리가 없습니다.</span>';
+    const categoryList = document.querySelector('.category-list');
+    if (categoryList && !categoryList.querySelector('.list-group-item')) {
+        const emptyMessage = createElement('li', {
+            className: 'list-group-item'
+        }, '<span class="text-muted">카테고리가 없습니다.</span>');
         categoryList.appendChild(emptyMessage);
-    }
-}
-
-/**
- * 폴더 목록 토글 및 필요시 AJAX로 데이터 로드
- * @param {string} categoryId - 카테고리 ID
- * @param {Function} loadFoldersCallback - 폴더 로드 콜백 함수
- */
-export function toggleFolderList(categoryId, loadFoldersCallback) {
-    const folderList = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
-    if (!folderList) return;
-
-    // 토글 상태 변경
-    const isCollapsed = folderList.style.display === 'none';
-
-    // 펼치는 경우 (현재 숨겨져 있음)
-    if (isCollapsed) {
-        // 폴더 목록이 비어있고 처음 펼치는 경우만 데이터 로드
-        if (folderList.children.length === 0 || folderList.dataset.loaded !== 'true') {
-            loadFoldersCallback(categoryId);
-        }
-        folderList.style.display = 'block';
-    } else {
-        // 접는 경우
-        folderList.style.display = 'none';
     }
 }
 
@@ -96,17 +185,6 @@ export function renderCategoryEditForm(container, data) {
         id: 'categoryEditForm',
         className: 'category-edit-form'
     });
-
-    // CSRF 토큰 추가
-    const csrfToken = document.querySelector('meta[name="_csrf"]');
-    if (csrfToken) {
-        const csrfInput = createElement('input', {
-            type: 'hidden',
-            name: '_csrf',
-            value: csrfToken.content
-        });
-        form.appendChild(csrfInput);
-    }
 
     // 카테고리 이름 입력 필드 (초기값 설정)
     const nameFormGroup = createElement('div', { className: 'mb-3' });
@@ -156,35 +234,16 @@ export function renderCategoryEditForm(container, data) {
 /**
  * 카테고리 생성 폼 렌더링 함수
  * @param {HTMLElement} container - 내용을 넣을 컨테이너
- * @param {Object} data - 초기 데이터 (필요한 경우)
+ * @returns {HTMLFormElement} 생성된 폼 요소
  */
-export function renderCategoryCreateForm(container, data) {
+export function renderCategoryCreateForm(container) {
     container.innerHTML = '';
-
-    // 블로그 ID 확인
-    const blogId = data?.blogId;
-    if (!blogId) {
-        container.innerHTML = '<p class="error">블로그 정보를 찾을 수 없습니다.</p>';
-        return;
-    }
 
     // 폼 생성
     const form = createElement('form', {
         id: 'categoryCreateForm',
-        method: 'post',
-        action: `/blog/${blogId}/category/create`
+        className: 'category-create-form'
     });
-
-    // CSRF 토큰 추가
-    const csrfToken = document.querySelector('meta[name="_csrf"]');
-    if (csrfToken) {
-        const csrfInput = createElement('input', {
-            type: 'hidden',
-            name: '_csrf',
-            value: csrfToken.content
-        });
-        form.appendChild(csrfInput);
-    }
 
     // 카테고리 이름 입력 필드
     const nameFormGroup = createElement('div', { className: 'mb-3' });
@@ -227,4 +286,5 @@ export function renderCategoryCreateForm(container, data) {
     form.appendChild(buttonGroup);
 
     container.appendChild(form);
+    return form;
 }

@@ -4,6 +4,7 @@
  */
 import { openModal, closeModal } from "../../common/modal.js";
 import { validateForm } from "../../utils/dom.js";
+import { getCsrfInfo } from "../../common/csrf.js"; // CSRF 공통 모듈 사용
 import * as CategoryAPI from "./foldercategory-api.js";
 import * as CategoryUI from "./foldercategory-ui.js";
 import { toggleFolderList } from "./folder.js";
@@ -21,36 +22,145 @@ export function initializeCategoryHandlers() {
 
     console.log('폴더카테고리 핸들러 초기화');
 
+    // 카테고리 추가 버튼 이벤트 처리
+    document.querySelectorAll('.add-category').forEach(button => {
+        button.addEventListener('click', handleAddCategory);
+    });
+
     // 카테고리 수정 버튼 이벤트 처리
-    document.querySelectorAll('.edit-category').forEach(button => {
-        button.addEventListener('click', handleCategoryEdit);
+    document.addEventListener('click', function(e) {
+        const editButton = e.target.closest('.edit-category');
+        if (editButton) {
+            handleCategoryEdit(editButton);
+        }
     });
 
     // 카테고리 삭제 버튼 이벤트 처리
-    document.querySelectorAll('.delete-category').forEach(button => {
-        button.addEventListener('click', handleCategoryDelete);
+    document.addEventListener('click', function(e) {
+        const deleteButton = e.target.closest('.delete-category');
+        if (deleteButton) {
+            handleCategoryDelete(deleteButton);
+        }
     });
 
     // 저장 버튼 클릭 이벤트 위임 처리
     document.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('save-category')) {
+        if (e.target.classList.contains('save-category')) {
             const categoryId = e.target.dataset.categoryId;
-            updateCategory(categoryId);
+            handleCategoryUpdate(categoryId);
         }
     });
 
     // 카테고리 클릭 시 폴더 목록 토글 기능
-    document.querySelectorAll('.list-group-item a').forEach(categoryLink => {
-        categoryLink.addEventListener('click', handleCategoryClick);
+    document.addEventListener('click', function(e) {
+        const categoryLink = e.target.closest('.category-name');
+        if (categoryLink) {
+            e.preventDefault();
+
+            const categoryItem = categoryLink.closest('.list-group-item');
+            if (categoryItem) {
+                const categoryId = categoryItem.dataset.categoryId;
+                if (categoryId) {
+                    toggleFolderList(categoryId);
+                }
+            }
+        }
     });
 }
 
 /**
- * 카테고리 수정 버튼 클릭 이벤트 핸들러
+ * 카테고리 추가 버튼 클릭 이벤트 핸들러
  */
-function handleCategoryEdit() {
-    const categoryId = this.dataset.categoryId;
-    const categoryName = this.dataset.categoryName;
+function handleAddCategory() {
+    // 모달 표시
+    const modal = document.getElementById('categoryModal');
+    if (!modal) return;
+
+    const modalTitle = modal.querySelector('.modal-title');
+    if (modalTitle) {
+        modalTitle.textContent = '카테고리 생성';
+    }
+
+    const modalContent = modal.querySelector('.modal-content-body');
+    if (!modalContent) return;
+
+    // 폼 렌더링
+    const form = CategoryUI.renderCategoryCreateForm(modalContent);
+
+    // 폼 제출 이벤트 핸들러 추가
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!validateForm(this)) {
+            return;
+        }
+
+        handleCategoryCreate(this);
+    });
+
+    // 모달 표시
+    modal.style.display = 'block';
+}
+
+/**
+ * 카테고리 생성 처리 함수
+ * @param {HTMLFormElement} form - 카테고리 생성 폼
+ */
+function handleCategoryCreate(form) {
+    const nameInput = form.querySelector('#categoryName');
+    const name = nameInput.value.trim();
+
+    if (!name) {
+        nameInput.classList.add('is-invalid');
+        return;
+    }
+
+    // 버튼 상태 업데이트
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = '생성 중...';
+    }
+
+    // API 호출
+    CategoryAPI.createCategory({ name })
+        .then(response => {
+            if (response.success) {
+                // UI에 새 카테고리 추가
+                CategoryUI.addCategoryToUI(response.category);
+
+                // 모달 닫기
+                const modal = document.getElementById('categoryModal');
+                if (modal) {
+                    closeModal(modal);
+                }
+
+                // 성공 메시지 표시 (선택적)
+                console.log('카테고리가 성공적으로 생성되었습니다:', response.category);
+            } else {
+                alert(response.message || '카테고리 생성 중 오류가 발생했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('카테고리 생성 오류:', error);
+            alert('카테고리 생성 중 오류가 발생했습니다: ' + error.message);
+        })
+        .finally(() => {
+            // 버튼 상태 복원
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = '생성';
+            }
+        });
+}
+
+/**
+ * 카테고리 수정 버튼 클릭 이벤트 핸들러
+ * @param {HTMLElement} button - 수정 버튼 요소
+ */
+function handleCategoryEdit(button) {
+    const categoryId = button.dataset.categoryId;
+    const categoryName = button.dataset.categoryName;
 
     if (!categoryId) {
         console.error('카테고리 ID가 없습니다.');
@@ -72,16 +182,17 @@ function handleCategoryEdit() {
                 categoryName: categoryName
             });
         }
-        modal.style.display = 'block';
+        openModal(modal);
     }
 }
 
 /**
  * 카테고리 삭제 버튼 클릭 이벤트 핸들러
+ * @param {HTMLElement} button - 삭제 버튼 요소
  */
-function handleCategoryDelete() {
-    const categoryId = this.dataset.categoryId;
-    const categoryName = this.dataset.categoryName;
+function handleCategoryDelete(button) {
+    const categoryId = button.dataset.categoryId;
+    const categoryName = button.dataset.categoryName;
 
     if (!categoryId) {
         console.error('카테고리 ID가 없습니다.');
@@ -90,16 +201,16 @@ function handleCategoryDelete() {
 
     if (confirm(`"${categoryName}" 카테고리를 정말 삭제하시겠습니까?\n포함된 모든 폴더와 글도 함께 삭제됩니다.`)) {
         // 버튼 비활성화 (중복 클릭 방지)
-        this.disabled = true;
+        button.disabled = true;
 
         // 카테고리 삭제 API 호출
         CategoryAPI.deleteCategory(categoryId)
-            .then(data => {
-                if (data.success) {
+            .then(response => {
+                if (response.success) {
                     // 성공적으로 삭제된 경우 UI에서 카테고리 요소 제거
                     CategoryUI.removeCategoryFromUI(categoryId);
                 } else {
-                    alert(data.message || '카테고리 삭제 중 오류가 발생했습니다.');
+                    alert(response.message || '카테고리 삭제 중 오류가 발생했습니다.');
                 }
             })
             .catch(error => {
@@ -108,34 +219,16 @@ function handleCategoryDelete() {
             })
             .finally(() => {
                 // 버튼 다시 활성화
-                this.disabled = false;
+                button.disabled = false;
             });
     }
 }
 
 /**
- * 카테고리 링크 클릭 이벤트 핸들러
- * @param {Event} e - 이벤트 객체
- */
-function handleCategoryClick(e) {
-    e.preventDefault();
-
-    // 해당 카테고리의 ID 찾기
-    const categoryItem = this.closest('.list-group-item');
-    if (!categoryItem) return;
-
-    const categoryId = categoryItem.dataset.categoryId;
-    if (!categoryId) return;
-
-    // 폴더 목록 토글
-    toggleFolderList(categoryId);
-}
-
-/**
- * 카테고리 업데이트 함수
+ * 카테고리 업데이트 처리 함수
  * @param {string} categoryId - 카테고리 ID
  */
-function updateCategory(categoryId) {
+function handleCategoryUpdate(categoryId) {
     const nameInput = document.getElementById('editCategoryName');
     const newName = nameInput.value.trim();
 
@@ -152,19 +245,19 @@ function updateCategory(categoryId) {
 
     // API 호출
     CategoryAPI.updateCategory(categoryId, newName)
-        .then(data => {
-            if (data.success) {
+        .then(response => {
+            if (response.success) {
                 // UI 업데이트
                 CategoryUI.updateCategoryUI(categoryId, newName);
 
                 // 모달 닫기
                 const modal = document.getElementById('editCategoryModal');
                 if (modal) {
-                    modal.style.display = 'none';
+                    closeModal(modal);
                 }
             } else {
                 // 실패 시 오류 메시지
-                alert(data.message || '카테고리 수정 중 오류가 발생했습니다.');
+                alert(response.message || '카테고리 수정 중 오류가 발생했습니다.');
             }
         })
         .catch(error => {
