@@ -68,42 +68,43 @@
 
 <!-- CSS 정의 -->
 <th:block layout:fragment="style">
-    <style>
-        .editor-toolbar {
-            border: 1px solid #ddd;
-            border-radius: 3px 3px 0 0;
-        }
-        .CodeMirror {
-            height: 300px;
-            border: 1px solid #ddd;
-            border-radius: 0 0 3px 3px;
-        }
-        .markdown-body {
-            padding: 15px;
-            min-height: 100px;
-        }
-        /* 마크다운 스타일 */
-        .markdown-body h1, .markdown-body h2 {
-            border-bottom: 1px solid #eaecef;
-            padding-bottom: 0.3em;
-        }
-        .markdown-body blockquote {
-            padding: 0 1em;
-            color: #6a737d;
-            border-left: 0.25em solid #dfe2e5;
-        }
-        .markdown-body pre {
-            padding: 16px;
-            overflow: auto;
-            background-color: #f6f8fa;
-            border-radius: 3px;
-        }
-        .markdown-body code {
-            padding: 0.2em 0.4em;
-            background-color: rgba(27,31,35,0.05);
-            border-radius: 3px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/post.css}">
+<!--    <style>-->
+<!--        .editor-toolbar {-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 3px 3px 0 0;-->
+<!--        }-->
+<!--        .CodeMirror {-->
+<!--            height: 300px;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 0 0 3px 3px;-->
+<!--        }-->
+<!--        .markdown-body {-->
+<!--            padding: 15px;-->
+<!--            min-height: 100px;-->
+<!--        }-->
+<!--        /* 마크다운 스타일 */-->
+<!--        .markdown-body h1, .markdown-body h2 {-->
+<!--            border-bottom: 1px solid #eaecef;-->
+<!--            padding-bottom: 0.3em;-->
+<!--        }-->
+<!--        .markdown-body blockquote {-->
+<!--            padding: 0 1em;-->
+<!--            color: #6a737d;-->
+<!--            border-left: 0.25em solid #dfe2e5;-->
+<!--        }-->
+<!--        .markdown-body pre {-->
+<!--            padding: 16px;-->
+<!--            overflow: auto;-->
+<!--            background-color: #f6f8fa;-->
+<!--            border-radius: 3px;-->
+<!--        }-->
+<!--        .markdown-body code {-->
+<!--            padding: 0.2em 0.4em;-->
+<!--            background-color: rgba(27,31,35,0.05);-->
+<!--            border-radius: 3px;-->
+<!--        }-->
+<!--    </style>-->
 </th:block>
 
 !-- JavaScript 정의 -->

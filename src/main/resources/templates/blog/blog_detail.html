@@ -1,162 +1,446 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout/layout}">
-<div layout:fragment="content" class="container my-3">
-    <!-- 블로그 헤더 섹션 -->
-    <div th:replace="~{layout/fragments/blog-header :: blogHeader(blogResponseDTO=${blogResponseDTO})}"></div>
+<div layout:fragment="content">
+    <!-- 블로그 헤더 -->
+    <section class="blog-hero">
+        <div class="container">
+            <div class="blog-hero-content">
+                <h1 class="blog-title" th:text="${blogResponseDTO.title}">블로그 제목</h1>
+                <p class="blog-description" th:text="${blogResponseDTO.intro}">블로그 소개</p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <i class="bi bi-person-circle"></i>
+                        <span th:text="${blogResponseDTO.nickname}">작성자</span>
+                        <span class="blog-date" th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy-MM-dd')}">작성일</span>
+                    </div>
 
-    <div class="row">
-        <!-- 왼쪽 사이드바 (카테고리 목록) -->
-        <div th:replace="~{layout/fragments/sidebar :: sidebar(${folderCategoryList}, ${blogResponseDTO})}"></div>
-
-        <!-- 메인 컨텐츠 영역 - 이 영역만 동적으로 교체됨 -->
-        <div id="content-area" class="col-md-9">
-            <!-- 초기 블로그 메인 컨텐츠 -->
-            <div th:replace="~{blog/blog_content :: blogContent(${blogResponseDTO})}"></div>
+                    <!-- 구독 버튼 (로그인 + 블로그 소유자가 아닐 때만) -->
+                    <button sec:authorize="isAuthenticated()"
+                            th:if="${#authentication.principal.username != blogResponseDTO.email}"
+                            class="btn subscribe-btn"
+                            id="subscribeBtn"
+                            th:data-blog-id="${blogResponseDTO.id}">
+                        <i class="bi bi-bell"></i> <span id="subscribeText">구독하기</span>
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="blog-hero-decoration"></div>
+    </section>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <section class="blog-content">
+        <div class="container">
+            <div class="row">
+                <!-- 왼쪽 사이드바 -->
+                <div class="col-lg-3">
+                    <div class="sidebar">
+                        <!-- 소유자 전용 버튼 -->
+                        <div class="owner-actions" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                            <a th:href="@{|/blog/${blogResponseDTO.id}/post/create|}" class="btn btn-primary btn-block">
+                                <i class="bi bi-pencil-square"></i> 새 포스트 작성
+                            </a>
+                            <button id="view-drafts" class="btn btn-outline-secondary btn-block">
+                                <i class="bi bi-file-earmark-text"></i> 초안 보기
+                            </button>
+                            <a th:href="@{|/blog/${blogResponseDTO.id}/settings|}" class="btn btn-outline-primary btn-block">
+                                <i class="bi bi-gear"></i> 블로그 설정
+                            </a>
+                        </div>
+
+                        <!-- 카테고리 영역 -->
+                        <div class="category-section">
+                            <div class="section-header">
+                                <h3>카테고리</h3>
+                                <!-- 카테고리 추가 버튼 (소유자만) -->
+                                <button type="button" class="btn btn-sm btn-icon open-modal"
+                                        data-modal-id="categoryModal"
+                                        data-modal-title="카테고리 생성"
+                                        data-modal-type="categoryCreateForm"
+                                        th:data-blog-id="${blogResponseDTO.id}"
+                                        sec:authorize="isAuthenticated()"
+                                        th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                                    <i class="bi bi-plus-circle"></i>
+                                </button>
+                            </div>
+
+                            <!-- 카테고리 목록 -->
+                            <ul class="category-list">
+                                <li class="empty-item" th:if="${folderCategoryList.isEmpty()}">
+                                    <span class="text-muted">카테고리가 없습니다.</span>
+                                </li>
+                                <li class="category-item" th:each="category : ${folderCategoryList}" th:attr="data-category-id=${category.id}">
+                                    <div class="category-item-inner">
+                                        <!-- 카테고리 링크 -->
+                                        <a href="#" class="category-link" th:text="${category.name}" th:data-category-id="${category.id}">
+                                            카테고리 이름
+                                        </a>
+                                        <span class="badge bg-primary rounded-pill" th:text="${category.folderCount} + '개'">0개</span>
+
+                                        <!-- 카테고리 관리 버튼 (소유자만) -->
+                                        <div class="category-actions" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == blogResponseDTO.email}">
+                                            <button type="button" class="btn btn-sm btn-icon add-folder" th:data-category-id="${category.id}" title="폴더 추가">
+                                                <i class="bi bi-folder-plus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-icon edit-category" th:data-category-id="${category.id}" th:data-category-name="${category.name}" title="수정">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-icon delete-category" th:data-category-id="${category.id}" th:data-category-name="${category.name}" th:if="${category.name != '기본 카테고리'}" title="삭제">
+                                                <i class="bi bi-x"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 폴더 목록 영역 -->
+                                    <div class="folder-list" th:attr="data-category-id=${category.id}" style="display: none;">
+                                        <!-- 이 영역은 JavaScript로 동적으로 채워집니다 -->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 블로그 정보 -->
+                        <div class="blog-info-card">
+                            <h3>블로그 정보</h3>
+                            <div class="info-item">
+                                <span class="info-label">생성일</span>
+                                <span class="info-value" th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy년 MM월 dd일')}">2023년 1월 1일</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">포스트</span>
+                                <span class="info-value">42개</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">구독자</span>
+                                <span class="info-value">128명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오른쪽 메인 콘텐츠 -->
+                <div class="col-lg-9">
+                    <div id="content-area">
+                        <!-- 포스트 목록 영역 -->
+                        <div class="post-section">
+                            <div class="section-header">
+                                <h2 id="post-container-title">전체 포스트</h2>
+                                <button id="view-all-posts" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-grid"></i> 전체보기
+                                </button>
+                            </div>
+
+                            <div id="post-list-container">
+                                <!-- 기본 안내 메시지 -->
+                                <div class="alert info-alert" id="post-info-message">
+                                    <i class="bi bi-info-circle"></i>
+                                    <span>왼쪽의 카테고리나 폴더를 클릭하면 해당 항목의 포스트를 볼 수 있습니다.</span>
+                                </div>
+
+                                <!-- 포스트 목록이 여기에 동적으로 표시됩니다 -->
+                                <div id="post-list" class="post-cards">
+                                    <!-- 여기에 포스트 카드들이 표시됩니다 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- 모달 영역 -->
     <div th:replace="~{layout/fragments/modals :: blogModals}"></div>
-
-    <!-- 블로그 소유자 정보 (JavaScript에서 접근용) -->
-    <meta name="blog-owner-email" th:content="${blogResponseDTO.email}" />
-    <meta name="current-user-email" sec:authorize="isAuthenticated()" th:content="${#authentication.principal.username}" />
-
-    <!-- csrf 토큰을 로그인한 사용자에게만 추가 -->
-    <th:block sec:authorize="isAuthenticated()">
-        <meta name="_csrf" th:content="${_csrf.token}" />
-        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-    </th:block>
-
 </div>
 
-<!-- 폴더 계층 구조를 위한 추가 스타일 -->
+<!-- 페이지별 스타일 -->
 <th:block layout:fragment="style">
     <style>
-        /* 폴더 계층 구조 관련 스타일 */
-        .folder-children {
-            padding-left: 1rem;
-            margin-top: 0.5rem;
-            border-left: 1px solid #dee2e6;
-            margin-left: 0.25rem;
+        /* 블로그 영웅 섹션 스타일 */
+        .blog-hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 5rem 0 3rem;
+            margin-bottom: 3rem;
+            border-radius: 0 0 20px 20px;
+            overflow: hidden;
         }
 
-        .folder-item {
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-hero-decoration {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .blog-hero-decoration::before {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -150px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .blog-description {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .blog-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.25rem 0;
-            margin: 0.25rem 0;
-            border-radius: 0.25rem;
-            transition: background-color 0.2s;
         }
 
-        .folder-item:hover {
-            background-color: rgba(0, 0, 0, 0.03);
+        .blog-author {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
         }
 
-        .add-subfolder {
-            margin-right: 0.25rem;
-            color: #28a745;
+        .blog-author i {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
         }
 
-        .add-subfolder:hover {
-            color: #218838;
+        .blog-date {
+            margin-left: 1rem;
+            opacity: 0.8;
         }
 
-        .folder-name small {
-            font-size: 0.75rem;
-            opacity: 0.7;
+        .subscribe-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            transition: all 0.3s ease;
         }
 
-         /* 포스트 목록 스타일 */
-        .post-item {
-            border-left: 3px solid #007bff;
-            margin-bottom: 10px;
+        .subscribe-btn:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .subscribe-btn.active {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* 사이드바 스타일 */
+        .sidebar {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .owner-actions {
+            margin-bottom: 2rem;
+        }
+
+        .owner-actions .btn {
+            margin-bottom: 0.75rem;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+        }
+
+        .owner-actions .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .category-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-item-inner {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background-color: #f8fafc;
             transition: all 0.2s ease;
         }
 
-        .post-item:hover {
-            background-color: #f8f9fa;
-            transform: translateX(3px);
+        .category-item-inner:hover {
+            background-color: #f1f5f9;
         }
 
-        .post-item.draft {
-            border-left-color: #6c757d;
+        .category-link {
+            flex-grow: 1;
+            font-weight: 500;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
         }
 
-        .post-date {
-            font-size: 0.8rem;
-            color: #6c757d;
+        .category-link:hover {
+            color: var(--primary);
         }
 
-        .post-content-preview {
-            color: #6c757d;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+        .category-actions {
+            display: none;
+            margin-left: 0.5rem;
         }
 
-        .folder-link.active, .category-link.active {
-            font-weight: bold;
-            color: #007bff;
+        .category-item-inner:hover .category-actions {
+            display: flex;
         }
 
-        .draft-badge {
-            background-color: #6c757d;
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 5px;
-            border-radius: 3px;
-            margin-left: 5px;
+        .empty-item {
+            padding: 1rem;
+            text-align: center;
+            color: #94a3b8;
+            font-style: italic;
         }
 
-        /* 플로팅 알림 메시지 스타일 */
-        .alert-floating {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            min-width: 250px;
-            max-width: 400px;
-            z-index: 1050;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-            padding: 15px;
-            animation: slide-in 0.3s ease-out, fade-out 0.3s ease-in 2.7s forwards;
+        .blog-info-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
         }
 
-        @keyframes slide-in {
-            0% {
-                transform: translateX(100%);
-                opacity: 0;
+        .blog-info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 600;
+        }
+
+        /* 포스트 섹션 스타일 */
+        .post-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .post-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-alert {
+            display: flex;
+            align-items: center;
+            background-color: #f0f9ff;
+            border: none;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-alert i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #0ea5e9;
+        }
+
+        /* 반응형 스타일 */
+        @media (max-width: 991.98px) {
+            .post-cards {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
         }
 
-        @keyframes fade-out {
-            0% {
-                opacity: 1;
+        @media (max-width: 767.98px) {
+            .blog-hero {
+                padding: 3rem 0 2rem;
             }
-            100% {
-                opacity: 0;
+
+            .blog-title {
+                font-size: 2rem;
+            }
+
+            .post-section {
+                padding: 1.5rem;
+            }
+
+            .post-cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </th:block>
 
-<!--<th:block layout:fragment="script" type='text/javascript'>-->
-<!--    <script type="module" src="/js/modalHandler.js"></script>-->
-<!--</th:block>-->
-
-
-<!-- javascript 파일 연결 - 페이지별 JS 파일 사용 -->
+<!-- JavaScript 파일 연결 -->
 <th:block layout:fragment="script" type='text/javascript'>
     <script type="module" src="/js/pages/blog-enhanced.js"></script>
 </th:block>
-
 </html>

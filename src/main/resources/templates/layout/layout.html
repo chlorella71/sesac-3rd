@@ -1,53 +1,179 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!--    &lt;!&ndash; CSRF 메타 태그 &ndash;&gt;-->
-<!--    <meta name="_csrf" th:content="${_csrf.token}" />-->
-<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}" />-->
+    <!-- CSRF 토큰 메타 태그 -->
+    <meta name="_csrf" th:content="${_csrf.token}" sec:authorize="isAuthenticated()" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" sec:authorize="isAuthenticated()" />
 
-    <!-- Bootstrap CSS -->
+    <!-- 폰트 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap">
+
+    <!-- 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <!-- 기본 스타일시트 -->
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/font/bootstrap-icons.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modern-theme.css}">
 
-    <!-- Popper.js 추가 (Bootstrap 5 드롭다운에 필요) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <!-- 그 다음 Bootstrap 추가 -->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>-->
+    <!-- 페이지별 스타일 -->
+    <th:block layout:fragment="style"></th:block>
 
     <!-- 마크다운 에디터 및 렌더링 라이브러리 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
     <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/markdown.css}">
 
-    <!-- 마크다운 CSS -->
-    <link rel="stylesheet" th:href="@{/css/markdown.css}">
-
-    <!-- sbb CSS -->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">-->
-    <!-- Main CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
-
-    <title>itall</title>
+    <title>ITALL - 지식 공유 커뮤니티</title>
 </head>
 <body>
-<!-- 네비게이션바 -->
-<nav th:replace="~{layout/fragments/navbar :: navbarFragment}"></nav>
+<!-- 상단 네비게이션 -->
+<header class="main-header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- 로고 -->
+            <a class="navbar-brand" href="/">
+                <span class="logo-text">ITALL</span>
+            </a>
 
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
+            <!-- 모바일 토글 버튼 -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <i class="bi bi-list"></i>
+            </button>
 
-<!-- Bootstrap JS -->
+            <!-- 네비게이션 항목 -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/blog/list}">블로그</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/blog/my}">내 블로그</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/question/list}">Q&A</a>
+                    </li>
+                </ul>
+
+                <!-- 오른쪽 항목들 -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- 알림 드롭다운 (로그인 시) -->
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle position-relative" href="#" id="notificationDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge"
+                                  id="notificationBadge" style="display: none;">
+                                    0
+                                </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" id="notificationList">
+                            <li><h6 class="dropdown-header">알림</h6></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <!-- 여기에 알림 항목이 동적으로 추가됩니다 -->
+                            <li><a class="dropdown-item" href="#" id="emptyNotification">새 알림이 없습니다</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-primary" href="#" id="markAllAsRead">모두 읽음으로 표시</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- 로그인/로그아웃 버튼 -->
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link auth-link" th:href="@{/member/login}">
+                            <i class="bi bi-box-arrow-in-right"></i> 로그인
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link auth-link" th:href="@{/member/logout}">
+                            <i class="bi bi-box-arrow-right"></i> 로그아웃
+                        </a>
+                    </li>
+
+                    <!-- 회원가입 버튼 -->
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="btn btn-primary signup-btn" th:href="@{/member/signup}">
+                            회원가입
+                        </a>
+                    </li>
+
+                    <!-- 사용자 프로필 (로그인 시) -->
+                    <li class="nav-item dropdown user-profile" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="user-avatar">
+                                    <i class="bi bi-person-circle"></i>
+                                </span>
+                            <span class="user-name" sec:authentication="name">사용자</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" th:href="@{/member/profile}">내 프로필</a></li>
+                            <li><a class="dropdown-item" th:href="@{/blog/my}">내 블로그</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/member/settings}">설정</a></li>
+                            <li><a class="dropdown-item" th:href="@{/member/logout}">로그아웃</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- 메인 컨텐츠 영역 -->
+<main class="main-content">
+    <th:block layout:fragment="content"></th:block>
+</main>
+
+<!-- 푸터 -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="footer-title">ITALL</h5>
+                <p>IT 전문가와 지식 공유 커뮤니티</p>
+                <p>&copy; 2025 ITALL. All rights reserved.</p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="footer-title">링크</h5>
+                <ul class="footer-links">
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/blog/list">블로그</a></li>
+                    <li><a href="/question/list">Q&A</a></li>
+                    <li><a href="/about">소개</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="footer-title">연락처</h5>
+                <p><i class="bi bi-envelope"></i> contact@itall.com</p>
+                <p><i class="bi bi-geo-alt"></i> 서울특별시 강남구</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="bi bi-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 스크롤 위로 버튼 -->
+<button id="scrollToTop" class="scroll-to-top">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
-
-<!-- 자바스크립트 Start -->
+<script type="module" src="/js/modern-theme.js"></script>
 <script type="module" src="/js/pages/common-page.js"></script>
 <th:block layout:fragment="script"></th:block>
-<!-- 자바스크립트 End -->
 </body>
 </html>

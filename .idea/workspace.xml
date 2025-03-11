@@ -5,26 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/common/DuplicateResourceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/NotificationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/blog-detail.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/blog-settings.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/modern-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/navbar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/question.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/modern-theme.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/foldercategory/foldercategory-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/foldercategory/foldercategory-ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-handler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/subscription-api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/subscription-api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/subscription-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/subscription-ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/toast.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/common/toast.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-enhanced.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-enhanced.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/blog-header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/blog-header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/post/post_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/post/post_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/question/question_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/question/question_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

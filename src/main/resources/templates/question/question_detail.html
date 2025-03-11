@@ -106,6 +106,11 @@
 <!--    <script type="module" src="/js/modalHandler.js"></script>-->
 <!--</th:block>-->
 
+<!-- 페이지별 스타일 -->
+<th:block layout:fragment="style">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/question.css}">
+</th:block>
+
 <!-- javascript 파일 연결 - 페이지별 JS 파일 사용 -->
 <th:block layout:fragment="script" type='text/javascript'>
     <script type="module" src="/js/pages/question-detail.js"></script>
