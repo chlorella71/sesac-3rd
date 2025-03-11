@@ -3,7 +3,7 @@
  * 카테고리와 폴더 관련 모든 기능을 초기화합니다.
  */
 import { initializeCategoryHandlers } from "./foldercategory.js";
-import { initializeFolderHandlers, loadFolders, toggleFolderList } from "./folder.js";
+import { initializeFolderHandlers, toggleFolderList } from "./folder.js";
 import { initializeModalEvents } from "../../common/modal.js";
 
 /**
@@ -22,7 +22,6 @@ export function initializeFolderCategory() {
     // 초기 카테고리 토글 상태 설정
     initializeToggleState();
 
-    console.log('폴더카테고리 모듈 초기화 완료');
 }
 
 /**
@@ -33,25 +32,14 @@ function initializeToggleState() {
     const urlParams = new URLSearchParams(window.location.search);
     const openCategoryId = urlParams.get('category');
 
+    // 모든 카테고리 처리
+    const categoryItems = document.querySelectorAll('.list-group-item[data-category-id]');
+
     if (openCategoryId) {
         // URL에 지정된 카테고리 자동 펼침
-        setTimeout(() => {
+        const targetCategory = document.querySelector(`.list-group-item[data-category-id="${openCategoryId}"]`);
+        if (targetCategory) {
             toggleFolderList(openCategoryId);
-        }, 100);
-    } else {
-        // 첫 번째 카테고리 자동 펼침 (선택적)
-        const firstCategory = document.querySelector('.list-group-item[data-category-id]');
-        if (firstCategory) {
-            const categoryId = firstCategory.dataset.categoryId;
-            setTimeout(() => {
-                toggleFolderList(categoryId);
-            }, 100);
         }
     }
 }
-
-// 필요한 함수들 내보내기
-export {
-    loadFolders,
-    toggleFolderList
-};

@@ -18,7 +18,7 @@ export function initializeFolderHandlers() {
     if (isInitialized) return;
     isInitialized = true;
 
-    console.log('폴더 핸들러 초기화');
+//    console.log('폴더 핸들러 초기화');
 
     // 폴더 추가 버튼 이벤트 처리
     document.querySelectorAll('.add-folder').forEach(button => {
@@ -94,7 +94,9 @@ function handleFolderExpandCollapse(e) {
         // 폴더 아이콘 업데이트
         const folderIcon = folderLink.querySelector('i');
         if (folderIcon) {
-            folderIcon.className = isHidden ? 'bi bi-folder2-open me-1' : 'bi bi-folder2 me-1';
+            folderIcon.className = isHidden
+                ? 'bi bi-folder2-open me-1'
+                : 'bi bi-folder2 me-1';
         }
     }
 }
@@ -103,7 +105,7 @@ function handleFolderExpandCollapse(e) {
  * 폴더 추가 버튼 클릭 이벤트 핸들러
  * @param {Event} e - 이벤트 객체
  */
-function handleAddFolder(e) {
+export function handleAddFolder(e) {
 //    e.stopPropagation(); // 이벤트 버블링 방지
 
     const categoryId = this.dataset.categoryId;
@@ -161,7 +163,7 @@ function handleAddFolder(e) {
  * 하위 폴더 추가 버튼 클릭 이벤트 핸들러
  * @param {HTMLElement} button - 버튼 요소
  */
-function handleAddSubfolder(button) {
+export function handleAddSubfolder(button) {
     const folderId = button.dataset.folderId;
     const folderName = button.dataset.folderName;
     const categoryId = button.dataset.categoryId;
@@ -416,29 +418,43 @@ export function loadFolders(categoryId) {
 }
 
 /**
- * 폴더 목록 표시 토글 함수
+ * 폴더 목록 토글 함수
  * @param {string} categoryId - 카테고리 ID
  */
 export function toggleFolderList(categoryId) {
-    const folderList = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
-    if (!folderList) {
-        console.error('폴더 목록 요소를 찾을 수 없습니다:', categoryId);
-        return;
-    }
+    console.log('toggleFolderList 호출:', categoryId);
+
+    const categoryItem = document.querySelector(`.list-group-item[data-category-id="${categoryId}"]`);
+    console.log('카테고리 아이템:', categoryItem);
+
+    if (!categoryItem) return;
+
+    // 폴더 목록을 직접 찾도록 수정
+    const folderList = categoryItem.querySelector('.folder-list');
+    console.log('폴더 목록:', folderList);
+
+    if (!folderList) return;
 
     // 토글 상태 변경
-    const isCollapsed = folderList.style.display === 'none';
+    const isCurrentlyVisible = folderList.style.display !== 'none';
+    console.log('현재 표시 상태:', isCurrentlyVisible);
 
-    // 펼치는 경우 (현재 숨겨져 있음)
-    if (isCollapsed) {
+    // 모든 폴더 목록 숨기기
+    document.querySelectorAll('.folder-list').forEach(list => {
+        list.style.display = 'none';
+    });
+
+    // 현재 폴더 목록이 보이지 않은 경우에만 로드 또는 표시
+    if (!isCurrentlyVisible) {
         // 폴더 목록이 비어있고 처음 펼치는 경우만 데이터 로드
         if (folderList.children.length === 0 || folderList.dataset.loaded !== 'true') {
-            loadFolders(categoryId);
+            console.log('폴더 로드 시도');
+            import('./folder.js').then(module => {
+                module.loadFolders(categoryId);
+            });
         } else {
+            console.log('폴더 목록 표시');
             folderList.style.display = 'block';
         }
-    } else {
-        // 접는 경우
-        folderList.style.display = 'none';
     }
 }

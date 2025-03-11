@@ -20,7 +20,24 @@ export function initializeCategoryHandlers() {
     if (isInitialized) return;
     isInitialized = true;
 
-    console.log('폴더카테고리 핸들러 초기화');
+//    console.log('폴더카테고리 핸들러 초기화');
+
+//    // 카테고리 클릭 이벤트 핸들러 (이벤트 위임 방식)
+//    document.addEventListener('click', function(e) {
+//        const categoryLink = e.target.closest('.category-link');
+//        if (categoryLink) {
+//            e.preventDefault();
+//
+//            const categoryItem = categoryLink.closest('.list-group-item');
+//            if (categoryItem) {
+//                const categoryId = categoryItem.dataset.categoryId;
+//                if (categoryId) {
+//                    console.log('카테고리 클릭:', categoryId);
+//                    toggleFolderList(categoryId);
+//                }
+//            }
+//        }
+//    });
 
     // 카테고리 추가 버튼 이벤트 처리
     document.querySelectorAll('.add-category').forEach(button => {
@@ -53,14 +70,22 @@ export function initializeCategoryHandlers() {
 
     // 카테고리 클릭 시 폴더 목록 토글 기능
     document.addEventListener('click', function(e) {
-        const categoryLink = e.target.closest('.category-name');
+        const categoryLink = e.target.closest('.category-link');
+        console.log('Category Link:', categoryLink); // 로그 추가
+
         if (categoryLink) {
             e.preventDefault();
+            console.log('Category Link Clicked'); // 클릭 확인 로그
 
             const categoryItem = categoryLink.closest('.list-group-item');
+            console.log('Category Item:', categoryItem); // 카테고리 아이템 로그
+
             if (categoryItem) {
                 const categoryId = categoryItem.dataset.categoryId;
+                console.log('Category ID:', categoryId); // 카테고리 ID 로그
+
                 if (categoryId) {
+                    console.log('Calling toggleFolderList'); // 함수 호출 로그
                     toggleFolderList(categoryId);
                 }
             }
