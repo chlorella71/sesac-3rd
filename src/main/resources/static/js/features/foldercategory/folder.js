@@ -389,6 +389,26 @@ function handleFolderFormSubmit(e) {
     FolderAPI.createFolder(categoryId, folderData, csrfInfo.token, csrfInfo.header)
         .then(data => {
             if (data.success) {
+
+//                const parentFolderId = folderData.parentFolderId;
+//
+//                // 성공적으로 생성된 경우 UI 업데이트
+//                if (parentFolderId) {
+//                    console.log(`📂 상위 폴더 (${parentFolderId}) 하위 폴더 다시 불러오기`);
+//                    FolderAPI.fetchFolders(categoryId)
+//                        .then(folders => {
+//                            FolderUI.renderFolderHierarchy(categoryId, folders);
+//                        })
+//                        .catch(error => console.error("폴더 목록 갱신 오류:", error));
+//                } else {
+//                    console.log("📂 최상위 폴더이므로 폴더 목록 전체 갱신");
+//                    FolderAPI.fetchFolders(categoryId)
+//                        .then(folders => {
+//                            FolderUI.renderFolderHierarchy(categoryId, folders);
+//                        })
+//                        .catch(error => console.error("폴더 목록 갱신 오류:", error));
+//                }
+
                 // 성공적으로 생성된 경우 UI 업데이트
                 FolderUI.addFolderToUI(categoryId, data.folder);
 
