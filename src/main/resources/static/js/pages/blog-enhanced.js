@@ -8,6 +8,8 @@ import { initializeFolderCategory } from "../features/foldercategory/index.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { showAllPosts } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
+import { initializeMarkdownRendering } from "../features/markdown/markdown-ui.js";
+
 
 // 페이지 초기화
 document.addEventListener('DOMContentLoaded', function() {
@@ -16,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 폴더카테고리 관련 이벤트 초기화
     initializeFolderCategory();
+
+    // 마크다운 렌더링 초기화
+    initializeMarkdownRendering();
 
     // 포스트 스타일 추가
     addPostStyles();
@@ -221,6 +226,9 @@ function loadPostContent(blogId, postId) {
         .then(html => {
             contentArea.innerHTML = html;
 
+            // 마크다운 렌더링 초기화
+            initializeMarkdownRendering();
+
             // 삭제 버튼 이벤트 재설정
             setupDeleteButtonEvents();
 
@@ -340,11 +348,7 @@ function loadDraftPosts() {
         });
 }
 
-/**
- * 포스트 목록 렌더링 함수
- * @param {Array} posts - 포스트 배열
- * @param {HTMLElement} container - 표시할 컨테이너
- */
+
 function renderPosts(posts, container) {
     // 컨테이너 초기화
     container.innerHTML = '';
@@ -364,6 +368,28 @@ function renderPosts(posts, container) {
         postItem.href = `/blog/${post.blogId}/post/${post.id}`;
         postItem.className = `list-group-item list-group-item-action post-item ${post.draft ? 'draft' : ''}`;
 
+        // 포스트 내용 미리보기 처리
+        let previewContent = post.content.substring(0, 150);
+        if (post.content.length > 150) previewContent += '...';
+        let contentPreview = previewContent;
+
+        // 마크다운 처리
+        try {
+            if (typeof marked !== 'undefined') {
+                // 마크다운을 HTML로 변환
+                const parsedHTML = marked.parse(previewContent);
+
+                // HTML 태그 제거 (순수 텍스트로 표시)
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = parsedHTML;
+                contentPreview = tempDiv.textContent || tempDiv.innerText || previewContent;
+            }
+        } catch (error) {
+            console.warn('마크다운 변환 중 오류:', error);
+            // 오류 발생 시 원본 텍스트 사용
+            contentPreview = previewContent;
+        }
+
         // 포스트 내용 HTML
         postItem.innerHTML = `
             <div class="d-flex w-100 justify-content-between">
@@ -373,7 +399,7 @@ function renderPosts(posts, container) {
                 </h5>
                 <small class="post-date">${post.formattedRegdate}</small>
             </div>
-            <p class="mb-1 post-content-preview">${post.content.substring(0, 150)}${post.content.length > 150 ? '...' : ''}</p>
+            <p class="mb-1 post-content-preview">${contentPreview}</p>
             <div class="d-flex justify-content-between align-items-center">
                 <small class="text-muted">폴더: ${post.folderName}</small>
                 <small class="text-muted">카테고리: ${post.categoryName}</small>
@@ -383,6 +409,50 @@ function renderPosts(posts, container) {
         container.appendChild(postItem);
     });
 }
+
+/**
+ * 포스트 목록 렌더링 함수
+ * @param {Array} posts - 포스트 배열
+ * @param {HTMLElement} container - 표시할 컨테이너
+ */
+//function renderPosts(posts, container) {
+//    // 컨테이너 초기화
+//    container.innerHTML = '';
+//
+//    // 포스트가 없는 경우
+//    if (!posts || posts.length === 0) {
+//        const emptyMessage = document.createElement('div');
+//        emptyMessage.className = 'alert alert-info';
+//        emptyMessage.textContent = '포스트가 없습니다.';
+//        container.appendChild(emptyMessage);
+//        return;
+//    }
+//
+//    // 포스트 목록 렌더링
+//    posts.forEach(post => {
+//        const postItem = document.createElement('a');
+//        postItem.href = `/blog/${post.blogId}/post/${post.id}`;
+//        postItem.className = `list-group-item list-group-item-action post-item ${post.draft ? 'draft' : ''}`;
+//
+//        // 포스트 내용 HTML
+//        postItem.innerHTML = `
+//            <div class="d-flex w-100 justify-content-between">
+//                <h5 class="mb-1">
+//                    ${post.title}
+//                    ${post.draft ? '<span class="draft-badge">초안</span>' : ''}
+//                </h5>
+//                <small class="post-date">${post.formattedRegdate}</small>
+//            </div>
+//            <p class="mb-1 post-content-preview">${post.content.substring(0, 150)}${post.content.length > 150 ? '...' : ''}</p>
+//            <div class="d-flex justify-content-between align-items-center">
+//                <small class="text-muted">폴더: ${post.folderName}</small>
+//                <small class="text-muted">카테고리: ${post.categoryName}</small>
+//            </div>
+//        `;
+//
+//        container.appendChild(postItem);
+//    });
+//}
 
 /**
  * URL에서 블로그 ID 추출

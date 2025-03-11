@@ -132,14 +132,34 @@ function handleCategoryClick(categoryElement, categoryId) {
 export function showAllPosts() {
     // 포스트 컨테이너 참조
     const postList = document.getElementById('post-list');
-    const postInfoMessage = document.getElementById('post-info-message');
+    let postInfoMessage = document.getElementById('post-info-message');
     const containerTitle = document.getElementById('post-container-title');
 
-    // 로딩 메시지 표시
-    postInfoMessage.textContent = '포스트를 불러오는 중...';
-    postInfoMessage.style.display = 'block';
-    postList.innerHTML = '';
-    containerTitle.textContent = '전체 포스트';
+    // post-list-container 찾기
+    const postListContainer = document.getElementById('post-list-container');
+
+    // post-info-message가 없으면 동적으로 생성
+    if (!postInfoMessage && postListContainer && postList) {
+        postInfoMessage = document.createElement('div');
+        postInfoMessage.id = 'post-info-message';
+        postInfoMessage.className = 'alert alert-info';
+        // postList 앞에 삽입
+        postListContainer.insertBefore(postInfoMessage, postList);
+    }
+
+    // 이제 요소 사용
+    if (postInfoMessage) {
+        postInfoMessage.textContent = '포스트를 불러오는 중...';
+        postInfoMessage.style.display = 'block';
+    }
+
+    if (postList) {
+        postList.innerHTML = '';
+    }
+
+    if (containerTitle) {
+        containerTitle.textContent = '전체 포스트';
+    }
 
     // 모든 active 클래스 제거
     document.querySelectorAll('.folder-link.active, .category-link.active').forEach(el => {
@@ -150,12 +170,94 @@ export function showAllPosts() {
     loadBlogPosts(
         // 성공 콜백
         (posts) => {
-            renderPosts(posts, postList, postInfoMessage);
+            if (postList && postInfoMessage) {
+                renderPosts(posts, postList, postInfoMessage);
+            }
         },
         // 실패 콜백
         (errorMessage) => {
-            postInfoMessage.textContent = '포스트를 불러오지 못했습니다: ' + errorMessage;
-            postInfoMessage.style.display = 'block';
+            if (postInfoMessage) {
+                postInfoMessage.textContent = '포스트를 불러오지 못했습니다: ' + errorMessage;
+                postInfoMessage.style.display = 'block';
+            }
         }
     );
 }
+
+
+//export function showAllPosts() {
+//    // 포스트 컨테이너 참조
+//    const postList = document.getElementById('post-list');
+//    const postInfoMessage = document.getElementById('post-info-message');
+//    const containerTitle = document.getElementById('post-container-title');
+//
+//    // 요소가 존재하는지 확인 후 작업 수행
+//    if (postInfoMessage) {
+//        postInfoMessage.textContent = '포스트를 불러오는 중...';
+//        postInfoMessage.style.display = 'block';
+//    } else {
+//        console.warn("Element with ID 'post-info-message' not found");
+//    }
+//
+//    if (postList) {
+//        postList.innerHTML = '';
+//    }
+//
+//    if (containerTitle) {
+//        containerTitle.textContent = '전체 포스트';
+//    }
+//
+//    // 모든 active 클래스 제거
+//    document.querySelectorAll('.folder-link.active, .category-link.active').forEach(el => {
+//        el.classList.remove('active');
+//    });
+//
+//    // 블로그 포스트 로드
+//    loadBlogPosts(
+//        // 성공 콜백
+//        (posts) => {
+//            if (postList && postInfoMessage) {
+//                renderPosts(posts, postList, postInfoMessage);
+//            }
+//        },
+//        // 실패 콜백
+//        (errorMessage) => {
+//            if (postInfoMessage) {
+//                postInfoMessage.textContent = '포스트를 불러오지 못했습니다: ' + errorMessage;
+//                postInfoMessage.style.display = 'block';
+//            }
+//        }
+//    );
+//}
+
+
+//export function showAllPosts() {
+//    // 포스트 컨테이너 참조
+//    const postList = document.getElementById('post-list');
+//    const postInfoMessage = document.getElementById('post-info-message');
+//    const containerTitle = document.getElementById('post-container-title');
+//
+//    // 로딩 메시지 표시
+//    postInfoMessage.textContent = '포스트를 불러오는 중...';
+//    postInfoMessage.style.display = 'block';
+//    postList.innerHTML = '';
+//    containerTitle.textContent = '전체 포스트';
+//
+//    // 모든 active 클래스 제거
+//    document.querySelectorAll('.folder-link.active, .category-link.active').forEach(el => {
+//        el.classList.remove('active');
+//    });
+//
+//    // 블로그 포스트 로드
+//    loadBlogPosts(
+//        // 성공 콜백
+//        (posts) => {
+//            renderPosts(posts, postList, postInfoMessage);
+//        },
+//        // 실패 콜백
+//        (errorMessage) => {
+//            postInfoMessage.textContent = '포스트를 불러오지 못했습니다: ' + errorMessage;
+//            postInfoMessage.style.display = 'block';
+//        }
+//    );
+//}

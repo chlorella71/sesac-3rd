@@ -28,8 +28,7 @@
             </div>
 
             <!-- 포스트 내용 -->
-            <div class="post-content my-4" style="white-space: pre-line;" th:text="${post.content}">
-                <!-- 마크다운으로 변환된 내용이 여기에 표시됩니다 -->
+            <div class="post-content my-4 markdown-body" id="markdown-content" th:attr="data-content=${post.content}">                <!-- 마크다운으로 변환된 내용이 여기에 표시됩니다 -->
             </div>
 
             <!-- 작성자용 버튼 -->
@@ -53,48 +52,48 @@
         </div>
     </div>
 
-    <!-- 마크다운 렌더링을 위한 스크립트 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const content = document.getElementById('markdown-content').getAttribute('data-content');
-            document.getElementById('markdown-content').innerHTML = marked.parse(content);
-        });
+<!--    &lt;!&ndash; 마크다운 렌더링을 위한 스크립트 &ndash;&gt;-->
+<!--    <script>-->
+<!--        document.addEventListener('DOMContentLoaded', function() {-->
+<!--            const content = document.getElementById('markdown-content').getAttribute('data-content');-->
+<!--            document.getElementById('markdown-content').innerHTML = marked.parse(content);-->
+<!--        });-->
 
-        // 발행 버튼 이벤트
-        if (document.getElementById('publish-draft')) {
-            document.getElementById('publish-draft').addEventListener('click', function() {
-                const blogId = this.getAttribute('data-blog-id');
-                const postId = this.getAttribute('data-post-id');
+<!--        // 발행 버튼 이벤트-->
+<!--        if (document.getElementById('publish-draft')) {-->
+<!--            document.getElementById('publish-draft').addEventListener('click', function() {-->
+<!--                const blogId = this.getAttribute('data-blog-id');-->
+<!--                const postId = this.getAttribute('data-post-id');-->
 
-                if (confirm('이 초안을 발행하시겠습니까?')) {
-                    // CSRF 토큰 가져오기
-                    const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-                    const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+<!--                if (confirm('이 초안을 발행하시겠습니까?')) {-->
+<!--                    // CSRF 토큰 가져오기-->
+<!--                    const token = document.querySelector('meta[name="_csrf"]').getAttribute('content');-->
+<!--                    const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');-->
 
-                    fetch(`/blog/${blogId}/post/${postId}/publish`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            [header]: token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert(data.message);
-                            window.location.reload();  // 페이지 새로고침
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('발행 중 오류가 발생했습니다.');
-                    });
-                }
-            });
-        }
-    </script>
+<!--                    fetch(`/blog/${blogId}/post/${postId}/publish`, {-->
+<!--                        method: 'POST',-->
+<!--                        headers: {-->
+<!--                            'Content-Type': 'application/json',-->
+<!--                            [header]: token-->
+<!--                        }-->
+<!--                    })-->
+<!--                    .then(response => response.json())-->
+<!--                    .then(data => {-->
+<!--                        if (data.success) {-->
+<!--                            alert(data.message);-->
+<!--                            window.location.reload();  // 페이지 새로고침-->
+<!--                        } else {-->
+<!--                            alert(data.message);-->
+<!--                        }-->
+<!--                    })-->
+<!--                    .catch(error => {-->
+<!--                        console.error('Error:', error);-->
+<!--                        alert('발행 중 오류가 발생했습니다.');-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
 
 </div>
 </body>

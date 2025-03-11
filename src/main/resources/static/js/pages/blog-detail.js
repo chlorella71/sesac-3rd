@@ -8,6 +8,8 @@ import { initializeFolderCategory, toggleFolderList } from "../features/folderca
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { initializePostUIHandlers } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
+import { initializeMarkdownRendering } from "../features/markdown/markdown-ui.js";
+
 
 /**
  * 블로그 상세 페이지 초기화 함수
@@ -21,6 +23,8 @@ function initializeBlogDetailPage() {
     // 폴더카테고리 관련 이벤트 초기화
     initializeFolderCategory();
 
+    // 마크다운 렌더링 초기화
+    initializeMarkdownRendering();
 
     // 포스트 UI 핸들러 초기화
     initializePostUIHandlers();

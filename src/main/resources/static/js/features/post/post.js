@@ -109,6 +109,29 @@ export function renderPosts(posts, container, infoElement) {
         postItem.href = `/blog/${post.blogId}/post/${post.id}`;
         postItem.className = `list-group-item list-group-item-action post-item ${post.draft ? 'draft' : ''}`;
 
+        // 마크다운으로 미리보기 내용 변환
+        let previewContent = post.content.substring(0, 150);
+        if (post.content.length > 150) previewContent += '...';
+
+        // marked.js가 로드되었는지 확인하고 마크다운 적용
+        let contentPreview = previewContent;
+        try {
+            if (typeof marked !== 'undefined') {
+                // 마크다운을 HTML로 변환
+                const parsedHTML = marked.parse(previewContent);
+
+                // HTML 태그 제거 (순수 텍스트로 표시)
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = parsedHTML;
+                contentPreview = tempDiv.textContent || tempDiv.innerText || previewContent;
+            }
+        } catch (error) {
+            console.warn('마크다운 변환 중 오류:', error);
+            // 오류 발생 시 원본 텍스트 사용
+            contentPreview = previewContent;
+        }
+
+
         // 포스트 내용 HTML
         postItem.innerHTML = `
             <div class="d-flex w-100 justify-content-between">
@@ -118,7 +141,7 @@ export function renderPosts(posts, container, infoElement) {
                 </h5>
                 <small class="post-date">${post.formattedRegdate}</small>
             </div>
-            <p class="mb-1 post-content-preview">${post.content.substring(0, 150)}${post.content.length > 150 ? '...' : ''}</p>
+            <p class="mb-1 post-content-preview">${contentPreview}</p>
             <div class="d-flex justify-content-between align-items-center">
                 <small class="text-muted">폴더: ${post.folderName}</small>
                 <small class="text-muted">카테고리: ${post.categoryName}</small>
