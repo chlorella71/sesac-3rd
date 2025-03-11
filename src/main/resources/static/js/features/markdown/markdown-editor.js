@@ -21,9 +21,9 @@ export function initializeMarkdownEditor(editorElementId = 'content', previewEle
         element: editorElement,
         spellChecker: false,
         autosave: {
-            enabled: true,
-            uniqueId: 'post-edit-autosave',
-            delay: 1000,
+            enabled: true,  // 자동 저장 활성화
+            uniqueId: 'post-edit-autosave', // 저장 키 (개발중엔 로컬스토리지)
+            delay: 1000,    // 1초마다 저장
         },
         toolbar: [
             'bold', 'italic', 'heading', '|',
@@ -47,6 +47,39 @@ export function initializeMarkdownEditor(editorElementId = 'content', previewEle
     // 에디터 초기화
     try {
         const easyMDE = new EasyMDE(mergedConfig);
+
+        // EasyMDE 인스턴스를 전역 변수로 저장 (beforeunload 이벤트에서 사용하기 위함)
+        window.easyMDE = easyMDE;
+
+        // 로컬 스토리지에서 자동 저장된 내용 복원
+        setTimeout(() => {
+            const savedContent = localStorage.getItem('post-edit-autosave');
+            if (savedContent) {
+                console.log("📂 복원할 데이터:", savedContent);
+                easyMDE.value(savedContent);
+            }
+        }, 500);
+
+        // 자동 저장 기능 추가 (미리보기 모드에서는 저장 안 함)
+        setInterval(() => {
+            if (!isPreviewActive(easyMDE)) { // 미리보기 상태에서는 저장하지 않음
+                console.log('🔥 자동 저장 실행됨:', easyMDE.value());
+                localStorage.setItem('post-edit-autosave', easyMDE.value());
+            }
+        }, 1000);
+
+        // 사용자가 페이지를 떠나기 전 현재 내용을 저장
+        window.addEventListener('beforeunload', function (e) {
+            // EasyMDE 에디터 내용 가져오기
+            const content = easyMDE.value();
+
+            // 로컬 스토리지에 에디터 내용 저장
+            localStorage.setItem('post-edit-autosave', content);
+
+            // 브라우저 기본 동작 수행 (사용자에게 경고)
+            e.preventDefault();
+            e.returnValue = ''; // 일부 브라우저에서 경고창을 띄우기 위한 코드
+        });
 
         // 미리보기 요소가 존재하는 경우 이벤트 핸들러 설정
         const previewElement = document.getElementById(previewElementId);
@@ -78,6 +111,16 @@ export function initializeMarkdownEditor(editorElementId = 'content', previewEle
         return null;
     }
 }
+
+/**
+ * 미리보기 모드인지 확인하는 함수
+ * @param {Object} easyMDE - EasyMDE 인스턴스
+ * @returns {boolean} 미리보기 모드 여부
+ */
+function isPreviewActive(easyMDE) {
+    return easyMDE.isPreviewActive();
+}
+
 
 /**
  * DOM이 로드된 후 마크다운 에디터 초기화

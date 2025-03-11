@@ -1,6 +1,9 @@
 package com.sesac.itall.domain.post;
 
 import lombok.Getter;
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -24,6 +27,7 @@ public class PostResponseDTO {
     private Long blogId;
     private Long categoryId;
     private String categoryName;
+    private String htmlContent;
 
     public PostResponseDTO(Post post) {
         this.id = post.getId();
@@ -40,6 +44,20 @@ public class PostResponseDTO {
         this.blogId = post.getBlog().getId();
         this.categoryId = post.getFolder().getFolderCategory().getId();
         this.categoryName = post.getFolder().getFolderCategory().getName();
+        this.htmlContent = convertMarkdownToHtml(post.getContent());
+    }
+
+    //Markdown to HTML 변환 메서드
+    private String convertMarkdownToHtml(String markdown) {
+        Parser parser = Parser.builder().build();
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        Node document = parser.parse(markdown);
+        return renderer.render(document);
+    }
+
+    // HTML 콘텐츠 getter 추가
+    public String getHtmlContent() {
+        return htmlContent;
     }
 
     // 날짜 형식화 메서드

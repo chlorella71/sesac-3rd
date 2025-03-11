@@ -46,6 +46,19 @@
             <div class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
         </div>
 
+        <!-- 미리보기 영역 추가 -->
+        <div class="mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">미리보기</h5>
+                    <button type="button" id="refreshPreview" class="btn btn-sm btn-outline-primary">미리보기 새로고침</button>
+                </div>
+                <div class="card-body">
+                    <div id="preview-content" class="markdown-body"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- 버튼 그룹 -->
         <div class="d-flex justify-content-between">
             <a th:href="@{|/blog/${blog.id}/post/${postUpdateDTO.id}|}" class="btn btn-secondary">취소</a>
@@ -61,6 +74,10 @@
             min-height: 300px;
         }
     </style>
+</th:block>
+
+<th:block layout:fragment="script" type='text/javascript'>
+    <script type="module" src="/js/pages/post-management.js"></script>
 </th:block>
 
 </html>

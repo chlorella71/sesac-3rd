@@ -5,6 +5,7 @@ import com.sesac.itall.domain.blog.BlogRepository;
 import com.sesac.itall.domain.common.DataNotFoundException;
 import com.sesac.itall.domain.folder.Folder;
 import com.sesac.itall.domain.folder.FolderRepository;
+import com.sesac.itall.domain.notification.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final BlogRepository blogRepository;
     private final FolderRepository folderRepository;
+    private final NotificationService notificationService;
 
     @Override
     @Transactional
@@ -54,7 +56,14 @@ public class PostServiceImpl implements PostService {
                 .folder(folder)
                 .build();
 
-        return postRepository.save(post);
+        Post savedPost = postRepository.save(post);
+
+        // 초안이 아닌 경우에만 알림 생성
+        if (!savedPost.isDraft()) {
+            notificationService.createPostNotifications(savedPost);
+        }
+
+        return savedPost;
     }
 
     @Override
@@ -136,6 +145,7 @@ public class PostServiceImpl implements PostService {
         postRepository.delete(post);
     }
 
+    // 초안 목록 조회
     @Override
     @Transactional(readOnly = true)
     public List<PostResponseDTO> getDraftsByBlogId(Long blogId, String email) {
@@ -143,6 +153,7 @@ public class PostServiceImpl implements PostService {
         Blog blog = blogRepository.findById(blogId)
                 .orElseThrow(() -> new DataNotFoundException("블로그를 찾을 수 없습니다."));
 
+        // 블로그 소유자 확인
         if (!blog.getMember().getEmail().equals(email)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "접근 권한이 없습니다.");
         }
@@ -153,6 +164,7 @@ public class PostServiceImpl implements PostService {
                 .collect(Collectors.toList());
     }
 
+    // 초안 발행
     @Override
     @Transactional
     public Post publishDraft(Long postId, String email) {
@@ -174,6 +186,11 @@ public class PostServiceImpl implements PostService {
         post.setDraft(false);
         post.setRegdate(LocalDateTime.now()); // 발행 시점으로 등록일 업데이트
 
-        return postRepository.save(post);
+        Post publishedPost = postRepository.save(post);
+
+        // 발행 시 알림 생성
+        notificationService.createPostNotifications(publishedPost);
+
+        return publishedPost;
     }
 }

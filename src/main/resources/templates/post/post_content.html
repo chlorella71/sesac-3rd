@@ -27,9 +27,14 @@
                 </div>
             </div>
 
-            <!-- 포스트 내용 -->
-            <div class="post-content my-4 markdown-body" id="markdown-content" th:attr="data-content=${post.content}">                <!-- 마크다운으로 변환된 내용이 여기에 표시됩니다 -->
+
+            <!-- th:utext 사용하여 HTML 렌더링 -->
+            <div class="post-content my-4 markdown-body" th:utext="${post.htmlContent}">
+                <!-- 서버에서 변환된 HTML 직접 출력 -->
             </div>
+<!--            &lt;!&ndash; 포스트 내용 &ndash;&gt;-->
+<!--            <div class="post-content my-4 markdown-body" id="markdown-content" th:attr="data-content=${post.content}">                &lt;!&ndash; 마크다운으로 변환된 내용이 여기에 표시됩니다 &ndash;&gt;-->
+<!--            </div>-->
 
             <!-- 작성자용 버튼 -->
             <div class="d-flex justify-content-end mt-4" sec:authorize="isAuthenticated()" th:if="${#authentication.principal.username == post.email}">

@@ -5,17 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5e80f77-204d-4bac-aba3-afb1f6de832d" name="Changes" comment="feat: 답변crud 구현&#10;Answer">
-      <change afterPath="$PROJECT_DIR$/logs/app.log.2025-03-07.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/blog/b_d_backup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/blog-header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/blog_content.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/modals.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/post_content.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/sidebar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/common/MarkdownConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/markdown/MarkdownController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/Notification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/NotificationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/NotificationRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/NotificationResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/NotificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/notification/NotificationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/Subscription.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/subscription/SubscriptionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-handler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/notification/notification-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/post/draft.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/post/post-api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/subscription-api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/subscription-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/subscription/toast.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/post-management.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/app.log.2025-02-28.0.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog/blog_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/PostResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/PostResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/post/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/markdown/markdown-editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/markdown/markdown-editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/features/markdown/markdown-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/features/markdown/markdown-ui.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-enhanced.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/pages/blog-enhanced.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/blog-header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/blog-header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/fragments/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/post/post_content.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/post/post_content.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/post/post_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/post/post_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/post/post_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/post/post_form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +80,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -73,34 +100,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Gradle.itall [:ItallApplication.main()].executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/jeonghuijun/git/sesac-3rd/itall/src/main/resources/static/js/features/category",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Gradle.itall [:ItallApplication.main()].executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeonghuijun/git/sesac-3rd/itall/src/main/resources/static/js/features/category&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/static/js/features/category" />
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static/js/features" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/common" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/category" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/layout/fragments" />
       <recent name="$PROJECT_DIR$/src/main/resources/templates/member" />
-      <recent name="$PROJECT_DIR$/src/main/resources/templates/question" />
     </key>
   </component>
   <component name="RunManager">
@@ -202,15 +229,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/answer/AnswerController.java</url>
           <line>59</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sesac/itall/domain/folder/FolderController.java</url>
-          <line>37</line>
-          <properties class="com.sesac.itall.domain.folder.FolderController" method="createFolder">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

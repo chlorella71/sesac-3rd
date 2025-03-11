@@ -70,6 +70,12 @@ dependencies {
 	//mariadb
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
 
+	// Markdown 파싱 라이브러리
+	implementation 'org.commonmark:commonmark:0.21.0'
+
+	// HTML 살균 (선택적)
+	implementation 'org.jsoup:jsoup:1.15.3'
+
 }
 
 tasks.named('test') {

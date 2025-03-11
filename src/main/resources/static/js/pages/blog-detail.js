@@ -9,6 +9,7 @@ import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { initializePostUIHandlers } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
 import { initializeMarkdownRendering } from "../features/markdown/markdown-ui.js";
+import { initializeDraftHandlers } from '../features/post/draft.js';
 
 
 /**
@@ -36,6 +37,9 @@ function initializeBlogDetailPage() {
     document.querySelectorAll('.open-modal').forEach(button => {
         button.addEventListener('click', handleModalOpenClick);
     });
+
+   // 초안 관련 핸들러 초기화
+   initializeDraftHandlers();
 
 }
 

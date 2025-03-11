@@ -9,6 +9,9 @@ import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { showAllPosts } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
 import { initializeMarkdownRendering } from "../features/markdown/markdown-ui.js";
+import { initializeDraftHandlers } from '../features/post/draft.js';
+import { initializeNotifications } from '../features/notification/notification-index.js';
+
 
 
 // 페이지 초기화
@@ -22,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 마크다운 렌더링 초기화
     initializeMarkdownRendering();
 
+    // 포스트 UI 핸들러 초기화
+    initializePostUIHandlers();
+
     // 포스트 스타일 추가
     addPostStyles();
 
@@ -29,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.open-modal').forEach(button => {
         button.addEventListener('click', handleModalOpenClick);
     });
+
+    // 알림 기능 초기화
+    initializeNotifications();
 
     // 초안 보기 버튼 이벤트 리스너
     const draftButton = document.getElementById('view-drafts');

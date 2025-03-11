@@ -107,51 +107,8 @@
 </th:block>
 
 !-- JavaScript 정의 -->
-<th:block layout:fragment="script">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 마크다운 에디터 초기화
-            const easyMDE = new EasyMDE({
-                element: document.getElementById('content'),
-                spellChecker: false,
-                autosave: {
-                    enabled: true,
-                    uniqueId: 'post-edit-autosave',
-                    delay: 1000,
-                },
-                toolbar: [
-                    'bold', 'italic', 'heading', '|',
-                    'quote', 'code', 'unordered-list', 'ordered-list', '|',
-                    'link', 'image', '|',
-                    'preview', 'side-by-side', 'fullscreen', '|',
-                    'guide'
-                ],
-                placeholder: '마크다운 형식으로 글을 작성해보세요...',
-                status: ['autosave', 'words', 'lines', 'cursor']
-            });
-
-            // 미리보기 업데이트 함수
-            function updatePreview() {
-                const content = easyMDE.value();
-                const previewContent = document.getElementById('preview-content');
-                // marked.js를 사용하여 마크다운을 HTML로 변환
-                previewContent.innerHTML = marked.parse(content);
-            }
-
-            // 내용이 변경될 때마다 미리보기 업데이트
-            easyMDE.codemirror.on('change', function() {
-                updatePreview();
-            });
-
-            // 미리보기 새로고침 버튼
-            document.getElementById('refreshPreview').addEventListener('click', function() {
-                updatePreview();
-            });
-
-            // 초기 미리보기 로드
-            updatePreview();
-        });
-    </script>
+<th:block layout:fragment="script" type='text/javascript'>
+    <script type="module" src="/js/pages/post-management.js"></script>
 </th:block>
 
 </html>
