@@ -7,7 +7,7 @@ import { validateForm } from "../../utils/dom.js";
 import { getCsrfInfo } from "../../common/csrf.js"; // CSRF 공통 모듈 사용
 import * as CategoryAPI from "./foldercategory-api.js";
 import * as CategoryUI from "./foldercategory-ui.js";
-import { toggleFolderList } from "./folder.js";
+import { toggleFolderList, handleAddFolder } from "./folder.js";
 
 // 중복 초기화 방지를 위한 플래그
 let isInitialized = false;
@@ -70,23 +70,29 @@ export function initializeCategoryHandlers() {
 
     // 카테고리 클릭 시 폴더 목록 토글 기능
     document.addEventListener('click', function(e) {
-        const categoryLink = e.target.closest('.category-link');
-        console.log('Category Link:', categoryLink); // 로그 추가
+    console.log('클릭 이벤트 발생', e.target);
+
+        const categoryLink = e.target.closest('.category-link, .add-folder');
+        console.log('카테고리 링크:', categoryLink);
 
         if (categoryLink) {
             e.preventDefault();
-            console.log('Category Link Clicked'); // 클릭 확인 로그
+            console.log('Category Link Clicked');
 
             const categoryItem = categoryLink.closest('.list-group-item');
-            console.log('Category Item:', categoryItem); // 카테고리 아이템 로그
+            console.log('Category Item:', categoryItem);
 
             if (categoryItem) {
-                const categoryId = categoryItem.dataset.categoryId;
-                console.log('Category ID:', categoryId); // 카테고리 ID 로그
+                const categoryId = categoryItem.dataset.categoryId || categoryLink.dataset.categoryId;
+                console.log('Category ID:', categoryId);
 
                 if (categoryId) {
-                    console.log('Calling toggleFolderList'); // 함수 호출 로그
-                    toggleFolderList(categoryId);
+                    if (categoryLink.classList.contains('category-link')) {
+                        console.log('toggleFolderList 호출');
+                        toggleFolderList(categoryId);
+                    } else if (categoryLink.classList.contains('add-folder')) {
+                        handleAddFolder.call(categoryLink, e);
+                    }
                 }
             }
         }
@@ -97,34 +103,47 @@ export function initializeCategoryHandlers() {
  * 카테고리 추가 버튼 클릭 이벤트 핸들러
  */
 function handleAddCategory() {
-    // 모달 표시
-    const modal = document.getElementById('categoryModal');
-    if (!modal) return;
+    const categoryId = this.dataset.categoryId;
 
+    // 모달을 ID로 찾아 열기
+    openModal('folderModal');
+
+    const modal = document.getElementById('folderModal');
+    if (!modal) {
+        console.error('모달 요소를 찾을 수 없습니다.');
+        return;
+    }
+
+    // 나머지 기존 코드 유지
     const modalTitle = modal.querySelector('.modal-title');
     if (modalTitle) {
-        modalTitle.textContent = '카테고리 생성';
+        modalTitle.textContent = '폴더 생성';
     }
 
     const modalContent = modal.querySelector('.modal-content-body');
-    if (!modalContent) return;
+    if (modalContent) {
+        const form = FolderUI.renderFolderCreateForm(modalContent, {
+            categoryId: categoryId
+        });
 
-    // 폼 렌더링
-    const form = CategoryUI.renderCategoryCreateForm(modalContent);
+        // 폼 제출 이벤트 핸들러
+        form.addEventListener('submit', function(evt) {
+            evt.preventDefault();
+            if (validateForm(this)) {
+                const formData = new FormData(this);
+                const folderData = {
+                    name: formData.get('name'),
+                    categoryId: formData.get('categoryId')
+                };
 
-    // 폼 제출 이벤트 핸들러 추가
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        if (!validateForm(this)) {
-            return;
-        }
-
-        handleCategoryCreate(this);
-    });
-
-    // 모달 표시
-    modal.style.display = 'block';
+                // 폼 제출 이벤트 발생
+                const customEvent = new CustomEvent('folderFormSubmit', {
+                    detail: { categoryId, folderData }
+                });
+                document.dispatchEvent(customEvent);
+            }
+        });
+    }
 }
 
 /**

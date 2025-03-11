@@ -24,7 +24,7 @@ export function fetchFolders(categoryId) {
  * @param {Object} folderData - 폴더 데이터 (name, parentFolderId)
  * @returns {Promise} 생성된 폴더 정보 Promise
  */
-export function createFolder(categoryId, folderData) {
+export function createFolder(categoryId, folderData, csrfToken, csrfHeader) {
     if (!categoryId) {
         return Promise.reject(new Error('카테고리 ID가 필요합니다.'));
     }
@@ -44,7 +44,11 @@ export function createFolder(categoryId, folderData) {
     const endpoint = `${getBlogApiBaseUrl()}/category/${categoryId}/folder/create`;
     return callApi(endpoint, {
         method: 'POST',
-        body: requestData
+        body: JSON.stringify(requestData),
+        headers: {
+            "Content-Type": "application/json",
+            [csrfHeader]: csrfToken
+        }
     });
 }
 

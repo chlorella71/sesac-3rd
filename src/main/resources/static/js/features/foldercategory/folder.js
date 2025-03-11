@@ -4,6 +4,7 @@
  */
 import { openModal, closeModal } from "../../common/modal.js";
 import { validateForm } from "../../utils/dom.js";
+import { getCsrfInfo } from "../../common/csrf.js";
 import * as FolderAPI from "./folder-api.js";
 import * as FolderUI from "./folder-ui.js";
 
@@ -114,50 +115,61 @@ export function handleAddFolder(e) {
         return;
     }
 
-    // 폴더 목록 참조
-    const folderList = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
-    if (12folderList) {
-        // 폴더 생성 모달 표시
-        const modal = document.getElementById('folderModal');
-        if (modal) {
-            const modalTitle = modal.querySelector('.modal-title');
-            if (modalTitle) {
-                modalTitle.textContent = '폴더 생성';
-            }
+    // 모든 모달 출력
+    const allModals = document.querySelectorAll('div[id]');
+    console.log('모든 모달:', Array.from(allModals).map(modal => ({
+        id: modal.id,
+        className: modal.className
+    })));
 
-            const modalContent = modal.querySelector('.modal-content-body');
-            if (modalContent) {
-                const form = FolderUI.renderFolderCreateForm(modalContent, {
-                    categoryId: categoryId
-                });
+    // 모달 찾기 로직 변경
+    const modal = document.getElementById('folderModal');
+    console.log('찾은 모달:', modal);
 
-                // 폼 제출 이벤트 핸들러
-                form.addEventListener('submit', function(evt) {
-                    evt.preventDefault();
-                    if (validateForm(this)) {
-                        const formData = new FormData(this);
-                        const folderData = {
-                            name: formData.get('name'),
-                            categoryId: formData.get('categoryId')
-                        };
-
-                        // 폼 제출 이벤트 발생
-                        const customEvent = new CustomEvent('folderFormSubmit', {
-                            detail: { categoryId, folderData }
-                        });
-                        document.dispatchEvent(customEvent);
-                    }
-                });
-            }
-            openModal(modal);
-        }
-
-        // 폴더 목록 표시 (이미 표시되어 있다면 그대로 유지)
-        if (folderList.style.display === 'none') {
-            folderList.style.display = 'block';
-        }
+    if (!modal) {
+        console.error('모달 요소를 찾을 수 없습니다.');
+        return;
     }
+
+    // 나머지 기존 코드 유지
+    const modalTitle = modal.querySelector('.modal-title');
+    if (modalTitle) {
+        modalTitle.textContent = '폴더 생성';
+    }
+
+    const modalContent = modal.querySelector('.modal-content-body');
+    if (modalContent) {
+        const form = FolderUI.renderFolderCreateForm(modalContent, {
+            categoryId: categoryId
+        });
+
+        // 폼 제출 이벤트 핸들러
+        form.addEventListener('submit', function(evt) {
+            evt.preventDefault();
+            if (validateForm(this)) {
+                const formData = new FormData(this);
+                const folderData = {
+                    name: formData.get('name'),
+                    categoryId: formData.get('categoryId')
+                };
+
+                // 폼 제출 이벤트 발생
+                const customEvent = new CustomEvent('folderFormSubmit', {
+                    detail: { categoryId, folderData }
+                });
+                document.dispatchEvent(customEvent);
+            }
+        });
+    }
+    openModal('folderModal');
 }
+
+//        // 폴더 목록 표시 (이미 표시되어 있다면 그대로 유지)
+//        if (folderList.style.display === 'none') {
+//            folderList.style.display = 'block';
+//        }
+//    }
+//}
 
 /**
  * 하위 폴더 추가 버튼 클릭 이벤트 핸들러
@@ -202,7 +214,7 @@ export function handleAddSubfolder(button) {
                 }
             });
         }
-        openModal(modal);
+        openModal('folderModal');
     }
 }
 
@@ -341,6 +353,26 @@ function handleFolderUpdate(folderId) {
 function handleFolderFormSubmit(e) {
     const { categoryId, folderData } = e.detail;
 
+//    // CSRF 정보 가져오기
+//    const csrfToken = document.querySelector('meta[name="_csrf"]')?.content;
+//    const csrfHeader = document.querySelector('meta[name="_csrf_header"]')?.content;
+//
+//    console.log('CSRF 토큰:', csrfToken);
+//    console.log('CSRF 헤더:', csrfHeader);
+//
+//    if (!csrfToken || !csrfHeader) {
+//        alert('인증 정보를 찾을 수 없습니다. 로그인 후 다시 시도해주세요.');
+//        return;
+//    }
+
+    // CSRF 정보 가져오기
+    const csrfInfo = getCsrfInfo();
+
+    if (!csrfInfo || !csrfInfo.token || !csrfInfo.header) {
+        alert('인증 정보를 찾을 수 없습니다. 로그인 후 다시 시도해주세요.');
+        return;
+    }
+
     // 중복 요청 방지
     const submitButton = document.querySelector('#folderCreateForm button[type="submit"], #subfolderCreateForm button[type="submit"]');
     if (submitButton && submitButton.disabled) {
@@ -354,7 +386,7 @@ function handleFolderFormSubmit(e) {
     }
 
     // 폴더 생성 API 호출
-    FolderAPI.createFolder(categoryId, folderData)
+    FolderAPI.createFolder(categoryId, folderData, csrfInfo.token, csrfInfo.header)
         .then(data => {
             if (data.success) {
                 // 성공적으로 생성된 경우 UI 업데이트
