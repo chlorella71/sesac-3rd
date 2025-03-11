@@ -9,8 +9,9 @@ import { handleModalOpenClick } from "../features/modal-open-handler.js";
 import { showAllPosts } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
 import { initializeMarkdownRendering } from "../features/markdown/markdown-ui.js";
-import { initializeDraftHandlers } from '../features/post/draft.js';
+//import { initializeDraftHandlers } from '../features/post/draft.js';
 import { initializeNotifications } from '../features/notification/notification-index.js';
+import { initializePostUIHandlers } from '../features/post/post-ui-handler.js';
 
 
 
@@ -37,7 +38,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 알림 기능 초기화
-    initializeNotifications();
+    try {
+        console.log('알림 기능 초기화 시도');
+        initializeNotifications();
+        console.log('알림 기능 초기화 성공');
+    } catch (e) {
+        console.error('알림 기능 초기화 실패:', e);
+    }
+
+     // 구독 버튼 초기화
+    try {
+        console.log('구독 버튼 초기화 시도');
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        if (subscribeBtn) {
+            console.log('구독 버튼 찾음, 초기화 중');
+            import('./subscription/subscription-ui.js').then(module => {
+                module.initSubscriptionButton();
+                console.log('구독 버튼 초기화 성공');
+            }).catch(e => {
+                console.error('구독 모듈 로드 실패:', e);
+            });
+        } else {
+            console.log('구독 버튼 없음, 초기화 건너뜀');
+        }
+    } catch (e) {
+        console.error('구독 버튼 초기화 실패:', e);
+    }
 
     // 초안 보기 버튼 이벤트 리스너
     const draftButton = document.getElementById('view-drafts');

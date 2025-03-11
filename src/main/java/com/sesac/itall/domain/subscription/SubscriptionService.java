@@ -1,43 +1,45 @@
 package com.sesac.itall.domain.subscription;
 
 import com.sesac.itall.domain.member.Member;
+
 import java.util.List;
 
 public interface SubscriptionService {
+
     /**
-     * 특정 블로그를 구독합니다.
+     * 블로그 구독 여부 확인
+     * @param email 사용자 이메일
      * @param blogId 블로그 ID
-     * @param subscriberEmail 구독자의 이메일
-     * @return 구독 정보
+     * @return 구독 여부
      */
-    Subscription subscribe(Long blogId, String subscriberEmail);
+    boolean isSubscribed(String email, Long blogId);
 
     /**
-     * 특정 블로그의 구독을 해지합니다.
-     * @param blogId 블로그 ID
-     * @param subscriberEmail 구독자의 이메일
+     * 블로그 구독
+     * @param email 구독자 이메일
+     * @param blogId 구독할 블로그 ID
+     * @return 구독 정보 DTO
      */
-    void unsubscribe(Long blogId, String subscriberEmail);
+    SubscriptionResponseDTO subscribe(String email, Long blogId);
 
     /**
-     * 특정 회원이 구독한 블로그 목록을 조회합니다.
-     * @param email 회원 이메일
-     * @return 구독한 블로그 목록 (DTO 리스트)
+     * 블로그 구독 취소
+     * @param email 구독자 이메일
+     * @param blogId 구독 취소할 블로그 ID
      */
-    List<SubscriptionResponseDTO> getSubscriptionsByMember(String email);
+    void unsubscribe(String email, Long blogId);
 
     /**
-     * 특정 블로그를 구독한 회원 목록을 조회합니다.
+     * 특정 블로그의 구독자 조회
      * @param blogId 블로그 ID
      * @return 구독자 목록
      */
     List<Member> getSubscribersByBlog(Long blogId);
 
     /**
-     * 특정 회원이 특정 블로그를 구독 중인지 확인합니다.
-     * @param blogId 블로그 ID
-     * @param email 회원 이메일
-     * @return 구독 여부 (true: 구독 중, false: 구독 안 함)
+     * 특정 사용자의 구독 목록 조회
+     * @param email 사용자 이메일
+     * @return 구독 정보 DTO 목록
      */
-    boolean isSubscribed(Long blogId, String email);
+    List<SubscriptionResponseDTO> getSubscriptionsByMember(String email);
 }

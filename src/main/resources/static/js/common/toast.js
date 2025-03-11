@@ -26,7 +26,13 @@ export function showToast(type, message, duration = 3000) {
 
     // 일정 시간 후 제거
     setTimeout(() => {
-        toast.remove();
+        // 부드럽게 사라지도록 fade-out 클래스 추가
+        toast.classList.add('fade-out');
+
+        // fade-out 애니메이션 후 요소 제거
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
     }, duration);
 }
 

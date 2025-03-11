@@ -11,6 +11,16 @@ export function getUnreadNotifications() {
     return callApi('/api/notifications/unread');
 }
 
+
+/**
+ * 모든 알림 목록 조회 API
+ * @returns {Promise} - 알림 목록 Promise
+ */
+export function getAllNotifications() {
+    console.log('모든 알림 API 호출');
+    return callApi('/api/notifications/all');
+}
+
 /**
  * 모든 알림 읽음으로 표시 API
  * @returns {Promise} - 처리 결과 Promise

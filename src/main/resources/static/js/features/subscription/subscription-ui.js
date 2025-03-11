@@ -40,6 +40,9 @@ export function initSubscriptionButton() {
                     if (response.success) {
                         updateSubscribeButton(true);
                         showToast('success', '블로그를 구독했습니다. 새 글이 등록되면 알림을 받게 됩니다.');
+                    } else {
+                         console.error('구독 실패:', response.message);
+                         showToast('error', response.message || '구독 중 오류가 발생했습니다.');
                     }
                 })
                 .catch(error => {
@@ -71,6 +74,11 @@ function checkSubscriptionState(blogId) {
 function updateSubscribeButton(isSubscribed) {
     const subscribeBtn = document.getElementById('subscribeBtn');
     const subscribeText = document.getElementById('subscribeText');
+
+    if (!subscribeBtn || !subscribeText) {
+        console.warn('구독 버튼 요소를 찾을 수 없습니다.');
+        return;
+    }
 
     if (isSubscribed) {
         subscribeBtn.classList.add('active', 'btn-primary');

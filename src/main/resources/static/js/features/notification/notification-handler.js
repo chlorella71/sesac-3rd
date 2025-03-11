@@ -1,5 +1,6 @@
 // notification-handler.js (이벤트 핸들러)
-import { fetchNotifications, markAllNotificationsAsRead } from './notification-api.js';
+//import { fetchNotifications, markAllNotificationsAsRead } from './notification-api.js';
+import { getUnreadNotifications, markAllNotificationsAsRead } from './notification-api.js';
 import { updateNotificationUI, initializeNotificationUI, setNotificationLoading } from './notification-ui.js';
 
 /**
@@ -42,15 +43,21 @@ function handleMarkAllAsRead(e) {
     setNotificationLoading(true);
 
     // API 호출
-    markAllNotificationsAsRead()
-        .then(() => {
-            // 알림 데이터 다시 로드
-            loadNotifications();
-        })
-        .catch(error => {
-            console.error('알림 모두 읽음 처리 오류:', error);
-            setNotificationLoading(false);
-        });
+        markAllNotificationsAsRead()
+            .then(response => {
+                console.log('알림 모두 읽음 응답:', response);
+                if (response.success) {
+                    // 알림 데이터 다시 로드
+                    loadNotifications();
+                } else {
+                    console.error('알림 모두 읽음 실패:', response.message);
+                    setNotificationLoading(false);
+                }
+            })
+            .catch(error => {
+                console.error('알림 모두 읽음 처리 오류:', error);
+                setNotificationLoading(false);
+            });
 }
 
 /**
@@ -59,15 +66,22 @@ function handleMarkAllAsRead(e) {
 function loadNotifications() {
     // 로딩 상태 표시
     setNotificationLoading(true);
+    console.log('알림 로드 시작');
+
 
     // API 호출
-    fetchNotifications()
-        .then(data => {
-            if (data.success) {
+    getUnreadNotifications()
+        .then(response => {
+            console.log('알림 API 응답:', response); // 전체 응답 로깅
+
+            if (response.success) {
+                console.log('알림 목록:', response.notifications); // 알림 목록 로깅
+                console.log('알림 개수:', response.notifications ? response.notifications.length : 0);
+
                 // UI 업데이트
-                updateNotificationUI(data.notifications);
+                updateNotificationUI(response.notifications);
             } else {
-                console.error('알림 로드 실패:', data.message);
+                console.error('알림 로드 실패:', response.message);
             }
         })
         .catch(error => {
@@ -76,5 +90,6 @@ function loadNotifications() {
         .finally(() => {
             // 로딩 상태 해제
             setNotificationLoading(false);
+            console.log('알림 로드 완료');
         });
 }

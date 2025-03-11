@@ -6,10 +6,12 @@
 import { initializeModalEvents } from "../common/modal.js";
 import { initializeFolderCategory, toggleFolderList } from "../features/foldercategory/index.js";
 import { handleModalOpenClick } from "../features/modal-open-handler.js";
-import { initializePostUIHandlers } from "../features/post/post-ui-handler.js";
+import { initializePostUIHandlers, showAllPosts } from "../features/post/post-ui-handler.js";
 import { addPostStyles } from "../features/post/post-styles.js";
 import { initializeMarkdownRendering } from "../features/markdown/markdown-ui.js";
 import { initializeDraftHandlers } from '../features/post/draft.js';
+import { initializeNotifications } from '../features/notification/notification-index.js';
+import { initSubscriptionButton } from '../features/subscription/subscription-ui.js';
 
 
 /**
@@ -38,8 +40,34 @@ function initializeBlogDetailPage() {
         button.addEventListener('click', handleModalOpenClick);
     });
 
-   // 초안 관련 핸들러 초기화
-   initializeDraftHandlers();
+    // 알림 기능 초기화
+    try {
+        console.log('알림 기능 초기화');
+        initializeNotifications();
+    } catch (e) {
+        console.error('알림 기능 초기화 실패:', e);
+    }
+
+    // 구독 버튼 초기화
+    try {
+        console.log('구독 버튼 초기화');
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        if (subscribeBtn) {
+            initSubscriptionButton();
+        }
+    } catch (e) {
+        console.error('구독 버튼 초기화 실패:', e);
+    }
+
+    // 초기 포스트 목록 로드
+    try {
+        showAllPosts();
+    } catch (e) {
+        console.error('초기 포스트 로드 실패:', e);
+    }
+
+    // 초안 관련 핸들러 초기화
+    initializeDraftHandlers();
 
 }
 

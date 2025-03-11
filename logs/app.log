@@ -6361,3 +6361,701 @@ java.lang.IllegalStateException: Cannot create a session after the response has 
 2025-03-11T17:19:50.110+09:00  INFO 73389 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2025-03-11T17:19:50.111+09:00  INFO 73389 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2025-03-11T17:19:50.190+09:00  INFO 73389 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T17:53:20.516+09:00  INFO 76105 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 76105 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T17:53:20.518+09:00 DEBUG 76105 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T17:53:20.519+09:00  INFO 76105 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T17:53:20.704+09:00  INFO 76105 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T17:53:20.705+09:00  INFO 76105 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T17:53:21.288+09:00  INFO 76105 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T17:53:21.355+09:00  INFO 76105 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 11 JPA repository interfaces.
+2025-03-11T17:53:21.883+09:00  INFO 76105 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T17:53:21.895+09:00  INFO 76105 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T17:53:21.895+09:00  INFO 76105 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T17:53:21.937+09:00  INFO 76105 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T17:53:21.937+09:00  INFO 76105 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1232 ms
+2025-03-11T17:53:22.089+09:00  INFO 76105 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T17:53:22.132+09:00  INFO 76105 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T17:53:22.156+09:00  INFO 76105 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T17:53:22.350+09:00  INFO 76105 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T17:53:22.372+09:00  INFO 76105 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T17:53:22.558+09:00  INFO 76105 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T17:53:22.559+09:00  INFO 76105 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T17:53:22.579+09:00  WARN 76105 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T17:53:22.593+09:00  INFO 76105 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T17:53:23.407+09:00  INFO 76105 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T17:53:23.459+09:00  INFO 76105 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T17:53:23.793+09:00  INFO 76105 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T17:53:24.693+09:00  WARN 76105 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T17:53:24.717+09:00  INFO 76105 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T17:53:25.178+09:00  INFO 76105 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T17:53:25.242+09:00  INFO 76105 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T17:53:25.269+09:00  INFO 76105 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T17:53:25.278+09:00  INFO 76105 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.152 seconds (process running for 5.565)
+2025-03-11T17:53:25.379+09:00  INFO 76105 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T17:55:19.156+09:00  INFO 76105 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T17:55:19.157+09:00  INFO 76105 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T17:55:19.158+09:00  INFO 76105 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T17:59:04.452+09:00  INFO 76564 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 76564 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T17:59:04.454+09:00 DEBUG 76564 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T17:59:04.455+09:00  INFO 76564 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T17:59:04.739+09:00  INFO 76564 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T17:59:04.739+09:00  INFO 76564 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T17:59:05.442+09:00  INFO 76564 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T17:59:05.519+09:00  INFO 76564 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 11 JPA repository interfaces.
+2025-03-11T17:59:06.094+09:00  INFO 76564 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T17:59:06.112+09:00  INFO 76564 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T17:59:06.113+09:00  INFO 76564 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T17:59:06.168+09:00  INFO 76564 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T17:59:06.168+09:00  INFO 76564 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1428 ms
+2025-03-11T17:59:06.371+09:00  INFO 76564 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T17:59:06.420+09:00  INFO 76564 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T17:59:06.446+09:00  INFO 76564 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T17:59:06.657+09:00  INFO 76564 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T17:59:06.681+09:00  INFO 76564 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T17:59:06.882+09:00  INFO 76564 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T17:59:06.883+09:00  INFO 76564 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T17:59:06.907+09:00  WARN 76564 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T17:59:06.924+09:00  INFO 76564 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T17:59:07.755+09:00  INFO 76564 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T17:59:07.807+09:00  INFO 76564 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T17:59:08.159+09:00  INFO 76564 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T17:59:09.110+09:00  WARN 76564 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T17:59:09.137+09:00  INFO 76564 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T17:59:09.629+09:00  INFO 76564 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T17:59:09.704+09:00  INFO 76564 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T17:59:09.734+09:00  INFO 76564 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T17:59:09.745+09:00  INFO 76564 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.644 seconds (process running for 5.983)
+2025-03-11T17:59:09.877+09:00  INFO 76564 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T17:59:23.393+09:00  INFO 76564 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T17:59:23.393+09:00  INFO 76564 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T17:59:23.394+09:00  INFO 76564 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T18:01:13.276+09:00  INFO 76758 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 76758 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:01:13.277+09:00 DEBUG 76758 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:01:13.278+09:00  INFO 76758 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:01:13.507+09:00  INFO 76758 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:01:13.507+09:00  INFO 76758 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:01:14.167+09:00  INFO 76758 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:01:14.259+09:00  INFO 76758 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 83 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:01:14.913+09:00  INFO 76758 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:01:14.928+09:00  INFO 76758 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:01:14.928+09:00  INFO 76758 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:01:14.977+09:00  INFO 76758 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:01:14.978+09:00  INFO 76758 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1470 ms
+2025-03-11T18:01:15.164+09:00  INFO 76758 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:01:15.222+09:00  INFO 76758 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:01:15.247+09:00  INFO 76758 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:01:15.455+09:00  INFO 76758 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:01:15.482+09:00  INFO 76758 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:01:15.690+09:00  INFO 76758 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:01:15.691+09:00  INFO 76758 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:01:15.713+09:00  WARN 76758 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:01:15.729+09:00  INFO 76758 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:01:16.707+09:00  INFO 76758 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:01:16.759+09:00  INFO 76758 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:01:17.163+09:00  INFO 76758 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:01:18.326+09:00  WARN 76758 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:01:18.351+09:00  INFO 76758 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:01:18.924+09:00  INFO 76758 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:01:19.005+09:00  INFO 76758 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:01:19.038+09:00  INFO 76758 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:01:19.050+09:00  INFO 76758 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 6.2 seconds (process running for 6.558)
+2025-03-11T18:01:19.195+09:00  INFO 76758 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T18:01:19.269+09:00  INFO 76758 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:01:19.269+09:00  INFO 76758 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:01:19.270+09:00  INFO 76758 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T18:04:46.866+09:00  INFO 77047 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 77047 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:04:46.867+09:00 DEBUG 77047 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:04:46.868+09:00  INFO 77047 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:04:47.079+09:00  INFO 77047 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:04:47.080+09:00  INFO 77047 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:04:47.805+09:00  INFO 77047 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:04:47.875+09:00  INFO 77047 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:04:48.421+09:00  INFO 77047 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:04:48.432+09:00  INFO 77047 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:04:48.433+09:00  INFO 77047 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:04:48.474+09:00  INFO 77047 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:04:48.474+09:00  INFO 77047 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1393 ms
+2025-03-11T18:04:48.637+09:00  INFO 77047 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:04:48.684+09:00  INFO 77047 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:04:48.708+09:00  INFO 77047 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:04:48.891+09:00  INFO 77047 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:04:48.911+09:00  INFO 77047 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:04:49.083+09:00  INFO 77047 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:04:49.084+09:00  INFO 77047 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:04:49.102+09:00  WARN 77047 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:04:49.117+09:00  INFO 77047 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:04:50.099+09:00  INFO 77047 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:04:50.157+09:00  INFO 77047 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:04:50.483+09:00  INFO 77047 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:04:51.399+09:00  WARN 77047 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:04:51.420+09:00  INFO 77047 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:04:51.929+09:00  INFO 77047 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:04:51.992+09:00  INFO 77047 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:04:52.016+09:00  INFO 77047 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:04:52.025+09:00  INFO 77047 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.525 seconds (process running for 5.996)
+2025-03-11T18:04:52.143+09:00  INFO 77047 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T18:04:52.218+09:00  INFO 77047 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:04:52.219+09:00  INFO 77047 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:04:52.220+09:00  INFO 77047 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T18:14:54.730+09:00  INFO 77830 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 77830 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:14:54.731+09:00 DEBUG 77830 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:14:54.732+09:00  INFO 77830 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:14:54.969+09:00  INFO 77830 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:14:54.970+09:00  INFO 77830 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:14:55.769+09:00  INFO 77830 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:14:55.853+09:00  INFO 77830 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:14:56.507+09:00  INFO 77830 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:14:56.522+09:00  INFO 77830 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:14:56.523+09:00  INFO 77830 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:14:56.574+09:00  INFO 77830 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:14:56.574+09:00  INFO 77830 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1604 ms
+2025-03-11T18:14:56.750+09:00  INFO 77830 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:14:56.794+09:00  INFO 77830 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:14:56.818+09:00  INFO 77830 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:14:57.071+09:00  INFO 77830 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:14:57.120+09:00  INFO 77830 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:14:57.461+09:00  INFO 77830 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:14:57.463+09:00  INFO 77830 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:14:57.492+09:00  WARN 77830 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:14:57.515+09:00  INFO 77830 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:14:58.435+09:00  INFO 77830 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:14:58.490+09:00  INFO 77830 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:14:58.991+09:00  INFO 77830 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:15:00.100+09:00  WARN 77830 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:15:00.128+09:00  INFO 77830 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:15:00.658+09:00  INFO 77830 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:15:00.757+09:00  INFO 77830 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:15:00.786+09:00  INFO 77830 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:15:00.797+09:00  INFO 77830 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 6.483 seconds (process running for 6.888)
+2025-03-11T18:15:00.919+09:00  INFO 77830 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T18:15:00.966+09:00  INFO 77830 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:15:00.966+09:00  INFO 77830 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:15:00.967+09:00  INFO 77830 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-03-11T18:16:08.117+09:00  INFO 77940 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 77940 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:16:08.118+09:00 DEBUG 77940 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:16:08.119+09:00  INFO 77940 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:16:08.308+09:00  INFO 77940 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:16:08.308+09:00  INFO 77940 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:16:08.939+09:00  INFO 77940 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:16:09.003+09:00  INFO 77940 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:16:09.562+09:00  INFO 77940 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:16:09.574+09:00  INFO 77940 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:16:09.575+09:00  INFO 77940 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:16:09.622+09:00  INFO 77940 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:16:09.622+09:00  INFO 77940 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1313 ms
+2025-03-11T18:16:09.802+09:00  INFO 77940 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:16:09.849+09:00  INFO 77940 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:16:09.873+09:00  INFO 77940 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:16:10.079+09:00  INFO 77940 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:16:10.103+09:00  INFO 77940 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:16:10.298+09:00  INFO 77940 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:16:10.300+09:00  INFO 77940 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:16:10.322+09:00  WARN 77940 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:16:10.339+09:00  INFO 77940 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:16:11.188+09:00  INFO 77940 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:16:11.237+09:00  INFO 77940 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:16:11.576+09:00  INFO 77940 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:16:12.446+09:00  WARN 77940 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:16:12.466+09:00  INFO 77940 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:16:12.887+09:00  INFO 77940 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:16:12.950+09:00  INFO 77940 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:16:12.993+09:00  INFO 77940 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:16:13.003+09:00  INFO 77940 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.236 seconds (process running for 5.602)
+2025-03-11T18:16:13.149+09:00  INFO 77940 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T18:16:15.202+09:00  INFO 77940 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:16:15.203+09:00  INFO 77940 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:16:15.204+09:00  INFO 77940 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T18:23:43.528+09:00  INFO 78523 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 78523 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:23:43.530+09:00 DEBUG 78523 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:23:43.530+09:00  INFO 78523 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:23:43.745+09:00  INFO 78523 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:23:43.746+09:00  INFO 78523 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:23:44.427+09:00  INFO 78523 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:23:44.501+09:00  INFO 78523 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:23:45.125+09:00  INFO 78523 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:23:45.140+09:00  INFO 78523 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:23:45.140+09:00  INFO 78523 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:23:45.191+09:00  INFO 78523 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:23:45.191+09:00  INFO 78523 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1445 ms
+2025-03-11T18:23:45.365+09:00  INFO 78523 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:23:45.416+09:00  INFO 78523 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:23:45.441+09:00  INFO 78523 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:23:45.650+09:00  INFO 78523 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:23:45.672+09:00  INFO 78523 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:23:45.878+09:00  INFO 78523 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:23:45.880+09:00  INFO 78523 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:23:45.901+09:00  WARN 78523 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:23:45.917+09:00  INFO 78523 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:23:46.815+09:00  INFO 78523 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:23:46.865+09:00  INFO 78523 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:23:47.355+09:00  INFO 78523 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:23:48.479+09:00  WARN 78523 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:23:48.508+09:00  INFO 78523 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:23:49.007+09:00  INFO 78523 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:23:49.086+09:00  INFO 78523 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:23:49.116+09:00  INFO 78523 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:23:49.127+09:00  INFO 78523 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 6.105 seconds (process running for 6.48)
+2025-03-11T18:23:49.257+09:00  INFO 78523 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T18:23:51.849+09:00  INFO 78523 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:23:51.849+09:00  INFO 78523 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:23:51.850+09:00  INFO 78523 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T18:25:12.316+09:00  INFO 78656 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 78656 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:25:12.318+09:00 DEBUG 78656 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:25:12.318+09:00  INFO 78656 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:25:12.566+09:00  INFO 78656 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:25:12.566+09:00  INFO 78656 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:25:13.254+09:00  INFO 78656 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:25:13.316+09:00  INFO 78656 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:25:13.822+09:00  INFO 78656 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:25:13.833+09:00  INFO 78656 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:25:13.833+09:00  INFO 78656 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:25:13.870+09:00  INFO 78656 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:25:13.871+09:00  INFO 78656 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1304 ms
+2025-03-11T18:25:14.016+09:00  INFO 78656 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:25:14.060+09:00  INFO 78656 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:25:14.082+09:00  INFO 78656 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:25:14.256+09:00  INFO 78656 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:25:14.276+09:00  INFO 78656 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:25:14.451+09:00  INFO 78656 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:25:14.453+09:00  INFO 78656 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:25:14.471+09:00  WARN 78656 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:25:14.485+09:00  INFO 78656 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:25:15.277+09:00  INFO 78656 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:25:15.327+09:00  INFO 78656 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:25:15.658+09:00  INFO 78656 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:25:16.621+09:00  WARN 78656 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:25:16.643+09:00  INFO 78656 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:25:17.072+09:00  INFO 78656 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:25:17.136+09:00  INFO 78656 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:25:17.167+09:00  INFO 78656 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:25:17.184+09:00  INFO 78656 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.193 seconds (process running for 5.532)
+2025-03-11T18:25:17.337+09:00  INFO 78656 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T18:25:20.732+09:00  INFO 78656 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:25:20.733+09:00  INFO 78656 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:25:20.734+09:00  INFO 78656 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T18:25:53.539+09:00  INFO 78718 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 78718 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T18:25:53.541+09:00 DEBUG 78718 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T18:25:53.543+09:00  INFO 78718 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T18:25:53.867+09:00  INFO 78718 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T18:25:53.868+09:00  INFO 78718 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T18:25:54.551+09:00  INFO 78718 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T18:25:54.630+09:00  INFO 78718 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 11 JPA repository interfaces.
+2025-03-11T18:25:55.354+09:00  INFO 78718 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T18:25:55.370+09:00  INFO 78718 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T18:25:55.371+09:00  INFO 78718 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T18:25:55.423+09:00  INFO 78718 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T18:25:55.423+09:00  INFO 78718 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1554 ms
+2025-03-11T18:25:55.615+09:00  INFO 78718 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T18:25:55.683+09:00  INFO 78718 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T18:25:55.718+09:00  INFO 78718 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T18:25:55.960+09:00  INFO 78718 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T18:25:55.989+09:00  INFO 78718 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T18:25:56.233+09:00  INFO 78718 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T18:25:56.235+09:00  INFO 78718 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T18:25:56.261+09:00  WARN 78718 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T18:25:56.284+09:00  INFO 78718 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T18:25:57.227+09:00  INFO 78718 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T18:25:57.277+09:00  INFO 78718 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T18:25:57.781+09:00  INFO 78718 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T18:25:58.873+09:00  WARN 78718 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T18:25:58.909+09:00  INFO 78718 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T18:25:59.544+09:00  INFO 78718 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T18:25:59.623+09:00  INFO 78718 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T18:25:59.667+09:00  INFO 78718 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T18:25:59.686+09:00  INFO 78718 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 6.502 seconds (process running for 6.978)
+2025-03-11T18:25:59.769+09:00  INFO 78718 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T18:25:59.770+09:00  INFO 78718 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T18:25:59.772+09:00  INFO 78718 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-03-11T18:25:59.873+09:00  INFO 78718 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T21:47:49.424+09:00  INFO 87410 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 87410 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T21:47:49.428+09:00 DEBUG 87410 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T21:47:49.430+09:00  INFO 87410 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T21:47:49.775+09:00  INFO 87410 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T21:47:49.775+09:00  INFO 87410 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T21:47:50.784+09:00  INFO 87410 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T21:47:50.857+09:00  INFO 87410 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 11 JPA repository interfaces.
+2025-03-11T21:47:51.536+09:00  INFO 87410 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T21:47:51.553+09:00  INFO 87410 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T21:47:51.553+09:00  INFO 87410 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T21:47:51.599+09:00  INFO 87410 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T21:47:51.600+09:00  INFO 87410 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1824 ms
+2025-03-11T21:47:51.781+09:00  INFO 87410 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T21:47:51.836+09:00  INFO 87410 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T21:47:51.871+09:00  INFO 87410 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T21:47:52.134+09:00  INFO 87410 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T21:47:52.166+09:00  INFO 87410 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T21:47:52.422+09:00  INFO 87410 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T21:47:52.423+09:00  INFO 87410 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T21:47:52.452+09:00  WARN 87410 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T21:47:52.469+09:00  INFO 87410 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T21:47:53.638+09:00  INFO 87410 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T21:47:53.699+09:00  INFO 87410 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T21:47:54.183+09:00  INFO 87410 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T21:47:55.314+09:00  WARN 87410 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T21:47:55.342+09:00  INFO 87410 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T21:47:56.834+09:00  INFO 87410 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T21:47:56.941+09:00  INFO 87410 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T21:47:56.977+09:00  INFO 87410 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T21:47:56.989+09:00  INFO 87410 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 8.238 seconds (process running for 9.042)
+2025-03-11T21:47:57.161+09:00  INFO 87410 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T21:47:57.799+09:00  INFO 87410 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T21:47:57.800+09:00  INFO 87410 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T21:47:57.801+09:00  INFO 87410 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T21:49:49.619+09:00  INFO 87630 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 87630 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T21:49:49.621+09:00 DEBUG 87630 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T21:49:49.622+09:00  INFO 87630 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T21:49:49.863+09:00  INFO 87630 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T21:49:49.864+09:00  INFO 87630 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T21:49:50.548+09:00  INFO 87630 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T21:49:50.616+09:00  INFO 87630 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 11 JPA repository interfaces.
+2025-03-11T21:49:51.286+09:00  INFO 87630 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T21:49:51.299+09:00  INFO 87630 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T21:49:51.299+09:00  INFO 87630 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T21:49:51.343+09:00  INFO 87630 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T21:49:51.344+09:00  INFO 87630 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1479 ms
+2025-03-11T21:49:51.510+09:00  INFO 87630 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T21:49:51.550+09:00  INFO 87630 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T21:49:51.571+09:00  INFO 87630 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T21:49:51.754+09:00  INFO 87630 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T21:49:51.775+09:00  INFO 87630 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T21:49:51.955+09:00  INFO 87630 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T21:49:51.956+09:00  INFO 87630 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T21:49:51.974+09:00  WARN 87630 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T21:49:51.988+09:00  INFO 87630 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T21:49:52.841+09:00  INFO 87630 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T21:49:52.945+09:00  INFO 87630 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T21:49:53.570+09:00  INFO 87630 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T21:49:54.503+09:00  WARN 87630 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T21:49:54.532+09:00  INFO 87630 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T21:49:55.025+09:00  INFO 87630 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T21:49:55.098+09:00  INFO 87630 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T21:49:55.123+09:00  INFO 87630 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T21:49:55.132+09:00  INFO 87630 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.901 seconds (process running for 6.276)
+2025-03-11T21:49:55.241+09:00  INFO 87630 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T21:49:55.349+09:00  INFO 87630 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T21:49:55.349+09:00  INFO 87630 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T21:49:55.350+09:00  INFO 87630 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T22:00:41.071+09:00  INFO 88526 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 88526 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T22:00:41.072+09:00 DEBUG 88526 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T22:00:41.073+09:00  INFO 88526 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T22:00:41.315+09:00  INFO 88526 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T22:00:41.316+09:00  INFO 88526 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T22:00:41.938+09:00  INFO 88526 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T22:00:42.004+09:00  INFO 88526 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 11 JPA repository interfaces.
+2025-03-11T22:00:42.567+09:00  INFO 88526 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T22:00:42.580+09:00  INFO 88526 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T22:00:42.580+09:00  INFO 88526 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T22:00:42.624+09:00  INFO 88526 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T22:00:42.624+09:00  INFO 88526 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1308 ms
+2025-03-11T22:00:42.806+09:00  INFO 88526 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T22:00:42.863+09:00  INFO 88526 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T22:00:42.890+09:00  INFO 88526 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T22:00:43.099+09:00  INFO 88526 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T22:00:43.121+09:00  INFO 88526 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T22:00:43.304+09:00  INFO 88526 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T22:00:43.305+09:00  INFO 88526 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T22:00:43.323+09:00  WARN 88526 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T22:00:43.337+09:00  INFO 88526 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T22:00:44.424+09:00  INFO 88526 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T22:00:44.475+09:00  INFO 88526 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T22:00:44.794+09:00  INFO 88526 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T22:00:45.758+09:00  WARN 88526 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T22:00:45.796+09:00  INFO 88526 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T22:00:46.303+09:00  INFO 88526 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T22:00:46.369+09:00  INFO 88526 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T22:00:46.392+09:00  INFO 88526 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T22:00:46.401+09:00  INFO 88526 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.767 seconds (process running for 6.267)
+2025-03-11T22:00:46.526+09:00  INFO 88526 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T22:00:46.758+09:00  INFO 88526 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T22:00:46.759+09:00  INFO 88526 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T22:00:46.759+09:00  INFO 88526 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-03-11T22:03:36.556+09:00  INFO 88775 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 88775 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T22:03:36.557+09:00 DEBUG 88775 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T22:03:36.557+09:00  INFO 88775 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T22:03:36.809+09:00  INFO 88775 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T22:03:36.810+09:00  INFO 88775 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T22:03:39.518+09:00  INFO 88775 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T22:03:39.585+09:00  INFO 88775 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 11 JPA repository interfaces.
+2025-03-11T22:03:40.355+09:00  INFO 88775 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T22:03:40.370+09:00  INFO 88775 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T22:03:40.370+09:00  INFO 88775 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T22:03:40.420+09:00  INFO 88775 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T22:03:40.421+09:00  INFO 88775 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3610 ms
+2025-03-11T22:03:40.617+09:00  INFO 88775 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T22:03:40.674+09:00  INFO 88775 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T22:03:40.698+09:00  INFO 88775 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T22:03:40.915+09:00  INFO 88775 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T22:03:40.939+09:00  INFO 88775 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T22:03:41.165+09:00  INFO 88775 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T22:03:41.167+09:00  INFO 88775 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T22:03:41.189+09:00  WARN 88775 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T22:03:41.208+09:00  INFO 88775 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T22:03:42.118+09:00  INFO 88775 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T22:03:42.177+09:00  INFO 88775 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T22:03:42.511+09:00  INFO 88775 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T22:03:43.515+09:00  WARN 88775 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T22:03:43.541+09:00  INFO 88775 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T22:03:43.995+09:00  INFO 88775 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T22:03:44.069+09:00  INFO 88775 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T22:03:44.094+09:00  INFO 88775 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T22:03:44.103+09:00  INFO 88775 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 7.868 seconds (process running for 6.192)
+2025-03-11T22:03:44.213+09:00  INFO 88775 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T22:04:07.263+09:00  INFO 88775 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T22:04:07.264+09:00  INFO 88775 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T22:04:07.265+09:00  INFO 88775 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T22:08:48.790+09:00  INFO 89212 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 89212 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T22:08:48.792+09:00 DEBUG 89212 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T22:08:48.793+09:00  INFO 89212 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T22:08:49.007+09:00  INFO 89212 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T22:08:49.008+09:00  INFO 89212 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T22:08:49.732+09:00  INFO 89212 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T22:08:49.796+09:00  INFO 89212 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 58 ms. Found 11 JPA repository interfaces.
+2025-03-11T22:08:50.341+09:00  INFO 89212 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T22:08:50.354+09:00  INFO 89212 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T22:08:50.354+09:00  INFO 89212 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T22:08:50.396+09:00  INFO 89212 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T22:08:50.396+09:00  INFO 89212 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1388 ms
+2025-03-11T22:08:50.555+09:00  INFO 89212 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T22:08:50.603+09:00  INFO 89212 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T22:08:50.627+09:00  INFO 89212 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T22:08:50.805+09:00  INFO 89212 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T22:08:50.825+09:00  INFO 89212 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T22:08:51.009+09:00  INFO 89212 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T22:08:51.010+09:00  INFO 89212 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T22:08:51.029+09:00  WARN 89212 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T22:08:51.043+09:00  INFO 89212 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T22:08:52.059+09:00  INFO 89212 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T22:08:52.130+09:00  INFO 89212 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T22:08:52.482+09:00  INFO 89212 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T22:08:53.439+09:00  WARN 89212 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T22:08:53.470+09:00  INFO 89212 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T22:08:54.144+09:00  INFO 89212 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T22:08:54.219+09:00  INFO 89212 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T22:08:54.245+09:00  INFO 89212 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T22:08:54.256+09:00  INFO 89212 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.825 seconds (process running for 6.381)
+2025-03-11T22:08:54.367+09:00  INFO 89212 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T22:08:55.679+09:00  INFO 89212 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T22:08:55.679+09:00  INFO 89212 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T22:08:55.681+09:00  INFO 89212 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T22:12:34.772+09:00  INFO 89522 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 89522 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T22:12:34.773+09:00 DEBUG 89522 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T22:12:34.774+09:00  INFO 89522 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T22:12:34.963+09:00  INFO 89522 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T22:12:34.963+09:00  INFO 89522 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T22:12:35.625+09:00  INFO 89522 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T22:12:35.687+09:00  INFO 89522 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 11 JPA repository interfaces.
+2025-03-11T22:12:36.219+09:00  INFO 89522 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T22:12:36.230+09:00  INFO 89522 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T22:12:36.230+09:00  INFO 89522 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T22:12:36.269+09:00  INFO 89522 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T22:12:36.270+09:00  INFO 89522 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1306 ms
+2025-03-11T22:12:36.419+09:00  INFO 89522 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T22:12:36.462+09:00  INFO 89522 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T22:12:36.485+09:00  INFO 89522 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T22:12:36.664+09:00  INFO 89522 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T22:12:36.684+09:00  INFO 89522 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T22:12:36.866+09:00  INFO 89522 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T22:12:36.867+09:00  INFO 89522 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T22:12:36.885+09:00  WARN 89522 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T22:12:36.899+09:00  INFO 89522 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T22:12:37.753+09:00  INFO 89522 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T22:12:37.806+09:00  INFO 89522 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T22:12:38.138+09:00  INFO 89522 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T22:12:39.079+09:00  WARN 89522 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T22:12:39.105+09:00  INFO 89522 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T22:12:39.681+09:00  INFO 89522 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T22:12:39.769+09:00  INFO 89522 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T22:12:39.823+09:00  INFO 89522 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T22:12:39.840+09:00  INFO 89522 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.515 seconds (process running for 5.988)
+2025-03-11T22:12:39.974+09:00  INFO 89522 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T22:12:41.812+09:00  INFO 89522 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T22:12:41.812+09:00  INFO 89522 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T22:12:41.813+09:00  INFO 89522 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T22:19:34.597+09:00  INFO 90045 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 90045 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T22:19:34.599+09:00 DEBUG 90045 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T22:19:34.600+09:00  INFO 90045 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T22:19:34.862+09:00  INFO 90045 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T22:19:34.862+09:00  INFO 90045 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T22:19:35.477+09:00  INFO 90045 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T22:19:35.540+09:00  INFO 90045 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 11 JPA repository interfaces.
+2025-03-11T22:19:36.066+09:00  INFO 90045 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T22:19:36.082+09:00  INFO 90045 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T22:19:36.083+09:00  INFO 90045 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T22:19:36.131+09:00  INFO 90045 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T22:19:36.132+09:00  INFO 90045 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1269 ms
+2025-03-11T22:19:36.293+09:00  INFO 90045 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T22:19:36.347+09:00  INFO 90045 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T22:19:36.373+09:00  INFO 90045 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T22:19:36.576+09:00  INFO 90045 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T22:19:36.599+09:00  INFO 90045 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T22:19:36.776+09:00  INFO 90045 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T22:19:36.778+09:00  INFO 90045 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T22:19:36.796+09:00  WARN 90045 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T22:19:36.810+09:00  INFO 90045 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T22:19:37.633+09:00  INFO 90045 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T22:19:37.688+09:00  INFO 90045 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T22:19:38.061+09:00  INFO 90045 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T22:19:39.028+09:00  WARN 90045 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T22:19:39.051+09:00  INFO 90045 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T22:19:39.509+09:00  INFO 90045 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T22:19:39.573+09:00  INFO 90045 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T22:19:39.607+09:00  INFO 90045 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T22:19:39.617+09:00  INFO 90045 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 5.402 seconds (process running for 5.778)
+2025-03-11T22:19:39.742+09:00  INFO 90045 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T22:19:45.715+09:00  INFO 90045 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T22:19:45.715+09:00  INFO 90045 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T22:19:45.717+09:00  INFO 90045 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-03-11T22:23:41.006+09:00  INFO 90359 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Starting ItallApplication using Java 21.0.3 with PID 90359 (/Users/jeonghuijun/git/sesac-3rd/itall/build/classes/java/main started by jeonghuijun in /Users/jeonghuijun/git/sesac-3rd/itall)
+2025-03-11T22:23:41.008+09:00 DEBUG 90359 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-11T22:23:41.009+09:00  INFO 90359 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-03-11T22:23:41.313+09:00  INFO 90359 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-11T22:23:41.313+09:00  INFO 90359 --- [itall] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-11T22:23:42.326+09:00  INFO 90359 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-11T22:23:42.397+09:00  INFO 90359 --- [itall] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 11 JPA repository interfaces.
+2025-03-11T22:23:42.932+09:00  INFO 90359 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-11T22:23:42.944+09:00  INFO 90359 --- [itall] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-11T22:23:42.944+09:00  INFO 90359 --- [itall] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-11T22:23:42.983+09:00  INFO 90359 --- [itall] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-11T22:23:42.984+09:00  INFO 90359 --- [itall] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1670 ms
+2025-03-11T22:23:43.130+09:00  INFO 90359 --- [itall] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-11T22:23:43.169+09:00  INFO 90359 --- [itall] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-11T22:23:43.191+09:00  INFO 90359 --- [itall] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-11T22:23:43.394+09:00  INFO 90359 --- [itall] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-11T22:23:43.417+09:00  INFO 90359 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-11T22:23:43.648+09:00  INFO 90359 --- [itall] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:~/local user=SA
+2025-03-11T22:23:43.651+09:00  INFO 90359 --- [itall] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-11T22:23:43.673+09:00  WARN 90359 --- [itall] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-11T22:23:43.690+09:00  INFO 90359 --- [itall] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-11T22:23:44.688+09:00  INFO 90359 --- [itall] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-11T22:23:44.749+09:00  INFO 90359 --- [itall] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-11T22:23:45.093+09:00  INFO 90359 --- [itall] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-11T22:23:46.024+09:00  WARN 90359 --- [itall] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-11T22:23:46.044+09:00  INFO 90359 --- [itall] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userSecurityService
+2025-03-11T22:23:46.489+09:00  INFO 90359 --- [itall] [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/local'
+2025-03-11T22:23:46.555+09:00  INFO 90359 --- [itall] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-03-11T22:23:46.579+09:00  INFO 90359 --- [itall] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-11T22:23:46.589+09:00  INFO 90359 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : Started ItallApplication in 6.075 seconds (process running for 6.668)
+2025-03-11T22:23:46.712+09:00  INFO 90359 --- [itall] [restartedMain] com.sesac.itall.ItallApplication         : 현재 시간의 포맷된 값: 방금 전
+2025-03-11T22:23:53.689+09:00  INFO 90359 --- [itall] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-11T22:23:53.689+09:00  INFO 90359 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-11T22:23:53.690+09:00  INFO 90359 --- [itall] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-11T22:33:11.710+09:00  WARN 90359 --- [itall] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Retrograde clock change detected (housekeeper delta=27s908ms), soft-evicting connections from pool.

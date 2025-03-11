@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <!-- 블로그 헤더 Fragment -->
 <div th:fragment="blogHeader(blogResponseDTO)" class="blog-header py-3 mb-4 border-bottom">
@@ -26,6 +27,27 @@
             <span class="ms-3 text-muted" th:text="${#temporals.format(blogResponseDTO.regdate, 'yyyy-MM-dd')}">작성일</span>
         </div>
     </div>
+
+    <!-- 구독 버튼 초기화 스크립트 수정 -->
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('구독 UI 초기화 시도');
+            const subscribeBtn = document.getElementById('subscribeBtn');
+            if (subscribeBtn) {
+                console.log('구독 버튼 발견:', subscribeBtn.dataset.blogId);
+                import('/js/features/subscription/subscription-ui.js')
+                    .then(module => {
+                        console.log('구독 모듈 로드 성공');
+                        module.initSubscriptionButton();
+                    })
+                    .catch(err => console.error('구독 모듈 로드 실패:', err));
+            }
+        });
+    </script>
+
 </div>
+
+
+
 </body>
 </html>

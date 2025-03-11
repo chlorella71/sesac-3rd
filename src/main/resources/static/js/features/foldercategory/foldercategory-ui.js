@@ -18,7 +18,7 @@ export function createCategoryItemElement(category) {
     // 카테고리 이름 링크
     const link = createElement('a', {
         href: '#',
-        className: 'category-name'
+        className: 'category-name category-link'
     }, category.name);
     listItem.appendChild(link);
 

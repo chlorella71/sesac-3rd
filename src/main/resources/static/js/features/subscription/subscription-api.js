@@ -29,3 +29,12 @@ export function subscribe(blogId) {
 export function unsubscribe(blogId) {
     return callApi(`/api/subscription/unsubscribe/${blogId}`, { method: 'POST' });
 }
+
+/**
+ * 사용자의 구독 목록 조회 API
+ * @returns {Promise} - 구독 목록 Promise
+ */
+export function getSubscriptionList() {
+    console.log('구독 목록 API 호출');
+    return callApi('/api/subscription/list');
+}
