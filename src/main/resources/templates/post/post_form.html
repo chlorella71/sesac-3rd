@@ -38,11 +38,24 @@
             <label class="form-check-label" for="draft">초안으로 저장</label>
         </div>
 
-        <!-- 포스트 내용 -->
+        <!-- 포스트 내용 (마크다운 에디터) -->
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>
             <textarea class="form-control" id="content" th:field="*{content}" rows="15" placeholder="내용을 입력하세요"></textarea>
             <div class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+        </div>
+
+        <!-- 미리보기 영역 -->
+        <div class="mb-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">미리보기</h5>
+                    <button type="button" id="refreshPreview" class="btn btn-sm btn-outline-primary">미리보기 새로고침</button>
+                </div>
+                <div class="card-body">
+                    <div id="preview-content" class="markdown-body"></div>
+                </div>
+            </div>
         </div>
 
         <!-- 버튼 그룹 -->
@@ -56,10 +69,89 @@
 <!-- CSS 정의 -->
 <th:block layout:fragment="style">
     <style>
-        textarea#content {
-            min-height: 300px;
+        .editor-toolbar {
+            border: 1px solid #ddd;
+            border-radius: 3px 3px 0 0;
+        }
+        .CodeMirror {
+            height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 0 0 3px 3px;
+        }
+        .markdown-body {
+            padding: 15px;
+            min-height: 100px;
+        }
+        /* 마크다운 스타일 */
+        .markdown-body h1, .markdown-body h2 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        .markdown-body blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+        }
+        .markdown-body pre {
+            padding: 16px;
+            overflow: auto;
+            background-color: #f6f8fa;
+            border-radius: 3px;
+        }
+        .markdown-body code {
+            padding: 0.2em 0.4em;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
         }
     </style>
+</th:block>
+
+!-- JavaScript 정의 -->
+<th:block layout:fragment="script">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 마크다운 에디터 초기화
+            const easyMDE = new EasyMDE({
+                element: document.getElementById('content'),
+                spellChecker: false,
+                autosave: {
+                    enabled: true,
+                    uniqueId: 'post-edit-autosave',
+                    delay: 1000,
+                },
+                toolbar: [
+                    'bold', 'italic', 'heading', '|',
+                    'quote', 'code', 'unordered-list', 'ordered-list', '|',
+                    'link', 'image', '|',
+                    'preview', 'side-by-side', 'fullscreen', '|',
+                    'guide'
+                ],
+                placeholder: '마크다운 형식으로 글을 작성해보세요...',
+                status: ['autosave', 'words', 'lines', 'cursor']
+            });
+
+            // 미리보기 업데이트 함수
+            function updatePreview() {
+                const content = easyMDE.value();
+                const previewContent = document.getElementById('preview-content');
+                // marked.js를 사용하여 마크다운을 HTML로 변환
+                previewContent.innerHTML = marked.parse(content);
+            }
+
+            // 내용이 변경될 때마다 미리보기 업데이트
+            easyMDE.codemirror.on('change', function() {
+                updatePreview();
+            });
+
+            // 미리보기 새로고침 버튼
+            document.getElementById('refreshPreview').addEventListener('click', function() {
+                updatePreview();
+            });
+
+            // 초기 미리보기 로드
+            updatePreview();
+        });
+    </script>
 </th:block>
 
 </html>
