@@ -116,7 +116,7 @@ export function handleAddFolder(e) {
 
     // 폴더 목록 참조
     const folderList = document.querySelector(`.folder-list[data-category-id="${categoryId}"]`);
-    if (folderList) {
+    if (12folderList) {
         // 폴더 생성 모달 표시
         const modal = document.getElementById('folderModal');
         if (modal) {
